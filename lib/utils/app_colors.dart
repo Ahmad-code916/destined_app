@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AppColors {
@@ -16,4 +17,6 @@ class AppColors {
   static const lightPurpleColor = Color(0xffB783EB);
   static const lightBlueColor = Color(0xff251759);
   static const transparentColor = Color(0x00000000);
+  static final swipeCardPrimaryColor = Colors.deepPurple.shade900;
+  static const swipeCardSecondryColor = Color(0xff0E0124);
 }

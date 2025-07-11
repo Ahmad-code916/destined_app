@@ -19,4 +19,14 @@ class AppImages {
   static const String sportsImage = 'assets/images/sports_icon.png';
   static const String fitnessImage = 'assets/images/fitness_icon.png';
   static const String uploadDocImage = 'assets/images/upload_doc.png';
+  static const String swipeImage = 'assets/images/swipe_icon.png';
+  static const String usersIcon = 'assets/images/users_icon.png';
+  static const String chatsIcon = 'assets/images/chats_icon.png';
+  static const String profileIcon = 'assets/images/profile_icon.png';
+  static const String swipeSelectedIcon = 'assets/images/swipe_icon_select.png';
+  static const String usersSelectedIcon = 'assets/images/users_icon_select.png';
+  static const String chatsSelectedIcon = 'assets/images/chats_icon_select.png';
+  static const String profileSelectedIcon =
+      'assets/images/profile_icon_select.png';
+  static const String filterImage = 'assets/images/filter_icon.png';
 }
