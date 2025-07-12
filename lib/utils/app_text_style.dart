@@ -20,6 +20,12 @@ class AppTextStyle {
     fontSize: 18,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle whiteRegular = TextStyle(
+    fontFamily: 'Lexend',
+    color: AppColors.whiteColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+  );
   static TextStyle pinkMedium = TextStyle(
     fontFamily: 'Lexend',
     color: AppColors.pinkColor,
