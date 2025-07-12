@@ -29,4 +29,7 @@ class AppImages {
   static const String profileSelectedIcon =
       'assets/images/profile_icon_select.png';
   static const String filterImage = 'assets/images/filter_icon.png';
+  static const String resetIcon = 'assets/images/reset_icon.png';
+  static const String advanceFilterButton =
+      'assets/images/advance_filter_button.png';
 }

@@ -7,17 +7,18 @@ import '../../utils/app_colors.dart';
 class DropDownWidget extends StatelessWidget {
   const DropDownWidget({
     super.key,
-    required this.selectedValue,
+    this.selectedValue,
     required this.items,
     required this.onChange,
   });
-  final String selectedValue;
+  final String? selectedValue;
   final List<String> items;
   final ValueChanged<String?> onChange;
 
   @override
   Widget build(BuildContext context) {
     return GradientContainer(
+      height: 60,
       child: Container(
         padding: EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
@@ -25,6 +26,7 @@ class DropDownWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: DropdownButton(
+          hint: Text('Select', style: AppTextStyle.whiteMedium),
           iconEnabledColor: AppColors.whiteColor,
           dropdownColor: AppColors.darkBlackColor,
           style: AppTextStyle.whiteMedium,

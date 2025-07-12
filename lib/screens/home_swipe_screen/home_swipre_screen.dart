@@ -1,3 +1,4 @@
+import 'package:destined_app/screens/filter_screen/filter_screen.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
 import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
@@ -80,7 +81,13 @@ class HomeSwipreScreen extends StatelessWidget {
                             ],
                           ),
                           AppFunctions.width(25),
-                          Image.asset(AppImages.filterImage, height: 22),
+                          GestureDetector(
+                            onTap: () => Get.to(() => FilterScreen()),
+                            child: Image.asset(
+                              AppImages.filterImage,
+                              height: 22,
+                            ),
+                          ),
                         ],
                       ),
                     ],

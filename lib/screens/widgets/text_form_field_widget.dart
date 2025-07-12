@@ -18,6 +18,7 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GradientContainer(
+      height: 60,
       child: Container(
         padding: EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(

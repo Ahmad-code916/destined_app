@@ -57,6 +57,7 @@ class UploadIdScreen extends StatelessWidget {
                           controller.toggleImage();
                         },
                         child: GradientContainer(
+                          height: 60,
                           child: Container(
                             padding: EdgeInsets.only(left: 16, right: 16),
                             decoration: BoxDecoration(

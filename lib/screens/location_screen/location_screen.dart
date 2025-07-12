@@ -72,6 +72,7 @@ class LocationScreen extends StatelessWidget {
                               ),
                               AppFunctions.height(10),
                               GradientContainer(
+                                height: 60,
                                 child: Container(
                                   padding: EdgeInsets.only(left: 16, right: 16),
                                   decoration: BoxDecoration(

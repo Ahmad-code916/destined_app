@@ -36,4 +36,13 @@ class AppStrings {
       'Let the app locate you to provide best\nsearched results around you';
   static const String currentLocation = 'Current Location';
   static const String searchLocation = 'Search New Location';
+  static const String filterOptions = 'Filter Options';
+  static const String filterOptionsSubString =
+      'Manage and set your preferences to find the best matches for you, keep enjoying!';
+  static const String hereTo = 'Here To';
+  static const String wantToMeet = 'Want to Meet';
+  static const String preferredAgeRange = 'Preferred Age Range';
+  static const String preferredLanguages = 'Preferred Language(s)';
+  static const String distanceRange = 'Distance Range';
+  static const String select = 'Select';
 }

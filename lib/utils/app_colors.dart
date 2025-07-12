@@ -13,9 +13,11 @@ class AppColors {
   static const blackColor = Color(0xff0E0127);
   static const darkBlackColor = Color(0xff03000C);
   static const pinkColor = Color(0xffDA489E);
+  static const pinkColorSecondry = Color(0xffC53E8D);
   static const lightPurpleColor = Color(0xffB783EB);
   static const lightBlueColor = Color(0xff251759);
   static const transparentColor = Color(0x00000000);
   static final swipeCardPrimaryColor = Colors.deepPurple.shade900;
   static const swipeCardSecondryColor = Color(0xff0E0124);
+  static const lightBlueSecColor = Color.fromARGB(255, 40, 3, 77);
 }

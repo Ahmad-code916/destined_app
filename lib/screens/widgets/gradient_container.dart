@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import '../../utils/app_colors.dart';
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key, required this.child});
+  const GradientContainer({super.key, required this.child, this.height});
   final Widget child;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(3),
-      height: 60,
+      height: height,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: AppFunctions.borderRadius(50),
