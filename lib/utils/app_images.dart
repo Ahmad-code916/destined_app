@@ -32,4 +32,8 @@ class AppImages {
   static const String resetIcon = 'assets/images/reset_icon.png';
   static const String advanceFilterButton =
       'assets/images/advance_filter_button.png';
+  static const String allTextImage = 'assets/images/all_text.png';
+  static const String onlineTextImage = 'assets/images/online_text.png';
+  static const String newDaterTextImage = 'assets/images/newdaters_text.png';
+  static const String likedYouTextImage = 'assets/images/liked_you.png';
 }

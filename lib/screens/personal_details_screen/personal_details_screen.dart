@@ -180,7 +180,10 @@ class PersonalDetailsScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(10),
                       DropDownWidget(
-                        selectedValue: controller.selectedGender ?? "",
+                        selectedValue:
+                            controller.selectedGender == null
+                                ? null
+                                : controller.selectedGender ?? "",
                         items: controller.genderList,
                         onChange: controller.onChange,
                       ),

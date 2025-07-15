@@ -20,4 +20,7 @@ class AppColors {
   static final swipeCardPrimaryColor = Colors.deepPurple.shade900;
   static const swipeCardSecondryColor = Color(0xff0E0124);
   static const lightBlueSecColor = Color.fromARGB(255, 40, 3, 77);
+  static const lightPurpleColorSec = Color(0xff8169DE);
+  static const pinkColorSec = Color(0xffDD3562);
+  static const purpleColorSec = Color(0xff8354FF);
 }

@@ -8,7 +8,7 @@ class PersonalDetailsScreenController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   List<String> genderList = ['Male', 'Female', 'Other'];
-  String? selectedGender = 'Male';
+  String? selectedGender;
   void onChange(String? value) {
     selectedGender = value;
     update();

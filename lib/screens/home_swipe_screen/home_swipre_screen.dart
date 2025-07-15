@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:get/get.dart';
 
+import '../widgets/head_row_widget.dart';
+
 class HomeSwipreScreen extends StatelessWidget {
   HomeSwipreScreen({super.key});
   final HomeSwipeScreenController controller = Get.put(
@@ -28,69 +30,11 @@ class HomeSwipreScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        spacing: 12,
-                        children: [
-                          ClipRRect(
-                            borderRadius: AppFunctions.borderRadius(50),
-                            child: Image.asset(
-                              AppImages.profileSelectedIcon,
-                              height: 40,
-                              width: 40,
-                            ),
-                          ),
-                          Text(
-                            'Name',
-                            style: AppTextStyle.whiteMedium.copyWith(
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: AppColors.whiteColor,
-                            size: 25,
-                          ),
-                          AppFunctions.width(25),
-                          Stack(
-                            alignment: Alignment.topRight,
-                            children: [
-                              Icon(
-                                Icons.notifications_rounded,
-                                color: AppColors.whiteColor,
-                                size: 25,
-                              ),
-                              Container(
-                                height: 12,
-                                width: 12,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: AppColors.darkBlackColor,
-                                    width: 2,
-                                  ),
-                                  color: AppColors.whiteColor,
-                                  borderRadius: AppFunctions.borderRadius(25),
-                                ),
-                              ),
-                            ],
-                          ),
-                          AppFunctions.width(25),
-                          GestureDetector(
-                            onTap: () => Get.to(() => FilterScreen()),
-                            child: Image.asset(
-                              AppImages.filterImage,
-                              height: 22,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  HeadRowWidget(
+                    image: AppImages.profileIcon,
+                    name: 'Name',
+                    onTapFilter: () => Get.to(() => FilterScreen()),
+                    onTapnotification: () {},
                   ),
                   AppFunctions.height(50),
                   SizedBox(
