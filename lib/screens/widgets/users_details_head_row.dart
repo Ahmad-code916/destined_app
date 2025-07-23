@@ -7,37 +7,32 @@ class UsersDetailsHeadRow extends StatelessWidget {
     super.key,
     required this.firstColor,
     required this.secondColor,
+    required this.child,
+    required this.onTapChild,
   });
   final Color firstColor;
   final Color secondColor;
+  final Widget child;
+  final void Function() onTapChild;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 6,
-          child: Container(
-            height: 90,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [firstColor, secondColor],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                stops: [0, 1.0],
-              ),
-            ),
-          ),
+    return Container(
+      padding: EdgeInsets.only(left: 24, top: 20),
+      height: 90,
+      width: Get.width * 0.6,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [firstColor, secondColor],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          stops: [0, 1.0],
         ),
-        Expanded(
-          flex: 4,
-          child: Container(
-            width: Get.width * 0.6,
-            height: 90,
-            decoration: BoxDecoration(color: AppColors.gradientSecondryFirst),
-          ),
-        ),
-      ],
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: GestureDetector(onTap: onTapChild, child: child),
+      ),
     );
   }
 }
