@@ -36,4 +36,13 @@ class AppImages {
   static const String onlineTextImage = 'assets/images/online_text.png';
   static const String newDaterTextImage = 'assets/images/newdaters_text.png';
   static const String likedYouTextImage = 'assets/images/liked_you.png';
+  static const String matchBigCirle = 'assets/images/match_circle.png';
+  static const String matchLikeImage = 'assets/images/match_like.png';
+  static const String matchHeartImage = 'assets/images/match_heart.png';
+  static const String matchDot1Image = 'assets/images/match_dot1.png';
+  static const String matchDot2Image = 'assets/images/match_dot2.png';
+  static const String keepDatingText = 'assets/images/keep_dating_text.png';
+  static const String unmatchHeartImage = 'assets/images/unmatch_heart.png';
+  static const String startSwiipingText =
+      'assets/images/start_swiping_text.png';
 }

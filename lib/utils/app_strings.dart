@@ -45,4 +45,12 @@ class AppStrings {
   static const String preferredLanguages = 'Preferred Language(s)';
   static const String distanceRange = 'Distance Range';
   static const String select = 'Select';
+  static const String interest = 'Interest';
+  static const String congrats = 'Congrats!';
+  static const String congratsSubStr =
+      'It\'s a Match!\nBelle & You both liked each\nother';
+  static const String startConversation = 'Start Conversation';
+  static const String bePatient = 'Be Patient';
+  static const String bePatientSubStr =
+      'Don\'t loose heart, keep\nbrowsing to find your best\nmatch';
 }
