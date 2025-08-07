@@ -1,8 +1,6 @@
 import 'package:destined_app/screens/home_screen/home_screen.dart';
-import 'package:destined_app/screens/home_swipe_screen/home_swipre_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../services/app_functions.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_images.dart';

@@ -9,11 +9,13 @@ class TextFormFieldWidget extends StatelessWidget {
     required this.controller,
     this.icon,
     this.hintText,
+    this.hintStyle,
   });
 
   final TextEditingController controller;
   final Widget? icon;
   final String? hintText;
+  final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class TextFormFieldWidget extends StatelessWidget {
           style: AppTextStyle.whiteMedium,
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: hintStyle,
             suffixIcon: icon,
             contentPadding: EdgeInsets.only(bottom: 2),
             filled: true,

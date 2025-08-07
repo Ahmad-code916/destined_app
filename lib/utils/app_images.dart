@@ -45,4 +45,5 @@ class AppImages {
   static const String unmatchHeartImage = 'assets/images/unmatch_heart.png';
   static const String startSwiipingText =
       'assets/images/start_swiping_text.png';
+  static const String archieveIcon = 'assets/images/archive_icon.png';
 }
