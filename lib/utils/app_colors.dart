@@ -28,4 +28,7 @@ class AppColors {
   static const lightRed = Color(0xffF64A69);
   static const darkRed = Color(0xffEF3349);
   static const lightBrown = Color(0xff501B41);
+  static const darkPurple = Color(0xff42207A);
+  static const lightBlue = Color(0xff2285FA);
+  static const darkBlue = Color(0xff1B40C1);
 }
