@@ -2,6 +2,7 @@ import 'package:destined_app/screens/interests_screen/interests_screen.dart';
 import 'package:destined_app/screens/personal_details_screen/personal_details_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/drop_down_widget.dart';
+import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
@@ -169,7 +170,41 @@ class PersonalDetailsScreen extends StatelessWidget {
                         ),
                       ),
                       AppFunctions.height(10),
-                      TextFormFieldWidget(controller: controller.dobController),
+                      GestureDetector(
+                        onTap: () {
+                          controller.selectDate();
+                        },
+                        child: GradientContainer(
+                          child: Container(
+                            height: 55,
+                            decoration: BoxDecoration(
+                              borderRadius: AppFunctions.borderRadius(50),
+                              color: AppColors.blackColor,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    controller.selectedDate == null
+                                        ? 'Select Date'
+                                        : '${controller.selectedDate!.day.toString()}-${controller.selectedDate!.month.toString()}-${controller.selectedDate!.year.toString()}',
+                                    style: AppTextStyle.whiteRegular,
+                                  ),
+                                  Icon(
+                                    Icons.calendar_month,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       AppFunctions.height(22),
                       Align(
                         alignment: Alignment.centerLeft,
@@ -190,7 +225,9 @@ class PersonalDetailsScreen extends StatelessWidget {
                       AppFunctions.height(44),
                       ButtonWidget(
                         buttonText: AppStrings.continu,
-                        onTap: () => Get.to(() => InterestsScreen()),
+                        onTap: () {
+                          controller.signUp();
+                        },
                       ),
                     ],
                   ),

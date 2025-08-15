@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "64981037488",
+    "project_id": "poppyapp-91a58",
+    "storage_bucket": "poppyapp-91a58.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64981037488:android:6816f2c6964d606c2fa675",
+        "android_client_info": {
+          "package_name": "com.example.destined_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMrYF5kpHVnjjk3ur5J1LP-R2sxrEnNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64981037488:android:94d5f6f2b9163f4a2fa675",
+        "android_client_info": {
+          "package_name": "com.mycompany.poppyryeuserapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMrYF5kpHVnjjk3ur5J1LP-R2sxrEnNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
