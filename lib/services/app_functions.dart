@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

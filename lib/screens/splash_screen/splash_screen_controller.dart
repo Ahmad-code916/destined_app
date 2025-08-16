@@ -40,7 +40,6 @@ class SplashScreenController extends GetxController {
           } else {
             Get.offAll(() => PersonalDetailsScreen());
           }
-          AppFunctions.showSnakBar('No', 'User not Exists');
         }
       }
     });

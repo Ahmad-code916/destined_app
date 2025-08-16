@@ -83,12 +83,30 @@ class UploadIdScreen extends StatelessWidget {
                         ),
                       ),
                       AppFunctions.height(30),
-                      if (controller.showUploadImage == true)
-                        Image.asset(AppImages.uploadDocImage),
+                      if (controller.showUploadImage == true &&
+                          controller.image == null)
+                        GestureDetector(
+                          onTap: () {
+                            controller.pickImage();
+                          },
+                          child: Image.asset(AppImages.uploadDocImage),
+                        ),
+                      if (controller.image != null)
+                        ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          child: Image(
+                            image: FileImage(controller.image!),
+                            height: 300,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       AppFunctions.height(46),
                       ButtonWidget(
                         buttonText: AppStrings.continu,
-                        onTap: () => Get.to(() => LocationScreen()),
+                        onTap: () {
+                          controller.updateUserInFirebase();
+                        },
                       ),
                     ],
                   ),
