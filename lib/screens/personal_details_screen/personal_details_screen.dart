@@ -1,4 +1,4 @@
-import 'package:destined_app/screens/interests_screen/interests_screen.dart';
+import 'package:destined_app/screens/login_screen/login_screen.dart';
 import 'package:destined_app/screens/personal_details_screen/personal_details_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/drop_down_widget.dart';
@@ -36,10 +36,17 @@ class PersonalDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.centerRight,
                         child: GestureDetector(
-                          onTap: () => Get.back(),
-                          child: Image.asset(AppImages.backIcon, height: 20),
+                          onTap: () {
+                            Get.to(() => LoginScreen());
+                          },
+                          child: Text(
+                            AppStrings.login,
+                            style: AppTextStyle.whiteBold.copyWith(
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                       ),
                       AppFunctions.height(30),

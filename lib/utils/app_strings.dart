@@ -56,4 +56,7 @@ class AppStrings {
   static const String addNewMessage = 'Add New Message';
   static const String newMatches = 'New Matches';
   static const String allMessages = 'All Messages';
+  static const String login = 'Login';
+  static const String logOut = 'Log Out';
+  static const String createAccount = 'Create Account';
 }

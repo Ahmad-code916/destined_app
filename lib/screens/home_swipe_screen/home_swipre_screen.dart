@@ -3,6 +3,7 @@ import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_control
 import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_text_style.dart';
@@ -32,7 +33,7 @@ class HomeSwipreScreen extends StatelessWidget {
                 children: [
                   HeadRowWidget(
                     image: AppImages.profileIcon,
-                    name: 'Name',
+                    name: UserBaseController.userData.name ?? "",
                     onTapFilter: () => Get.to(() => FilterScreen()),
                     onTapnotification: () {},
                   ),

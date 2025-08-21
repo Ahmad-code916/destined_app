@@ -33,20 +33,24 @@ class UploadIdScreenController extends GetxController {
     }
   }
 
-  void uploadImage() async {
+  Future<String> uploadImage() async {
     if (image == null) {
-      return;
+      return "";
     } else {
       try {
         final fileName =
             '${DateTime.now().millisecondsSinceEpoch.toString()}.jpg';
         await supabase.storage.from('users_images').upload(fileName, image!);
-        imageUrl = supabase.storage.from('users_images').getPublicUrl(fileName);
+        String imageUrl = supabase.storage
+            .from('users_images')
+            .getPublicUrl(fileName);
         print('-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl');
+        return imageUrl;
       } catch (e) {
         Get.dialog(
           AlertDialog(title: Text('Error!'), content: Text(e.toString())),
         );
+        return "";
       }
     }
   }
@@ -59,13 +63,14 @@ class UploadIdScreenController extends GetxController {
         message: 'Please select your image.',
       );
     } else {
-      uploadImage();
-      AppFunctions.showSnakBar('Url', imageUrl ?? "");
+      String imageUrl2 = await uploadImage();
+      print('---------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl2');
+      // AppFunctions.showSnakBar('Url', imageUrl ?? "");
       await FirebaseFirestore.instance
           .collection(UserModel.tableName)
           .doc(userModel.uid)
           .set(
-            userModel.copyWith(uploadedId: imageUrl, page3: true).toMap(),
+            userModel.copyWith(uploadedId: imageUrl2, page3: true).toMap(),
             SetOptions(merge: true),
           );
       AppFunctions.showSnakBar('Updaed!', 'List added to your data.');

@@ -1,4 +1,5 @@
 import 'package:destined_app/screens/profile_screen/profile_screen_controller.dart';
+import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/profile_page_row.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -347,6 +348,17 @@ class ProfileScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
+                                AppFunctions.height(20),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: ButtonWidget(
+                                    buttonText: 'LogOut',
+                                    onTap: () {
+                                      controller.logOut();
+                                    },
+                                  ),
+                                ),
+                                AppFunctions.height(30),
                               ],
                             ),
                           ),

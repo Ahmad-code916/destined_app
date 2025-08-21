@@ -54,6 +54,7 @@ class LocationScreen extends StatelessWidget {
                                   fontSize: 36,
                                 ),
                               ),
+
                               AppFunctions.height(12),
                               Text(
                                 textAlign: TextAlign.center,
@@ -71,43 +72,59 @@ class LocationScreen extends StatelessWidget {
                                 ),
                               ),
                               AppFunctions.height(10),
-                              GradientContainer(
-                                height: 60,
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 16, right: 16),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.darkBlackColor,
-                                    borderRadius: AppFunctions.borderRadius(50),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        AppStrings.idProof,
-                                        style: AppTextStyle.whiteMedium,
+                              GestureDetector(
+                                onTap: () {
+                                  controller.getPosition();
+                                },
+                                child: GradientContainer(
+                                  height: 60,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      left: 16,
+                                      right: 16,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.darkBlackColor,
+                                      borderRadius: AppFunctions.borderRadius(
+                                        50,
                                       ),
-                                      Icon(
-                                        Icons.location_searching_outlined,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            controller.currentUserData == null
+                                                ? 'Select'
+                                                : '${controller.currentUserData!.subLocality},${controller.currentUserData!.locality},${controller.currentUserData!.country}',
+                                            style: AppTextStyle.whiteMedium,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.location_searching_outlined,
+                                          color: AppColors.whiteColor,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              AppFunctions.height(30),
-                              TextFormFieldWidget(
-                                controller: controller.locationController,
-                                icon: Icon(
-                                  Icons.search,
-                                  color: AppColors.purpleColor,
-                                ),
-                                hintText: AppStrings.searchLocation,
-                              ),
+                              // AppFunctions.height(30),
+                              // TextFormFieldWidget(
+                              //   controller: controller.locationController,
+                              //   icon: Icon(
+                              //     Icons.search,
+                              //     color: AppColors.purpleColor,
+                              //   ),
+                              //   hintText: AppStrings.searchLocation,
+                              // ),
                               AppFunctions.height(40),
                               ButtonWidget(
                                 buttonText: AppStrings.continu,
-                                onTap: () => Get.to(() => HomeScreen()),
+                                onTap: () {
+                                  controller.updateUserInFirebase();
+                                },
                               ),
                             ],
                           ),
