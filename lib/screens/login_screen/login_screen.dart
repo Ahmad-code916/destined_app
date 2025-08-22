@@ -80,6 +80,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(40),
                       ButtonWidget(
+                        isLoading: controller.isLoading,
                         buttonText: AppStrings.login,
                         onTap: () {
                           controller.Login();

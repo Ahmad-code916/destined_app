@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 class LoginScreenController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   void Login() async {
     try {
@@ -27,6 +28,8 @@ class LoginScreenController extends GetxController {
           message: 'Please enter your password',
         );
       } else {
+        isLoading = true;
+        update();
         final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
@@ -45,9 +48,13 @@ class LoginScreenController extends GetxController {
           'Login',
           'Login to your account successfully!',
         );
+        isLoading = false;
+        update();
         Get.offAll(HomeScreen());
       }
     } catch (e) {
+      isLoading = false;
+      update();
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',

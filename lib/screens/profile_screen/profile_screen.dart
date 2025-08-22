@@ -352,6 +352,7 @@ class ProfileScreen extends StatelessWidget {
                                 Align(
                                   alignment: Alignment.center,
                                   child: ButtonWidget(
+                                    isLoading: controller.isLoading,
                                     buttonText: 'LogOut',
                                     onTap: () {
                                       controller.logOut();

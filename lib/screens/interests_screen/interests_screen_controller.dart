@@ -7,10 +7,10 @@ import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class InterestsScreenController extends GetxController {
   late UserModel userModel;
+  bool isLoading = false;
   List<LocalListModel> selectedItems = [];
   List<String> selectedInterestList = [];
   List<LocalListModel> interestList = [
@@ -81,17 +81,31 @@ class InterestsScreenController extends GetxController {
         message: 'Please select your list',
       );
     } else {
-      FirebaseFirestore.instance
-          .collection(UserModel.tableName)
-          .doc(userModel.uid)
-          .set(
-            userModel
-                .copyWith(interestList: selectedInterestList, page2: true)
-                .toMap(),
-            SetOptions(merge: true),
-          );
-      AppFunctions.showSnakBar('Updaed!', 'List added to your data.');
-      Get.to(() => UploadIdScreen());
+      try {
+        isLoading = true;
+        update();
+        FirebaseFirestore.instance
+            .collection(UserModel.tableName)
+            .doc(userModel.uid)
+            .set(
+              userModel
+                  .copyWith(interestList: selectedInterestList, page2: true)
+                  .toMap(),
+              SetOptions(merge: true),
+            );
+        AppFunctions.showSnakBar('Updaed!', 'List added to your data.');
+        Get.to(() => UploadIdScreen(), arguments: {'userModel': userModel});
+        isLoading = false;
+        update();
+      } catch (e) {
+        isLoading = false;
+        update();
+        showOkAlertDialog(
+          context: Get.context!,
+          title: 'Error',
+          message: e.toString(),
+        );
+      }
     }
   }
 

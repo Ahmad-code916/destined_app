@@ -139,6 +139,7 @@ class InterestsScreen extends StatelessWidget {
                         ),
                       ),
                       ButtonWidget(
+                        isLoading: controller.isLoading,
                         buttonText: AppStrings.continu,
                         onTap: () {
                           controller.updateUserInFirebase();

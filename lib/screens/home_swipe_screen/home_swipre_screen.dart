@@ -32,7 +32,7 @@ class HomeSwipreScreen extends StatelessWidget {
               child: Column(
                 children: [
                   HeadRowWidget(
-                    image: AppImages.profileIcon,
+                    image: UserBaseController.userData.imageUrl ?? "",
                     name: UserBaseController.userData.name ?? "",
                     onTapFilter: () => Get.to(() => FilterScreen()),
                     onTapnotification: () {},

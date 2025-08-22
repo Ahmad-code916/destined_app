@@ -79,17 +79,28 @@ class PersonalDetailsScreen extends StatelessWidget {
                                   color: AppColors.purpleColor,
                                 ),
                                 child: Center(
-                                  child: Image.asset(
-                                    AppImages.profileImage,
-                                    fit: BoxFit.cover,
-                                    height: 50,
-                                  ),
+                                  child:
+                                      controller.image == null
+                                          ? Image.asset(
+                                            AppImages.profileImage,
+                                            fit: BoxFit.cover,
+                                            height: 50,
+                                          )
+                                          : CircleAvatar(
+                                            radius: 100,
+                                            backgroundImage: FileImage(
+                                              controller.image!,
+                                            ),
+                                          ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 90, left: 75),
+                            GestureDetector(
+                              onTap: () {
+                                controller.pickImage();
+                              },
                               child: Container(
+                                margin: EdgeInsets.only(left: 75, top: 90),
                                 height: 50,
                                 width: 50,
                                 decoration: BoxDecoration(
@@ -231,6 +242,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(44),
                       ButtonWidget(
+                        isLoading: controller.isLoading,
                         buttonText: AppStrings.continu,
                         onTap: () {
                           controller.signUp();

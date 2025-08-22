@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
+import 'package:destined_app/screens/location_screen/location_screen.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class UploadIdScreenController extends GetxController {
   File? image;
   String? imageUrl;
   final supabase = Supabase.instance.client;
+  bool isLoading = false;
 
   void toggleImage() {
     showUploadImage = !showUploadImage;
@@ -63,9 +65,10 @@ class UploadIdScreenController extends GetxController {
         message: 'Please select your image.',
       );
     } else {
+      isLoading = true;
+      update();
       String imageUrl2 = await uploadImage();
       print('---------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl2');
-      // AppFunctions.showSnakBar('Url', imageUrl ?? "");
       await FirebaseFirestore.instance
           .collection(UserModel.tableName)
           .doc(userModel.uid)
@@ -73,13 +76,17 @@ class UploadIdScreenController extends GetxController {
             userModel.copyWith(uploadedId: imageUrl2, page3: true).toMap(),
             SetOptions(merge: true),
           );
-      AppFunctions.showSnakBar('Updaed!', 'List added to your data.');
+      AppFunctions.showSnakBar('Updaed!', 'Id added to your data.');
+      Get.offAll(() => LocationScreen(), arguments: {'userModel': userModel});
+      isLoading = false;
+      update();
     }
   }
 
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
+    AppFunctions.showSnakBar('Page3', userModel.page3.toString());
     super.onInit();
   }
 }

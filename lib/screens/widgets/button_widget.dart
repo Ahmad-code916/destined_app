@@ -8,9 +8,11 @@ class ButtonWidget extends StatelessWidget {
     super.key,
     required this.buttonText,
     required this.onTap,
+    required this.isLoading,
   });
   final String buttonText;
   final void Function() onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +31,15 @@ class ButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: Center(
-          child: Text(
-            buttonText,
-            style: AppTextStyle.whiteMedium.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          child:
+              isLoading == true
+                  ? CircularProgressIndicator(color: AppColors.whiteColor)
+                  : Text(
+                    buttonText,
+                    style: AppTextStyle.whiteMedium.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
         ),
       ),
     );

@@ -18,6 +18,7 @@ class LocationScreenController extends GetxController {
 
   final TextEditingController locationController = TextEditingController();
   bool isLoading = false;
+  bool isUpdatingData = false;
 
   Future<Position> getPosition() async {
     isLoading = true;
@@ -102,21 +103,35 @@ class LocationScreenController extends GetxController {
         message: 'Please select your location.',
       );
     } else {
-      await FirebaseFirestore.instance
-          .collection(UserModel.tableName)
-          .doc(userModel.uid)
-          .set(
-            userModel
-                .copyWith(
-                  location:
-                      '${currentUserData!.subLocality},${currentUserData!.locality},${currentUserData!.country}',
-                  page4: true,
-                )
-                .toMap(),
-            SetOptions(merge: true),
-          );
-      AppFunctions.showSnakBar('Updaed!', 'Location added to your data.');
-      Get.offAll(HomeScreen());
+      try {
+        isUpdatingData = true;
+        update();
+        await FirebaseFirestore.instance
+            .collection(UserModel.tableName)
+            .doc(userModel.uid)
+            .set(
+              userModel
+                  .copyWith(
+                    location:
+                        '${currentUserData!.subLocality},${currentUserData!.locality},${currentUserData!.country}',
+                    page4: true,
+                  )
+                  .toMap(),
+              SetOptions(merge: true),
+            );
+        AppFunctions.showSnakBar('Updaed!', 'Location added to your data.');
+        Get.offAll(HomeScreen());
+        isUpdatingData = false;
+        update();
+      } catch (e) {
+        isUpdatingData = false;
+        update();
+        showOkAlertDialog(
+          context: Get.context!,
+          title: 'Error',
+          message: e.toString(),
+        );
+      }
     }
   }
 

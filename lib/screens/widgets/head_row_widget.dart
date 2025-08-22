@@ -28,7 +28,10 @@ class HeadRowWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: AppFunctions.borderRadius(50),
-              child: Image.asset(image, height: 40, width: 40),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(image),
+                radius: 25,
+              ),
             ),
             Text(
               name,

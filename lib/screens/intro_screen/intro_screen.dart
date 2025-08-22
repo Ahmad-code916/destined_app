@@ -44,6 +44,7 @@ class IntroScreen extends StatelessWidget {
                 ),
                 Image.asset(AppImages.introSecondImage, fit: BoxFit.cover),
                 ButtonWidget(
+                  isLoading: false,
                   buttonText: AppStrings.startDating,
                   onTap: () => Get.to(() => PersonalDetailsScreen()),
                 ),

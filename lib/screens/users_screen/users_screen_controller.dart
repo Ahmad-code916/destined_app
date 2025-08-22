@@ -1,10 +1,37 @@
+import 'dart:async';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:destined_app/models/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 
 class UsersScreenController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
   int selectedIndex = 0;
+  List<UserModel> userList = [];
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
+
+  void getUsers() async {
+    try {
+      final user =
+          await FirebaseFirestore.instance
+              .collection(UserModel.tableName)
+              .get();
+      if (user.docs.isNotEmpty) {
+        userList =
+            user.docs.map((e) {
+              return UserModel.fromMap(e.data());
+            }).toList();
+      }
+    } catch (e) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: 'Please select your image.',
+      );
+    }
+  }
 
   @override
   void onInit() {

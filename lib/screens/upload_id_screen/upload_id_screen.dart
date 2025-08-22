@@ -103,6 +103,7 @@ class UploadIdScreen extends StatelessWidget {
                         ),
                       AppFunctions.height(46),
                       ButtonWidget(
+                        isLoading: controller.isLoading,
                         buttonText: AppStrings.continu,
                         onTap: () {
                           controller.updateUserInFirebase();

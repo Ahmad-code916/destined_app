@@ -1,8 +1,6 @@
-import 'package:destined_app/screens/home_screen/home_screen.dart';
 import 'package:destined_app/screens/location_screen/location_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/gradient_container.dart';
-import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/app_functions.dart';
@@ -110,17 +108,9 @@ class LocationScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // AppFunctions.height(30),
-                              // TextFormFieldWidget(
-                              //   controller: controller.locationController,
-                              //   icon: Icon(
-                              //     Icons.search,
-                              //     color: AppColors.purpleColor,
-                              //   ),
-                              //   hintText: AppStrings.searchLocation,
-                              // ),
                               AppFunctions.height(40),
                               ButtonWidget(
+                                isLoading: controller.isUpdatingData,
                                 buttonText: AppStrings.continu,
                                 onTap: () {
                                   controller.updateUserInFirebase();

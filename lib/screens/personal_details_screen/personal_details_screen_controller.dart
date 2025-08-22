@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/interests_screen/interests_screen.dart';
@@ -5,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PersonalDetailsScreenController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
@@ -18,6 +22,9 @@ class PersonalDetailsScreenController extends GetxController {
   DateTime? selectedDate;
   List<String> genderList = ['Male', 'Female', 'Other'];
   String? selectedGender;
+  File? image;
+  final supabase = Supabase.instance.client;
+
   void onChange(String? value) {
     selectedGender = value;
     update();
@@ -35,8 +42,49 @@ class PersonalDetailsScreenController extends GetxController {
     }
   }
 
+  void pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      image = File(pickedImage.path);
+      update();
+    } else {
+      Get.dialog(
+        AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
+      );
+    }
+  }
+
+  Future<String> uploadImage() async {
+    if (image == null) {
+      return "";
+    } else {
+      try {
+        final fileName =
+            '${DateTime.now().millisecondsSinceEpoch.toString()}.jpg';
+        await supabase.storage.from('users_images').upload(fileName, image!);
+        String imageUrl = supabase.storage
+            .from('users_images')
+            .getPublicUrl(fileName);
+        print('-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl');
+        return imageUrl;
+      } catch (e) {
+        Get.dialog(
+          AlertDialog(title: Text('Error!'), content: Text(e.toString())),
+        );
+        return "";
+      }
+    }
+  }
+
   void signUp() async {
-    if (emailController.text.isEmpty) {
+    if (image == null) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: 'Please select your image',
+      );
+    } else if (emailController.text.isEmpty) {
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',
@@ -76,6 +124,7 @@ class PersonalDetailsScreenController extends GetxController {
       try {
         isLoading = true;
         update();
+        String imageUrl2 = await uploadImage();
         final userCredential = await firebaseAuth
             .createUserWithEmailAndPassword(
               email: emailController.text,
@@ -83,6 +132,7 @@ class PersonalDetailsScreenController extends GetxController {
             );
         final userModel = UserModel(
           uid: userCredential.user?.uid ?? "",
+          imageUrl: imageUrl2,
           dateOfBirth: selectedDate,
           gender: selectedGender,
           name: firstNameController.text,
