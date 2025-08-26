@@ -3,6 +3,8 @@ import 'package:destined_app/screens/users_screen/users_screen_controller.dart';
 import 'package:destined_app/screens/widgets/head_row_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/user_data_container.dart';
+import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +26,7 @@ class UsersScreen extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: HeadRowWidget(
-              image: AppImages.profileIcon,
+              image: UserBaseController.userData.imageUrl ?? "",
               name: 'Name',
               onTapFilter: () => Get.to(() => FilterScreen()),
               onTapnotification: () {},
@@ -87,7 +89,7 @@ class UsersScreen extends StatelessWidget {
                       children: [
                         Expanded(
                           child: GridView.builder(
-                            itemCount: 10,
+                            itemCount: controller.userList.length,
                             shrinkWrap: true,
                             primary: true,
                             gridDelegate:
@@ -98,6 +100,7 @@ class UsersScreen extends StatelessWidget {
                                   childAspectRatio: 0.9,
                                 ),
                             itemBuilder: (context, index) {
+                              final user = controller.userList[index];
                               return UserDataContainer(
                                 onTapContainer:
                                     () => Get.to(() => UserDetailsScreen()),
@@ -105,9 +108,12 @@ class UsersScreen extends StatelessWidget {
                                     index == 0 || index == 2 || index == 5
                                         ? true
                                         : false,
-                                image: AppImages.profileImage,
-                                age: '28',
-                                name: 'Belle Benson',
+                                image: user.imageUrl ?? "",
+                                age:
+                                    AppFunctions.calculateAge(
+                                      user.dateOfBirth!,
+                                    ).toString(),
+                                name: user.name ?? "",
                                 distance: 2.5,
                                 count: 30,
                               );

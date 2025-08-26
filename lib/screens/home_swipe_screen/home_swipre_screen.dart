@@ -37,174 +37,147 @@ class HomeSwipreScreen extends StatelessWidget {
                     onTapFilter: () => Get.to(() => FilterScreen()),
                     onTapnotification: () {},
                   ),
-                  AppFunctions.height(50),
+                  AppFunctions.height(30),
                   SizedBox(
-                    width: double.infinity,
                     height: Get.height * 0.6,
-                    child: GetBuilder<HomeSwipeScreenController>(
-                      builder: (context) {
-                        return CardSwiper(
-                          controller: controller.swiperController,
-                          numberOfCardsDisplayed: 2,
-                          onSwipe:
-                              (previousIndex, currentIndex, direction) =>
-                                  controller.updateIndexOnSwipe(
-                                    currentIndex ?? 0,
-                                  ),
-                          backCardOffset: Offset(60, -50),
-                          isLoop: true,
-                          cardBuilder: (
-                            context,
-                            index,
-                            horizontalOffsetPercentage,
-                            verticalOffsetPercentage,
-                          ) {
-                            final card = controller.cards2[index];
-                            final isTopCard = index == controller.currentIndex;
-                            return Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  stops: [0.0, 1.0],
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    AppColors.swipeCardPrimaryColor,
-                                    AppColors.swipeCardSecondryColor,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color:
-                                      isTopCard
-                                          ? AppColors.whiteColor
-                                          : AppColors.transparentColor,
-                                  width: 3,
-                                ),
-                                color: AppColors.darkBlackColor,
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(card, style: AppTextStyle.whiteBold),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 26,
-                                      right: 26,
-                                      bottom: 36,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          spacing: 20,
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                color: AppColors.whiteColor,
-                                                borderRadius:
-                                                    AppFunctions.borderRadius(
-                                                      50,
-                                                    ),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    AppFunctions.borderRadius(
-                                                      50,
-                                                    ),
-                                                child: Image.asset(
-                                                  AppImages.swipeImage,
-                                                  height: 80,
-                                                  width: 80,
-                                                ),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Anna Mcconaughey',
-                                                    style: AppTextStyle
-                                                        .whiteBold
-                                                        .copyWith(fontSize: 24),
-                                                  ),
-                                                  Text(
-                                                    '1.5 km away',
-                                                    style:
-                                                        AppTextStyle
-                                                            .whiteRegular,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        AppFunctions.height(20),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              width: 80,
-                                              height: 10,
-                                              child: ListView.builder(
-                                                itemCount: 10,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                shrinkWrap: true,
-                                                primary: true,
-                                                itemBuilder: (context, index) {
-                                                  return Container(
-                                                    margin: EdgeInsets.only(
-                                                      left: 2,
-                                                      right: 5,
-                                                    ),
-                                                    height: 10,
-                                                    width: 10,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          index == 0
-                                                              ? AppColors
-                                                                  .whiteColor
-                                                              : AppColors
-                                                                  .darkBlackColor,
-                                                      border: Border.all(
-                                                        color:
-                                                            AppColors
-                                                                .whiteColor,
-                                                        width: 2,
-                                                      ),
-                                                      borderRadius:
-                                                          AppFunctions.borderRadius(
-                                                            50,
-                                                          ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                            Icon(
-                                              Icons.chat_outlined,
-                                              color: AppColors.whiteColor,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                    child: CardSwiper(
+                      numberOfCardsDisplayed: 2,
+                      cardsCount: controller.userList.length,
+                      cardBuilder: (context, index, prev, ind) {
+                        final card = controller.cards2[index];
+                        return GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                stops: [0.0, 1.0],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.swipeCardPrimaryColor,
+                                  AppColors.swipeCardSecondryColor,
                                 ],
                               ),
-                            );
-                          },
-                          cardsCount: controller.cards2.length,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: AppColors.whiteColor,
+                                width: 3,
+                              ),
+                              color: AppColors.darkBlackColor,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(card, style: AppTextStyle.whiteBold),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 26,
+                                    right: 26,
+                                    bottom: 36,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        spacing: 20,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.whiteColor,
+                                              borderRadius:
+                                                  AppFunctions.borderRadius(50),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  AppFunctions.borderRadius(50),
+                                              child: Image.asset(
+                                                AppImages.swipeImage,
+                                                height: 80,
+                                                width: 80,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Anna Mcconaughey',
+                                                  style: AppTextStyle.whiteBold
+                                                      .copyWith(fontSize: 24),
+                                                ),
+                                                Text(
+                                                  '1.5 km away',
+                                                  style:
+                                                      AppTextStyle.whiteRegular,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      AppFunctions.height(20),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: 80,
+                                            height: 10,
+                                            child: ListView.builder(
+                                              itemCount: 10,
+                                              scrollDirection: Axis.horizontal,
+                                              shrinkWrap: true,
+                                              primary: true,
+                                              itemBuilder: (context, index) {
+                                                return Container(
+                                                  margin: EdgeInsets.only(
+                                                    left: 2,
+                                                    right: 5,
+                                                  ),
+                                                  height: 10,
+                                                  width: 10,
+                                                  decoration: BoxDecoration(
+                                                    color:
+                                                        index == 0
+                                                            ? AppColors
+                                                                .whiteColor
+                                                            : AppColors
+                                                                .darkBlackColor,
+                                                    border: Border.all(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                      width: 2,
+                                                    ),
+                                                    borderRadius:
+                                                        AppFunctions.borderRadius(
+                                                          50,
+                                                        ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.chat_outlined,
+                                            color: AppColors.whiteColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         );
                       },
                     ),
                   ),
+                  AppFunctions.height(20),
                   Padding(
                     padding: const EdgeInsets.only(left: 50, right: 50),
                     child: Row(

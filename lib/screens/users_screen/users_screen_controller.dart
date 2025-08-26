@@ -40,6 +40,7 @@ class UsersScreenController extends GetxController
       selectedIndex = tabController.index;
       update();
     });
+    getUsers();
     super.onInit();
   }
 

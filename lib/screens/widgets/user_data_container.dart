@@ -50,7 +50,17 @@ class UserDataContainer extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.topRight,
                 children: [
-                  Center(child: Image.asset(image, height: 115)),
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: AppFunctions.borderRadius(10),
+                      child: Image.network(
+                        image,
+                        height: 120,
+                        fit: BoxFit.fitWidth,
+                        width: double.infinity,
+                      ),
+                    ),
+                  ),
                   if (isShownGreen == true)
                     Container(
                       margin: EdgeInsets.only(right: 13, top: 12),

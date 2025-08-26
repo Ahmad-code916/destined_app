@@ -11,7 +11,8 @@ class UserModel {
   List<String>? interestList;
   String? imageUrl;
   String? location;
-  String? uploadedId; // ✅ new field
+  String? uploadedId;
+  List<String>? likedBy; // ✅ new field
   bool? page1;
   bool? page2;
   bool? page3;
@@ -27,7 +28,8 @@ class UserModel {
     this.interestList,
     this.imageUrl,
     this.location,
-    this.uploadedId, // ✅ added to constructor
+    this.uploadedId,
+    this.likedBy, // ✅ added to constructor
     this.page1,
     this.page2,
     this.page3,
@@ -51,7 +53,11 @@ class UserModel {
               : [],
       imageUrl: map["imageUrl"] ?? "",
       location: map["location"] ?? "",
-      uploadedId: map["uploadedId"] ?? "", // ✅ added
+      uploadedId: map["uploadedId"] ?? "",
+      likedBy:
+          map["likedBy"] != null
+              ? List<String>.from(map["likedBy"])
+              : [], // ✅ added
       page1: map["page1"] ?? false,
       page2: map["page2"] ?? false,
       page3: map["page3"] ?? false,
@@ -70,7 +76,8 @@ class UserModel {
       "interestList": interestList,
       "imageUrl": imageUrl,
       "location": location,
-      "uploadedId": uploadedId, // ✅ added
+      "uploadedId": uploadedId,
+      "likedBy": likedBy, // ✅ added
       "page1": page1,
       "page2": page2,
       "page3": page3,
@@ -88,7 +95,8 @@ class UserModel {
     List<String>? interestList,
     String? imageUrl,
     String? location,
-    String? uploadedId, // ✅ added
+    String? uploadedId,
+    List<String>? likedBy, // ✅ added
     bool? page1,
     bool? page2,
     bool? page3,
@@ -104,7 +112,8 @@ class UserModel {
       interestList: interestList ?? this.interestList,
       imageUrl: imageUrl ?? this.imageUrl,
       location: location ?? this.location,
-      uploadedId: uploadedId ?? this.uploadedId, // ✅ added
+      uploadedId: uploadedId ?? this.uploadedId,
+      likedBy: likedBy ?? this.likedBy, // ✅ added
       page1: page1 ?? this.page1,
       page2: page2 ?? this.page2,
       page3: page3 ?? this.page3,

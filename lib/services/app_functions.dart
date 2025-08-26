@@ -19,4 +19,16 @@ class AppFunctions {
   static SnackbarController showSnakBar(String title, String message) {
     return Get.snackbar(title, message, backgroundColor: AppColors.whiteColor);
   }
+
+  static int calculateAge(DateTime dateOfBirth) {
+    DateTime today = DateTime.now();
+    int age = today.year - dateOfBirth.year;
+
+    if (today.month < dateOfBirth.month ||
+        (today.month == dateOfBirth.month && today.day < dateOfBirth.day)) {
+      age--;
+    }
+
+    return age;
+  }
 }
