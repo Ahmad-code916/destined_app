@@ -27,7 +27,7 @@ class UsersScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             title: HeadRowWidget(
               image: UserBaseController.userData.imageUrl ?? "",
-              name: 'Name',
+              name: UserBaseController.userData.name ?? "",
               onTapFilter: () => Get.to(() => FilterScreen()),
               onTapnotification: () {},
             ),

@@ -23,87 +23,140 @@ class MessageScreen extends StatelessWidget {
       body: PrimaryGradient(
         firstColor: AppColors.gradientSecondryFirst,
         secondColor: AppColors.gradientSecondrySec,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          GradientSecondryContainer(
-                            firstColor: AppColors.lightRed,
-                            thirdColor: AppColors.darkRed,
-                            child: Icon(
-                              Icons.message,
-                              color: AppColors.whiteColor,
+        child: GetBuilder<MessageScreenController>(
+          builder: (context) {
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                GradientSecondryContainer(
+                                  firstColor: AppColors.lightRed,
+                                  thirdColor: AppColors.darkRed,
+                                  child: Icon(
+                                    Icons.message,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                ),
+                                AppFunctions.width(11),
+                                Text(
+                                  AppStrings.addNewMessage,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Image.asset(AppImages.archieveIcon, height: 21),
+                          ],
+                        ),
+                        AppFunctions.height(32),
+                        TextFormFieldWidget(
+                          controller: controller.searchController,
+                          hintText: 'Search Message, Match',
+                          hintStyle: AppTextStyle.whiteMedium,
+                        ),
+                        AppFunctions.height(30),
+                        Text(
+                          AppStrings.newMatches,
+                          style: AppTextStyle.whiteMedium,
+                        ),
+                        AppFunctions.height(32),
+                        if (controller.userList.isEmpty)
+                          Center(
+                            child: Text(
+                              'No match found',
+                              style: AppTextStyle.whiteMedium,
+                            ),
+                          )
+                        else
+                          SizedBox(
+                            height: 150,
+                            child: ListView.builder(
+                              itemCount: controller.userList.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                final user = controller.userList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 17),
+                                  child: Column(
+                                    spacing: 5,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: AppColors.whiteColor,
+                                          ),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: CircleAvatar(
+                                          radius: 50,
+                                          backgroundImage: NetworkImage(
+                                            user.imageUrl ?? "",
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          user.name ?? "",
+                                          style: AppTextStyle.whiteRegular,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ),
-                          AppFunctions.width(11),
-                          Text(
-                            AppStrings.addNewMessage,
-                            style: AppTextStyle.whiteMedium.copyWith(
-                              fontWeight: FontWeight.w600,
+                        AppFunctions.height(30),
+                        Text(
+                          AppStrings.allMessages,
+                          style: AppTextStyle.whiteMedium.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                          ),
+                        ),
+                        AppFunctions.height(30),
+                        if (controller.userList.isEmpty)
+                          Center(
+                            child: Text(
+                              'No User Found',
+                              style: AppTextStyle.whiteMedium,
+                            ),
+                          )
+                        else if (controller.userList.isNotEmpty)
+                          SizedBox(
+                            height: Get.height * 0.6,
+                            child: ListView.builder(
+                              itemCount: controller.userList.length,
+                              itemBuilder: (context, index) {
+                                return MessageWidget(
+                                  name: 'Belle Benson',
+                                  lastMessage:
+                                      'Hi, How are you? Nice to meet you? Free now, You?',
+                                  image: AppImages.musicImage,
+                                  dateTime: '3:45 PM',
+                                  count: '3',
+                                );
+                              },
                             ),
                           ),
-                        ],
-                      ),
-                      Image.asset(AppImages.archieveIcon, height: 21),
-                    ],
-                  ),
-                  AppFunctions.height(32),
-                  TextFormFieldWidget(
-                    controller: controller.searchController,
-                    hintText: 'Search Message, Match',
-                    hintStyle: AppTextStyle.whiteMedium,
-                  ),
-                  AppFunctions.height(30),
-                  Text(AppStrings.newMatches, style: AppTextStyle.whiteMedium),
-                  AppFunctions.height(32),
-                  SizedBox(
-                    height: 100,
-                    child: ListView.builder(
-                      itemCount: 10,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.whiteColor),
-                            // borderRadius: AppFunctions.borderRadius(25),
-                            shape: BoxShape.circle,
-                          ),
-                          margin: const EdgeInsets.only(right: 17),
-                          child: Image.asset(AppImages.musicImage),
-                        );
-                      },
+                      ],
                     ),
                   ),
-                  AppFunctions.height(30),
-                  Text(
-                    AppStrings.allMessages,
-                    style: AppTextStyle.whiteMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 24,
-                    ),
-                  ),
-                  AppFunctions.height(30),
-                  MessageWidget(
-                    name: 'Belle Benson',
-                    lastMessage:
-                        'Hi, How are you? Nice to meet you? Free now, You?',
-                    image: AppImages.musicImage,
-                    dateTime: '3:45 PM',
-                    count: '3',
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

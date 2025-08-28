@@ -1,6 +1,7 @@
 import 'package:destined_app/screens/profile_screen/profile_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/profile_page_row.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/app_functions.dart';
@@ -47,7 +48,9 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Image.asset(AppImages.profileImage),
+                                child: Image.network(
+                                  UserBaseController.userData.imageUrl ?? "",
+                                ),
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -67,8 +70,13 @@ class ProfileScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(top: 15),
                                         child: ProfilePageRow(
                                           icon: Icons.favorite_border_outlined,
-                                          text1: '2.7',
-                                          text2: 'k',
+                                          text1:
+                                              UserBaseController
+                                                  .userData
+                                                  .likedBy!
+                                                  .length
+                                                  .toString(),
+                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -83,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                                         child: ProfilePageRow(
                                           icon: Icons.thumb_up,
                                           text1: '2.7',
-                                          text2: 'k',
+                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -98,7 +106,7 @@ class ProfileScreen extends StatelessWidget {
                                         child: ProfilePageRow(
                                           icon: Icons.message_outlined,
                                           text1: '2.7',
-                                          text2: 'k',
+                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -133,108 +141,53 @@ class ProfileScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Text(
+                                  UserBaseController.userData.name ?? "",
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    fontSize: 32,
+                                  ),
+                                ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                    Row(
                                       children: [
-                                        Text(
-                                          'Belle Benson',
-                                          style: AppTextStyle.whiteMedium
-                                              .copyWith(fontSize: 32),
+                                        Icon(
+                                          Icons.location_on,
+                                          color: AppColors.whiteColor,
                                         ),
-                                        Row(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.location_on,
-                                                  color: AppColors.whiteColor,
-                                                ),
-                                                AppFunctions.width(8),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    text: '1.5 ',
-                                                    children: [
-                                                      TextSpan(text: 'km away'),
-                                                    ],
-                                                    style: AppTextStyle
-                                                        .whiteMedium
-                                                        .copyWith(fontSize: 14),
-                                                  ),
-                                                ),
-                                                AppFunctions.width(16),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.favorite_sharp,
-                                                  color: AppColors.whiteColor,
-                                                ),
-                                                AppFunctions.width(8),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    text: '2.7 ',
-                                                    children: [
-                                                      TextSpan(text: 'k'),
-                                                    ],
-                                                    style: AppTextStyle
-                                                        .whiteMedium
-                                                        .copyWith(fontSize: 14),
-                                                  ),
-                                                ),
-                                                AppFunctions.width(16),
-                                              ],
-                                            ),
-                                          ],
+                                        AppFunctions.width(8),
+                                        RichText(
+                                          text: TextSpan(
+                                            text: '1.5 ',
+                                            children: [
+                                              TextSpan(text: 'km away'),
+                                            ],
+                                            style: AppTextStyle.whiteMedium
+                                                .copyWith(fontSize: 14),
+                                          ),
                                         ),
+                                        AppFunctions.width(16),
                                       ],
                                     ),
                                     Row(
-                                      spacing: 10,
                                       children: [
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: GradientSecondryContainer(
-                                            firstColor: Color(0xff34F07F),
-                                            thirdColor: Color(0xff10AA7C),
-                                            child: Icon(
-                                              Icons.thumb_up,
-                                              color: AppColors.whiteColor,
-                                            ),
-                                          ),
+                                        Icon(
+                                          Icons.favorite_sharp,
+                                          color: AppColors.whiteColor,
                                         ),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: GradientSecondryContainer(
-                                            firstColor: Color(0xffFF7D95),
-                                            thirdColor: Color(0xffEF3349),
-                                            child: Icon(
-                                              Icons.thumb_down,
-                                              color: AppColors.whiteColor,
-                                            ),
-                                          ),
+                                        AppFunctions.width(8),
+                                        Text(
+                                          UserBaseController
+                                              .userData
+                                              .likedBy!
+                                              .length
+                                              .toString(),
+                                          style: AppTextStyle.whiteRegular,
                                         ),
+                                        AppFunctions.width(16),
                                       ],
                                     ),
                                   ],
-                                ),
-                                AppFunctions.height(34),
-                                Text(
-                                  'Hello Friends!',
-                                  style: AppTextStyle.whiteMedium.copyWith(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                AppFunctions.height(10),
-                                Text(
-                                  'Love music, cooking, swimming, going out, travellig etc. Wanna be friends??',
-                                  style: AppTextStyle.whiteRegular,
                                 ),
                                 AppFunctions.height(25),
                                 SizedBox(
@@ -329,16 +282,22 @@ class ProfileScreen extends StatelessWidget {
                                   height: 50,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: controller.interestList.length,
+                                    itemCount:
+                                        UserBaseController
+                                            .userData
+                                            .interestList!
+                                            .length,
                                     itemBuilder: (context, index) {
-                                      final interest =
-                                          controller.interestList[index];
+                                      final interests =
+                                          UserBaseController
+                                              .userData
+                                              .interestList![index];
                                       return Padding(
                                         padding: const EdgeInsets.only(
                                           right: 15,
                                         ),
                                         child: Text(
-                                          interest,
+                                          interests,
                                           style: AppTextStyle.whiteRegular
                                               .copyWith(
                                                 color: AppColors.purpleColor,
