@@ -12,7 +12,11 @@ class UserModel {
   String? imageUrl;
   String? location;
   String? uploadedId;
-  List<String>? likedBy; // ✅ new field
+
+  List<String>? likedBy;
+  List<String>? myLikes;
+  List<String>? matches;
+
   bool? page1;
   bool? page2;
   bool? page3;
@@ -29,7 +33,9 @@ class UserModel {
     this.imageUrl,
     this.location,
     this.uploadedId,
-    this.likedBy, // ✅ added to constructor
+    this.likedBy,
+    this.myLikes,
+    this.matches,
     this.page1,
     this.page2,
     this.page3,
@@ -54,10 +60,11 @@ class UserModel {
       imageUrl: map["imageUrl"] ?? "",
       location: map["location"] ?? "",
       uploadedId: map["uploadedId"] ?? "",
-      likedBy:
-          map["likedBy"] != null
-              ? List<String>.from(map["likedBy"])
-              : [], // ✅ added
+
+      likedBy: map["likedBy"] != null ? List<String>.from(map["likedBy"]) : [],
+      myLikes: map["myLikes"] != null ? List<String>.from(map["myLikes"]) : [],
+      matches: map["matches"] != null ? List<String>.from(map["matches"]) : [],
+
       page1: map["page1"] ?? false,
       page2: map["page2"] ?? false,
       page3: map["page3"] ?? false,
@@ -77,7 +84,11 @@ class UserModel {
       "imageUrl": imageUrl,
       "location": location,
       "uploadedId": uploadedId,
-      "likedBy": likedBy, // ✅ added
+
+      "likedBy": likedBy,
+      "myLikes": myLikes,
+      "matches": matches,
+
       "page1": page1,
       "page2": page2,
       "page3": page3,
@@ -96,7 +107,9 @@ class UserModel {
     String? imageUrl,
     String? location,
     String? uploadedId,
-    List<String>? likedBy, // ✅ added
+    List<String>? likedBy,
+    List<String>? myLikes,
+    List<String>? matches,
     bool? page1,
     bool? page2,
     bool? page3,
@@ -113,7 +126,11 @@ class UserModel {
       imageUrl: imageUrl ?? this.imageUrl,
       location: location ?? this.location,
       uploadedId: uploadedId ?? this.uploadedId,
-      likedBy: likedBy ?? this.likedBy, // ✅ added
+
+      likedBy: likedBy ?? this.likedBy,
+      myLikes: myLikes ?? this.myLikes,
+      matches: matches ?? this.matches,
+
       page1: page1 ?? this.page1,
       page2: page2 ?? this.page2,
       page3: page3 ?? this.page3,

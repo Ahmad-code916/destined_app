@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class UsersScreenController extends GetxController
       final user =
           await FirebaseFirestore.instance
               .collection(UserModel.tableName)
+              .where('uid', isNotEqualTo: UserBaseController.userData.uid)
               .get();
       if (user.docs.isNotEmpty) {
         userList =
