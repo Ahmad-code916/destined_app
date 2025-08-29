@@ -32,7 +32,6 @@ class MessageWidget extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Row(
@@ -47,7 +46,10 @@ class MessageWidget extends StatelessWidget {
                       borderRadius: AppFunctions.borderRadius(10),
                     ),
                     margin: const EdgeInsets.only(right: 17),
-                    child: Image.asset(image),
+                    child: ClipRRect(
+                      borderRadius: AppFunctions.borderRadius(10),
+                      child: Image.network(image, fit: BoxFit.fitWidth),
+                    ),
                   ),
                   Flexible(
                     child: Column(

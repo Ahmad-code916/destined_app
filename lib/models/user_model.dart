@@ -15,6 +15,7 @@ class UserModel {
 
   List<String>? likedBy;
   List<String>? myLikes;
+  List<String>? myDislikes;
   List<String>? matches;
 
   bool? page1;
@@ -35,6 +36,7 @@ class UserModel {
     this.uploadedId,
     this.likedBy,
     this.myLikes,
+    myDislikes,
     this.matches,
     this.page1,
     this.page2,
@@ -63,6 +65,8 @@ class UserModel {
 
       likedBy: map["likedBy"] != null ? List<String>.from(map["likedBy"]) : [],
       myLikes: map["myLikes"] != null ? List<String>.from(map["myLikes"]) : [],
+      myDislikes:
+          map["myDislikes"] != null ? List<String>.from(map["myDislikes"]) : [],
       matches: map["matches"] != null ? List<String>.from(map["matches"]) : [],
 
       page1: map["page1"] ?? false,
@@ -87,6 +91,7 @@ class UserModel {
 
       "likedBy": likedBy,
       "myLikes": myLikes,
+      "myDislikes": myDislikes,
       "matches": matches,
 
       "page1": page1,
@@ -109,6 +114,7 @@ class UserModel {
     String? uploadedId,
     List<String>? likedBy,
     List<String>? myLikes,
+    List<String>? myDislikes,
     List<String>? matches,
     bool? page1,
     bool? page2,
@@ -129,6 +135,7 @@ class UserModel {
 
       likedBy: likedBy ?? this.likedBy,
       myLikes: myLikes ?? this.myLikes,
+      myDislikes: myDislikes ?? this.myDislikes,
       matches: matches ?? this.matches,
 
       page1: page1 ?? this.page1,

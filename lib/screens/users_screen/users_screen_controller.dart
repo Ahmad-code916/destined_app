@@ -15,17 +15,19 @@ class UsersScreenController extends GetxController
 
   void getUsers() async {
     try {
-      final user =
-          await FirebaseFirestore.instance
-              .collection(UserModel.tableName)
-              .where('uid', isNotEqualTo: UserBaseController.userData.uid)
-              .get();
-      if (user.docs.isNotEmpty) {
-        userList =
-            user.docs.map((e) {
-              return UserModel.fromMap(e.data());
-            }).toList();
-      }
+      subscription = FirebaseFirestore.instance
+          .collection(UserModel.tableName)
+          .where('uid', isNotEqualTo: UserBaseController.userData.uid)
+          .snapshots()
+          .listen((event) {
+            if (event.docs.isNotEmpty) {
+              userList =
+                  event.docs.map((e) {
+                    return UserModel.fromMap(e.data());
+                  }).toList();
+              update();
+            }
+          });
     } catch (e) {
       showOkAlertDialog(
         context: Get.context!,
@@ -47,8 +49,9 @@ class UsersScreenController extends GetxController
   }
 
   @override
-  void onClose() {
+  void onClose() async {
     tabController.dispose();
+    await subscription?.cancel();
     super.onClose();
   }
 }

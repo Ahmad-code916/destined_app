@@ -137,14 +137,20 @@ class MessageScreen extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.6,
                             child: ListView.builder(
-                              itemCount: controller.userList.length,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: controller.threadList.length,
                               itemBuilder: (context, index) {
+                                final thread = controller.threadList[index];
+                                final user =
+                                    (index < controller.otherUsersList.length)
+                                        ? controller.otherUsersList[index]
+                                        : null;
                                 return MessageWidget(
-                                  name: 'Belle Benson',
-                                  lastMessage:
-                                      'Hi, How are you? Nice to meet you? Free now, You?',
-                                  image: AppImages.musicImage,
-                                  dateTime: '3:45 PM',
+                                  name: user?.name ?? "",
+                                  lastMessage: thread.lastMessage ?? "",
+                                  image: user?.imageUrl ?? "",
+                                  dateTime:
+                                      '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
                                   count: '3',
                                 );
                               },

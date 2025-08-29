@@ -1,4 +1,4 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'dart:math' as math;
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -30,5 +30,26 @@ class AppFunctions {
     }
 
     return age;
+  }
+
+  static String generatedThreadId(String currentUserId, String otherUserId) {
+    return currentUserId.compareTo(otherUserId) >= 0
+        ? "${currentUserId}__$otherUserId"
+        : "${otherUserId}__$currentUserId";
+  }
+
+  static String generateRandomId() {
+    /// MODIFY CODE ONLY BELOW THIS LINE
+
+    const String chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    final math.Random random =
+        math.Random(); // Use math.Random() instead of Random()
+    return List.generate(
+      15,
+      (index) => chars[random.nextInt(chars.length)],
+    ).join();
+
+    /// MODIFY CODE ONLY ABOVE THIS LINE
   }
 }

@@ -1,5 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:destined_app/models/thread_model.dart';
+import 'package:destined_app/screens/users_screen/users_screen_controller.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -25,26 +27,27 @@ class HomeSwipeScreenController extends GetxController {
     try {
       isLoading = true;
       update();
-      final user =
-          await FirebaseFirestore.instance
-              .collection(UserModel.tableName)
-              .where('uid', isNotEqualTo: UserBaseController.userData.uid)
-              .get();
-      if (user.docs.isNotEmpty) {
-        userList =
-            user.docs
-                .map((e) {
-                  return UserModel.fromMap(e.data());
-                })
-                .where((ele) {
-                  return !(ele.likedBy!.contains(
-                    UserBaseController.userData.uid,
-                  ));
-                })
-                .toList();
-      }
-      isLoading = false;
-      update();
+      subscription = FirebaseFirestore.instance
+          .collection(UserModel.tableName)
+          .where('uid', isNotEqualTo: UserBaseController.userData.uid)
+          .snapshots()
+          .listen((event) {
+            if (event.docs.isNotEmpty) {
+              userList =
+                  event.docs
+                      .map((e) {
+                        return UserModel.fromMap(e.data());
+                      })
+                      .where((ele) {
+                        return !(UserBaseController.userData.myLikes!.contains(
+                          ele.uid,
+                        ));
+                      })
+                      .toList();
+              isLoading = false;
+              update();
+            }
+          });
     } catch (e) {
       isLoading = false;
       update();
@@ -56,7 +59,7 @@ class HomeSwipeScreenController extends GetxController {
     }
   }
 
-  Future onSwipeRight(int index) async {
+  Future onSwipeRight(int index, UserModel user) async {
     final currentUserId = UserBaseController.userData.uid ?? "";
     final updatedLikedBy = userList[index].likedBy;
     updatedLikedBy!.add(currentUserId);
@@ -85,6 +88,7 @@ class HomeSwipeScreenController extends GetxController {
                 .toMap(),
             SetOptions(merge: true),
           );
+      await createThread(user);
       AppFunctions.showSnakBar('Congratulations', 'Your match created');
     } else {
       await FirebaseFirestore.instance
@@ -107,9 +111,49 @@ class HomeSwipeScreenController extends GetxController {
     }
   }
 
+  Future createThread(UserModel user) async {
+    String currentUserId = UserBaseController.userData.uid ?? "";
+    String threadId = AppFunctions.generatedThreadId(
+      currentUserId,
+      user.uid ?? "",
+    );
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^$threadId');
+    final doc =
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .get();
+    if (doc.exists) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: 'This chat is already present',
+      );
+    } else {
+      await FirebaseFirestore.instance
+          .collection(ThreadModel.tableName)
+          .doc(threadId)
+          .set(
+            ThreadModel(
+              id: threadId,
+              lastMessage: 'Hy! How are you?',
+              lastMessageTime: DateTime.now(),
+              participantsList: [currentUserId, user.uid ?? ""],
+              senderId: currentUserId,
+            ).toMap(),
+          );
+    }
+  }
+
   @override
   void onInit() {
     getUsers();
     super.onInit();
+  }
+
+  @override
+  void onClose() async {
+    await subscription?.cancel();
+    super.onClose();
   }
 }
