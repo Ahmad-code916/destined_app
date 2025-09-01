@@ -1,3 +1,4 @@
+import 'package:destined_app/screens/chat_screen/chat_screen.dart';
 import 'package:destined_app/screens/message_screen/message_screen_controller.dart';
 import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
 import 'package:destined_app/screens/widgets/message_widget.dart';
@@ -145,13 +146,24 @@ class MessageScreen extends StatelessWidget {
                                     (index < controller.otherUsersList.length)
                                         ? controller.otherUsersList[index]
                                         : null;
-                                return MessageWidget(
-                                  name: user?.name ?? "",
-                                  lastMessage: thread.lastMessage ?? "",
-                                  image: user?.imageUrl ?? "",
-                                  dateTime:
-                                      '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
-                                  count: '3',
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                      () => ChatScreen(),
+                                      arguments: {
+                                        'threadId': thread.id,
+                                        'user': user,
+                                      },
+                                    );
+                                  },
+                                  child: MessageWidget(
+                                    name: user?.name ?? "",
+                                    lastMessage: thread.lastMessage ?? "",
+                                    image: user?.imageUrl ?? "",
+                                    dateTime:
+                                        '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
+                                    count: '3',
+                                  ),
                                 );
                               },
                             ),
