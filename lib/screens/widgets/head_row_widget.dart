@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../services/app_functions.dart';
 import '../../utils/app_colors.dart';
@@ -29,7 +30,7 @@ class HeadRowWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: AppFunctions.borderRadius(50),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(image),
+                backgroundImage: CachedNetworkImageProvider(image),
                 radius: 25,
               ),
             ),

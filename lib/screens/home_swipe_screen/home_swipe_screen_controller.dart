@@ -1,7 +1,6 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/thread_model.dart';
-import 'package:destined_app/screens/users_screen/users_screen_controller.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -13,13 +12,6 @@ class HomeSwipeScreenController extends GetxController {
   int currentIndex = 0;
   bool isLoading = false;
   final CardSwiperController swiperController = CardSwiperController();
-  List<String> cards2 = ['One', 'Two', 'Three', 'Four'];
-  updateIndexOnSwipe(int index) {
-    if (index < cards2.length) {
-      currentIndex = index;
-    }
-  }
-
   List<UserModel> userList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
 

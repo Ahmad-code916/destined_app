@@ -10,12 +10,14 @@ class TextFormFieldWidget extends StatelessWidget {
     this.icon,
     this.hintText,
     this.hintStyle,
+    this.onChange,
   });
 
   final TextEditingController controller;
   final Widget? icon;
   final String? hintText;
   final TextStyle? hintStyle;
+  final Function(String)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class TextFormFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: TextFormField(
+          onChanged: onChange,
           controller: controller,
           style: AppTextStyle.whiteMedium,
           decoration: InputDecoration(

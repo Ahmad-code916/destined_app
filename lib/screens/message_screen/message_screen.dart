@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/screens/chat_screen/chat_screen.dart';
 import 'package:destined_app/screens/message_screen/message_screen_controller.dart';
 import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
@@ -101,9 +102,10 @@ class MessageScreen extends StatelessWidget {
                                         ),
                                         child: CircleAvatar(
                                           radius: 50,
-                                          backgroundImage: NetworkImage(
-                                            user.imageUrl ?? "",
-                                          ),
+                                          backgroundImage:
+                                              CachedNetworkImageProvider(
+                                                user.imageUrl ?? "",
+                                              ),
                                         ),
                                       ),
                                       Expanded(
@@ -127,7 +129,7 @@ class MessageScreen extends StatelessWidget {
                           ),
                         ),
                         AppFunctions.height(30),
-                        if (controller.userList.isEmpty)
+                        if (controller.threadList.isEmpty)
                           Center(
                             child: Text(
                               'No User Found',
@@ -146,23 +148,28 @@ class MessageScreen extends StatelessWidget {
                                     (index < controller.otherUsersList.length)
                                         ? controller.otherUsersList[index]
                                         : null;
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(
-                                      () => ChatScreen(),
-                                      arguments: {
-                                        'threadId': thread.id,
-                                        'user': user,
-                                      },
-                                    );
-                                  },
-                                  child: MessageWidget(
-                                    name: user?.name ?? "",
-                                    lastMessage: thread.lastMessage ?? "",
-                                    image: user?.imageUrl ?? "",
-                                    dateTime:
-                                        '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
-                                    count: '3',
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onTap: () {
+                                      Get.to(
+                                        () => ChatScreen(),
+                                        arguments: {
+                                          'threadId': thread.id,
+                                          'user': user,
+                                          'threadModel': thread,
+                                        },
+                                      );
+                                    },
+                                    child: MessageWidget(
+                                      name: user?.name ?? "",
+                                      lastMessage: thread.lastMessage ?? "",
+                                      image: user?.imageUrl ?? "",
+                                      dateTime:
+                                          '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
+                                      count: '3',
+                                    ),
                                   ),
                                 );
                               },

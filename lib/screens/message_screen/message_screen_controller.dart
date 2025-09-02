@@ -44,6 +44,10 @@ class MessageScreenController extends GetxController {
     try {
       FirebaseFirestore.instance
           .collection(ThreadModel.tableName)
+          .where(
+            'participantsList',
+            arrayContains: UserBaseController.userData.uid ?? "",
+          )
           .snapshots()
           .listen((event) {
             if (event.docs.isNotEmpty) {

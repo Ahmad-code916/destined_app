@@ -32,8 +32,6 @@ class ProfileScreen extends StatelessWidget {
                 UsersDetailsHeadRow(
                   firstColor: AppColors.pinkColorSec,
                   secondColor: AppColors.lightPink,
-                  child: Image.asset(AppImages.backIcon, height: 20),
-                  onTapChild: () => Get.back(),
                 ),
                 Expanded(
                   child: SingleChildScrollView(

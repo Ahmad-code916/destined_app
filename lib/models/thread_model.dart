@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 
@@ -11,7 +13,6 @@ class ThreadModel {
   String? senderId;
   int? unseenMessageCount;
   UserModel? userModel;
-  // bool isDeleted = false;
 
   ThreadModel({
     this.id,
@@ -21,27 +22,24 @@ class ThreadModel {
     this.senderId,
     this.unseenMessageCount,
     this.userModel,
-    // required this.isDeleted,
   });
 
   factory ThreadModel.fromMap(Map<String, dynamic> map) {
     return ThreadModel(
       id: map["id"] ?? "",
-      lastMessage: map["lastMessage"],
+      lastMessage: map["lastMessage"] ?? "",
       lastMessageTime:
           map["lastMessageTime"] != null
               ? (map["lastMessageTime"] as Timestamp).toDate()
               : null,
       participantsList:
-          map["participantsList"] == null
-              ? null
-              : List<String>.from(map["participantsList"] as List),
-      senderId: map["senderId"],
-      unseenMessageCount:
-          map["unseenMessageCount"] == null
-              ? null
-              : map["unseenMessageCount"] as int,
-      // isDeleted: map["isDeleted"] ?? false,
+          map["participantsList"] != null
+              ? List<String>.from(map["participantsList"])
+              : [],
+      senderId: map["senderId"] ?? "",
+      unseenMessageCount: map["unseenMessageCount"] ?? 0,
+      userModel:
+          map["userModel"] != null ? UserModel.fromMap(map["userModel"]) : null,
     );
   }
 
@@ -54,7 +52,27 @@ class ThreadModel {
       "participantsList": participantsList,
       "senderId": senderId,
       "unseenMessageCount": unseenMessageCount,
-      // "isDeleted": isDeleted,
+      "userModel": userModel?.toMap(),
     };
+  }
+
+  ThreadModel copyWith({
+    String? id,
+    String? lastMessage,
+    DateTime? lastMessageTime,
+    List<String>? participantsList,
+    String? senderId,
+    int? unseenMessageCount,
+    UserModel? userModel,
+  }) {
+    return ThreadModel(
+      id: id ?? this.id,
+      lastMessage: lastMessage ?? this.lastMessage,
+      lastMessageTime: lastMessageTime ?? this.lastMessageTime,
+      participantsList: participantsList ?? this.participantsList,
+      senderId: senderId ?? this.senderId,
+      unseenMessageCount: unseenMessageCount ?? this.unseenMessageCount,
+      userModel: userModel ?? this.userModel,
+    );
   }
 }

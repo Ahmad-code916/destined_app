@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/filter_screen/filter_screen.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
@@ -7,7 +8,6 @@ import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_text_style.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:get/get.dart';
@@ -144,7 +144,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                                           child: CircleAvatar(
                                                             radius: 40,
                                                             backgroundImage:
-                                                                NetworkImage(
+                                                                CachedNetworkImageProvider(
                                                                   user.imageUrl ??
                                                                       "",
                                                                 ),

@@ -1,4 +1,3 @@
-import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,13 +6,13 @@ class UsersDetailsHeadRow extends StatelessWidget {
     super.key,
     required this.firstColor,
     required this.secondColor,
-    required this.child,
-    required this.onTapChild,
+    this.child,
+    this.onTapChild,
   });
   final Color firstColor;
   final Color secondColor;
-  final Widget child;
-  final void Function() onTapChild;
+  final Widget? child;
+  final void Function()? onTapChild;
 
   @override
   Widget build(BuildContext context) {

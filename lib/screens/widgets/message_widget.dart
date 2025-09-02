@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/app_functions.dart';
@@ -48,7 +49,10 @@ class MessageWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 17),
                     child: ClipRRect(
                       borderRadius: AppFunctions.borderRadius(10),
-                      child: Image.network(image, fit: BoxFit.fitWidth),
+                      child: CachedNetworkImage(
+                        imageUrl: image,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                   ),
                   Flexible(

@@ -1,5 +1,4 @@
 import 'package:destined_app/screens/interests_screen/interests_screen_controller.dart';
-import 'package:destined_app/screens/upload_id_screen/upload_id_screen.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/utils/app_colors.dart';

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +54,8 @@ class UserDataContainer extends StatelessWidget {
                   Center(
                     child: ClipRRect(
                       borderRadius: AppFunctions.borderRadius(10),
-                      child: Image.network(
-                        image,
+                      child: CachedNetworkImage(
+                        imageUrl: image,
                         height: 120,
                         fit: BoxFit.fitWidth,
                         width: double.infinity,

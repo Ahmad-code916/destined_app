@@ -59,4 +59,5 @@ class AppStrings {
   static const String login = 'Login';
   static const String logOut = 'Log Out';
   static const String createAccount = 'Create Account';
+  static const String message = 'Message';
 }

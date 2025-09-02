@@ -1,4 +1,3 @@
-import 'package:destined_app/screens/location_screen/location_screen.dart';
 import 'package:destined_app/screens/upload_id_screen/upload_id_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/gradient_container.dart';
