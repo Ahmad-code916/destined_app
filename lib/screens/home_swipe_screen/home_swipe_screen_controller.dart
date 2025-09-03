@@ -31,9 +31,12 @@ class HomeSwipeScreenController extends GetxController {
                         return UserModel.fromMap(e.data());
                       })
                       .where((ele) {
-                        return !(UserBaseController.userData.myLikes!.contains(
-                          ele.uid,
-                        ));
+                        return !((UserBaseController.userData.myLikes!.contains(
+                              ele.uid,
+                            )) ||
+                            (UserBaseController.userData.myDislikes!.contains(
+                              ele.uid,
+                            )));
                       })
                       .toList();
               isLoading = false;
@@ -101,6 +104,24 @@ class HomeSwipeScreenController extends GetxController {
           );
       AppFunctions.showSnakBar('Added', 'You liked this profile');
     }
+  }
+
+  Future onSwipeLeft(int index) async {
+    AppFunctions.showSnakBar('Called!', 'CAlled');
+    final currentUserId = UserBaseController.userData.uid ?? "";
+    final updatedMyDislike = UserBaseController.userData.myDislikes;
+    updatedMyDislike!.add(userList[index].uid ?? "");
+    await FirebaseFirestore.instance
+        .collection(UserModel.tableName)
+        .doc(currentUserId)
+        .set(
+          UserBaseController.userData
+              .copyWith(myDislikes: updatedMyDislike)
+              .toMap(),
+          SetOptions(merge: true),
+        );
+    AppFunctions.showSnakBar('Dislike!', 'You dislike this product');
+    update();
   }
 
   Future createThread(UserModel user) async {

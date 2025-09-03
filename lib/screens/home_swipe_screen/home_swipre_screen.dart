@@ -74,8 +74,13 @@ class HomeSwipreScreen extends StatelessWidget {
                                           userModel,
                                         );
                                       }
+                                      if (direction ==
+                                          CardSwiperDirection.left) {
+                                        controller.onSwipeLeft(previousIndex);
+                                      }
                                       return true;
                                     },
+
                                     numberOfCardsDisplayed:
                                         controller.userList.length < 2
                                             ? controller.userList.length

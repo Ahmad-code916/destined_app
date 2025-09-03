@@ -20,14 +20,20 @@ class MessageScreenController extends GetxController {
     try {
       subscription = FirebaseFirestore.instance
           .collection(UserModel.tableName)
-          .where('uid', isNotEqualTo: UserBaseController.userData.uid)
           .snapshots()
           .listen((event) {
             if (event.docs.isNotEmpty) {
               userList =
-                  event.docs.map((e) {
-                    return UserModel.fromMap(e.data());
-                  }).toList();
+                  event.docs
+                      .map((e) {
+                        return UserModel.fromMap(e.data());
+                      })
+                      .where((element) {
+                        return UserBaseController.userData.matches!.contains(
+                          element.uid ?? "",
+                        );
+                      })
+                      .toList();
               update();
             }
           });

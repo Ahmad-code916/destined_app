@@ -36,7 +36,7 @@ class UserModel {
     this.uploadedId,
     this.likedBy,
     this.myLikes,
-    myDislikes,
+    this.myDislikes,
     this.matches,
     this.page1,
     this.page2,
