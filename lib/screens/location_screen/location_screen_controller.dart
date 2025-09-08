@@ -138,6 +138,9 @@ class LocationScreenController extends GetxController {
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
+    // AppFunctions.showSnakBar('Page2', userModel.page2.toString());
+    // AppFunctions.showSnakBar('Page3', userModel.page3.toString());
+
     super.onInit();
   }
 }

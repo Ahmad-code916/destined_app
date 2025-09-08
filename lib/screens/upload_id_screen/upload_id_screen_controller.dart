@@ -69,15 +69,17 @@ class UploadIdScreenController extends GetxController {
       update();
       String imageUrl2 = await uploadImage();
       print('---------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl2');
+      final userModel2 = userModel.copyWith(uploadedId: imageUrl2, page3: true);
       await FirebaseFirestore.instance
           .collection(UserModel.tableName)
           .doc(userModel.uid)
           .set(
-            userModel.copyWith(uploadedId: imageUrl2, page3: true).toMap(),
+            // userModel.copyWith(uploadedId: imageUrl2, page3: true).toMap(),
+            userModel2.toMap(),
             SetOptions(merge: true),
           );
       AppFunctions.showSnakBar('Updaed!', 'Id added to your data.');
-      Get.offAll(() => LocationScreen(), arguments: {'userModel': userModel});
+      Get.offAll(() => LocationScreen(), arguments: {'userModel': userModel2});
       isLoading = false;
       update();
     }
@@ -86,7 +88,8 @@ class UploadIdScreenController extends GetxController {
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
-    AppFunctions.showSnakBar('Page3', userModel.page3.toString());
+    // AppFunctions.showSnakBar('Page2', userModel.page2.toString());
+    // AppFunctions.showSnakBar('Page3', userModel.page3.toString());
     super.onInit();
   }
 }

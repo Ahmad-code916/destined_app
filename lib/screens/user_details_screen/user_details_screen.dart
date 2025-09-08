@@ -82,7 +82,7 @@ class UserDetailsScreen extends StatelessWidget {
                                                 AppFunctions.width(8),
                                                 RichText(
                                                   text: TextSpan(
-                                                    text: '1.5 ',
+                                                    text: '1.5',
                                                     children: [
                                                       TextSpan(text: 'km away'),
                                                     ],

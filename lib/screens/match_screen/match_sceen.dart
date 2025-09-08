@@ -1,3 +1,4 @@
+import 'package:destined_app/screens/message_screen/message_screen.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/utils/app_colors.dart';
@@ -5,6 +6,7 @@ import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MatchSceen extends StatelessWidget {
   const MatchSceen({super.key});
@@ -122,7 +124,15 @@ class MatchSceen extends StatelessWidget {
                               ),
                             ),
                             AppFunctions.height(45),
-                            Image.asset(AppImages.keepDatingText, height: 30),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(MessageScreen());
+                              },
+                              child: Image.asset(
+                                AppImages.keepDatingText,
+                                height: 30,
+                              ),
+                            ),
                             AppFunctions.height(20),
                           ],
                         ),

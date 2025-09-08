@@ -84,17 +84,16 @@ class InterestsScreenController extends GetxController {
       try {
         isLoading = true;
         update();
+        final userModel2 = userModel.copyWith(
+          interestList: selectedInterestList,
+          page2: true,
+        );
         FirebaseFirestore.instance
             .collection(UserModel.tableName)
             .doc(userModel.uid)
-            .set(
-              userModel
-                  .copyWith(interestList: selectedInterestList, page2: true)
-                  .toMap(),
-              SetOptions(merge: true),
-            );
+            .set(userModel2.toMap(), SetOptions(merge: true));
         AppFunctions.showSnakBar('Updaed!', 'List added to your data.');
-        Get.to(() => UploadIdScreen(), arguments: {'userModel': userModel});
+        Get.to(() => UploadIdScreen(), arguments: {'userModel': userModel2});
         isLoading = false;
         update();
       } catch (e) {
@@ -112,7 +111,7 @@ class InterestsScreenController extends GetxController {
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
-    AppFunctions.showSnakBar('User Data', userModel.page1.toString());
+    // AppFunctions.showSnakBar('User Data', userModel.page1.toString());
     super.onInit();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/thread_model.dart';
+import 'package:destined_app/screens/match_screen/match_sceen.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -85,6 +86,7 @@ class HomeSwipeScreenController extends GetxController {
           );
       await createThread(user);
       AppFunctions.showSnakBar('Congratulations', 'Your match created');
+      Get.to(() => MatchSceen());
     } else {
       await FirebaseFirestore.instance
           .collection(UserModel.tableName)
@@ -107,7 +109,6 @@ class HomeSwipeScreenController extends GetxController {
   }
 
   Future onSwipeLeft(int index) async {
-    AppFunctions.showSnakBar('Called!', 'CAlled');
     final currentUserId = UserBaseController.userData.uid ?? "";
     final updatedMyDislike = UserBaseController.userData.myDislikes;
     updatedMyDislike!.add(userList[index].uid ?? "");
@@ -120,7 +121,7 @@ class HomeSwipeScreenController extends GetxController {
               .toMap(),
           SetOptions(merge: true),
         );
-    AppFunctions.showSnakBar('Dislike!', 'You dislike this product');
+    AppFunctions.showSnakBar('Dislike!', 'You dislike this profile');
     update();
   }
 

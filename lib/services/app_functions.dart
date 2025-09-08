@@ -39,17 +39,12 @@ class AppFunctions {
   }
 
   static String generateRandomId() {
-    /// MODIFY CODE ONLY BELOW THIS LINE
-
     const String chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    final math.Random random =
-        math.Random(); // Use math.Random() instead of Random()
+    final math.Random random = math.Random();
     return List.generate(
       15,
       (index) => chars[random.nextInt(chars.length)],
     ).join();
-
-    /// MODIFY CODE ONLY ABOVE THIS LINE
   }
 }

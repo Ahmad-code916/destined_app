@@ -59,60 +59,72 @@ class ChatScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    Flexible(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 16, bottom: 16),
-                        child: ListView.builder(
-                          itemCount: controller.messages.length,
-                          itemBuilder: (context, index) {
-                            final message = controller.messages[index];
-                            return Padding(
-                              padding:
-                                  message.senderId ==
-                                          UserBaseController.userData.uid
-                                      ? EdgeInsets.only(left: 70, bottom: 16)
-                                      : EdgeInsets.only(right: 70, bottom: 16),
-
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                    onLongPress: () {
-                                      controller.deleteMessage(index);
-                                    },
-                                    child: GradientContainer(
-                                      child: Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                          color: AppColors.blackColor,
-                                          borderRadius:
-                                              AppFunctions.borderRadius(50),
+                    if (controller.messages.isEmpty)
+                      Center(
+                        child: Text(
+                          'Start Chat!',
+                          style: AppTextStyle.whiteRegular,
+                        ),
+                      )
+                    else if (controller.messages.isNotEmpty)
+                      Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: ListView.builder(
+                            itemCount: controller.messages.length,
+                            itemBuilder: (context, index) {
+                              final message = controller.messages[index];
+                              return Padding(
+                                padding:
+                                    message.senderId ==
+                                            UserBaseController.userData.uid
+                                        ? EdgeInsets.only(left: 70, bottom: 16)
+                                        : EdgeInsets.only(
+                                          right: 70,
+                                          bottom: 16,
                                         ),
-                                        child: Text(
-                                          message.message ?? "",
-                                          style: AppTextStyle.whiteMedium,
+
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                      onLongPress: () {
+                                        controller.deleteMessage(index);
+                                      },
+                                      child: GradientContainer(
+                                        child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.blackColor,
+                                            borderRadius:
+                                                AppFunctions.borderRadius(50),
+                                          ),
+                                          child: Text(
+                                            message.message ?? "",
+                                            style: AppTextStyle.whiteMedium,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Align(
-                                    alignment:
-                                        message.senderId ==
-                                                UserBaseController.userData.uid
-                                            ? Alignment.centerRight
-                                            : Alignment.centerLeft,
-                                    child: Text(
-                                      '${message.timestamp!.hour}:${message.timestamp!.minute}',
-                                      style: AppTextStyle.whiteRegular,
+                                    Align(
+                                      alignment:
+                                          message.senderId ==
+                                                  UserBaseController
+                                                      .userData
+                                                      .uid
+                                              ? Alignment.centerRight
+                                              : Alignment.centerLeft,
+                                      child: Text(
+                                        '${message.timestamp!.hour}:${message.timestamp!.minute}',
+                                        style: AppTextStyle.whiteRegular,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
                     Row(
                       spacing: 12,
                       children: [
