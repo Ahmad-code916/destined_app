@@ -126,7 +126,7 @@ class MatchSceen extends StatelessWidget {
                             AppFunctions.height(45),
                             GestureDetector(
                               onTap: () {
-                                Get.to(MessageScreen());
+                                Get.back();
                               },
                               child: Image.asset(
                                 AppImages.keepDatingText,

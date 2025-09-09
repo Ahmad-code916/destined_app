@@ -147,44 +147,20 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on,
-                                          color: AppColors.whiteColor,
-                                        ),
-                                        AppFunctions.width(8),
-                                        RichText(
-                                          text: TextSpan(
-                                            text: '1.5 ',
-                                            children: [
-                                              TextSpan(text: 'km away'),
-                                            ],
-                                            style: AppTextStyle.whiteMedium
-                                                .copyWith(fontSize: 14),
-                                          ),
-                                        ),
-                                        AppFunctions.width(16),
-                                      ],
+                                    Icon(
+                                      Icons.favorite_sharp,
+                                      color: AppColors.whiteColor,
                                     ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.favorite_sharp,
-                                          color: AppColors.whiteColor,
-                                        ),
-                                        AppFunctions.width(8),
-                                        Text(
-                                          UserBaseController
-                                              .userData
-                                              .likedBy!
-                                              .length
-                                              .toString(),
-                                          style: AppTextStyle.whiteRegular,
-                                        ),
-                                        AppFunctions.width(16),
-                                      ],
+                                    AppFunctions.width(8),
+                                    Text(
+                                      UserBaseController
+                                          .userData
+                                          .likedBy!
+                                          .length
+                                          .toString(),
+                                      style: AppTextStyle.whiteRegular,
                                     ),
+                                    AppFunctions.width(16),
                                   ],
                                 ),
                                 AppFunctions.height(25),

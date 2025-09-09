@@ -80,7 +80,6 @@ class HomeSwipreScreen extends StatelessWidget {
                                       }
                                       return true;
                                     },
-
                                     numberOfCardsDisplayed:
                                         controller.userList.length < 2
                                             ? controller.userList.length
@@ -88,7 +87,6 @@ class HomeSwipreScreen extends StatelessWidget {
                                     cardsCount: controller.userList.length,
                                     cardBuilder: (context, index, prev, ind) {
                                       final user = controller.userList[index];
-
                                       return GestureDetector(
                                         onTap: () {},
                                         child: Container(

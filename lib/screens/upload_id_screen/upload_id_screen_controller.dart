@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/location_screen/location_screen.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -73,11 +74,8 @@ class UploadIdScreenController extends GetxController {
       await FirebaseFirestore.instance
           .collection(UserModel.tableName)
           .doc(userModel.uid)
-          .set(
-            // userModel.copyWith(uploadedId: imageUrl2, page3: true).toMap(),
-            userModel2.toMap(),
-            SetOptions(merge: true),
-          );
+          .set(userModel2.toMap(), SetOptions(merge: true));
+      UserBaseController.updateUserModel(UserModel.fromMap(userModel2.toMap()));
       AppFunctions.showSnakBar('Updaed!', 'Id added to your data.');
       Get.offAll(() => LocationScreen(), arguments: {'userModel': userModel2});
       isLoading = false;
@@ -88,8 +86,6 @@ class UploadIdScreenController extends GetxController {
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
-    // AppFunctions.showSnakBar('Page2', userModel.page2.toString());
-    // AppFunctions.showSnakBar('Page3', userModel.page3.toString());
     super.onInit();
   }
 }

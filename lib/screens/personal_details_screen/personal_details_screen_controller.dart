@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/interests_screen/interests_screen.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -143,10 +144,16 @@ class PersonalDetailsScreenController extends GetxController {
           page3: false,
           page4: false,
         );
+        UserBaseController.updateUserModel(
+          UserModel.fromMap(userModel.toMap()),
+        );
         await fireStore
             .collection(UserModel.tableName)
             .doc(userModel.uid)
             .set(userModel.toMap());
+        UserBaseController.updateUserModel(
+          UserModel.fromMap(userModel.toMap()),
+        );
         Get.snackbar('Congratulations', 'Account Created Successfully!');
         Get.to(() => InterestsScreen(), arguments: {'userModel': userModel});
         isLoading = false;

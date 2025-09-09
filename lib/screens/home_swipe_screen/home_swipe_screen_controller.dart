@@ -43,6 +43,8 @@ class HomeSwipeScreenController extends GetxController {
               isLoading = false;
               update();
             }
+            isLoading = false;
+            update();
           });
     } catch (e) {
       isLoading = false;
@@ -162,6 +164,9 @@ class HomeSwipeScreenController extends GetxController {
   @override
   void onInit() {
     getUsers();
+    print(
+      '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${UserBaseController.userData.name}',
+    );
     super.onInit();
   }
 

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/home_screen/home_screen.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
@@ -106,19 +107,18 @@ class LocationScreenController extends GetxController {
       try {
         isUpdatingData = true;
         update();
+        final userModel2 = userModel.copyWith(
+          location:
+              '${currentUserData!.subLocality},${currentUserData!.locality},${currentUserData!.country}',
+          page4: true,
+        );
         await FirebaseFirestore.instance
             .collection(UserModel.tableName)
             .doc(userModel.uid)
-            .set(
-              userModel
-                  .copyWith(
-                    location:
-                        '${currentUserData!.subLocality},${currentUserData!.locality},${currentUserData!.country}',
-                    page4: true,
-                  )
-                  .toMap(),
-              SetOptions(merge: true),
-            );
+            .set(userModel2.toMap(), SetOptions(merge: true));
+        UserBaseController.updateUserModel(
+          UserModel.fromMap(userModel2.toMap()),
+        );
         AppFunctions.showSnakBar('Updaed!', 'Location added to your data.');
         Get.offAll(HomeScreen());
         isUpdatingData = false;
@@ -138,9 +138,6 @@ class LocationScreenController extends GetxController {
   @override
   void onInit() {
     userModel = Get.arguments['userModel'];
-    // AppFunctions.showSnakBar('Page2', userModel.page2.toString());
-    // AppFunctions.showSnakBar('Page3', userModel.page3.toString());
-
     super.onInit();
   }
 }

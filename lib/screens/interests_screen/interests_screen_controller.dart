@@ -4,6 +4,7 @@ import 'package:destined_app/models/local_list_model.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/upload_id_screen/upload_id_screen.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:get/get.dart';
@@ -92,6 +93,11 @@ class InterestsScreenController extends GetxController {
             .collection(UserModel.tableName)
             .doc(userModel.uid)
             .set(userModel2.toMap(), SetOptions(merge: true));
+        UserBaseController.updateUserModel(
+          UserModel.fromMap(userModel2.toMap()),
+        );
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^${UserBaseController.userData.page2}');
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^${UserBaseController.userData.page3}');
         AppFunctions.showSnakBar('Updaed!', 'List added to your data.');
         Get.to(() => UploadIdScreen(), arguments: {'userModel': userModel2});
         isLoading = false;
