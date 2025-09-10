@@ -63,6 +63,9 @@ class MessageScreen extends StatelessWidget {
                         ),
                         AppFunctions.height(32),
                         TextFormFieldWidget(
+                          onChange: (p0) {
+                            controller.onChnage(p0);
+                          },
                           controller: controller.searchController,
                           hintText: 'Search Message, Match',
                           hintStyle: AppTextStyle.whiteMedium,
@@ -145,8 +148,8 @@ class MessageScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final thread = controller.threadList[index];
                                 final user =
-                                    (index < controller.otherUsersList.length)
-                                        ? controller.otherUsersList[index]
+                                    (index < controller.filteredList.length)
+                                        ? controller.filteredList[index]
                                         : null;
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 16),

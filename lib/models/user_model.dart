@@ -23,6 +23,10 @@ class UserModel {
   bool? page3;
   bool? page4;
 
+  /// New fields
+  double? lat;
+  double? lng;
+
   UserModel({
     this.uid,
     this.name,
@@ -42,6 +46,8 @@ class UserModel {
     this.page2,
     this.page3,
     this.page4,
+    this.lat,
+    this.lng,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -62,17 +68,17 @@ class UserModel {
       imageUrl: map["imageUrl"] ?? "",
       location: map["location"] ?? "",
       uploadedId: map["uploadedId"] ?? "",
-
       likedBy: map["likedBy"] != null ? List<String>.from(map["likedBy"]) : [],
       myLikes: map["myLikes"] != null ? List<String>.from(map["myLikes"]) : [],
       myDislikes:
           map["myDislikes"] != null ? List<String>.from(map["myDislikes"]) : [],
       matches: map["matches"] != null ? List<String>.from(map["matches"]) : [],
-
       page1: map["page1"] ?? false,
       page2: map["page2"] ?? false,
       page3: map["page3"] ?? false,
       page4: map["page4"] ?? false,
+      lat: map["lat"] != null ? (map["lat"] as num).toDouble() : null,
+      lng: map["lng"] != null ? (map["lng"] as num).toDouble() : null,
     );
   }
 
@@ -88,16 +94,16 @@ class UserModel {
       "imageUrl": imageUrl,
       "location": location,
       "uploadedId": uploadedId,
-
       "likedBy": likedBy,
       "myLikes": myLikes,
       "myDislikes": myDislikes,
       "matches": matches,
-
       "page1": page1,
       "page2": page2,
       "page3": page3,
       "page4": page4,
+      "lat": lat,
+      "lng": lng,
     };
   }
 
@@ -120,6 +126,8 @@ class UserModel {
     bool? page2,
     bool? page3,
     bool? page4,
+    double? lat,
+    double? lng,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -132,16 +140,16 @@ class UserModel {
       imageUrl: imageUrl ?? this.imageUrl,
       location: location ?? this.location,
       uploadedId: uploadedId ?? this.uploadedId,
-
       likedBy: likedBy ?? this.likedBy,
       myLikes: myLikes ?? this.myLikes,
       myDislikes: myDislikes ?? this.myDislikes,
       matches: matches ?? this.matches,
-
       page1: page1 ?? this.page1,
       page2: page2 ?? this.page2,
       page3: page3 ?? this.page3,
       page4: page4 ?? this.page4,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
     );
   }
 }

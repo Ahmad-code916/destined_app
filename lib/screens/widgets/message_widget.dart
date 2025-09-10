@@ -32,6 +32,7 @@ class MessageWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
@@ -88,20 +89,20 @@ class MessageWidget extends StatelessWidget {
                     color: AppColors.whiteColor,
                   ),
                 ),
-                Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    color: AppColors.darkRed,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      count,
-                      style: AppTextStyle.whiteRegular.copyWith(fontSize: 14),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   height: 20,
+                //   width: 20,
+                //   decoration: BoxDecoration(
+                //     color: AppColors.darkRed,
+                //     shape: BoxShape.circle,
+                //   ),
+                //   child: Center(
+                //     child: Text(
+                //       count,
+                //       style: AppTextStyle.whiteRegular.copyWith(fontSize: 14),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

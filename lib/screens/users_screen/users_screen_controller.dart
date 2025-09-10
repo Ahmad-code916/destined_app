@@ -11,6 +11,7 @@ class UsersScreenController extends GetxController
   late TabController tabController;
   int selectedIndex = 0;
   List<UserModel> userList = [];
+  List<UserModel> filteredList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
 
   void getUsers() async {
@@ -25,6 +26,12 @@ class UsersScreenController extends GetxController
                   event.docs.map((e) {
                     return UserModel.fromMap(e.data());
                   }).toList();
+              filteredList =
+                  userList.where((element) {
+                    return element.myLikes!.contains(
+                      UserBaseController.userData.uid,
+                    );
+                  }).toList();
               update();
             }
           });
@@ -37,9 +44,19 @@ class UsersScreenController extends GetxController
     }
   }
 
+  Future<List<UserModel>> filterUsers() async {
+    filteredList =
+        userList.where((element) {
+          return element.myLikes!.contains(UserBaseController.userData.uid);
+        }).toList();
+    update();
+    print('Called');
+    return filteredList;
+  }
+
   @override
   void onInit() {
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() {
       selectedIndex = tabController.index;
       update();

@@ -1,6 +1,7 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/thread_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -14,7 +15,9 @@ class MessageScreenController extends GetxController {
   List<String> participientUsers = [];
   UserModel? userData;
   List<UserModel> otherUsersList = [];
+  List<UserModel> filteredList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
 
   void getUsers() async {
     try {
@@ -34,6 +37,7 @@ class MessageScreenController extends GetxController {
                         );
                       })
                       .toList();
+              filteredList = otherUsersList;
               update();
             }
           });
@@ -48,7 +52,7 @@ class MessageScreenController extends GetxController {
 
   void getThreads() async {
     try {
-      FirebaseFirestore.instance
+      threadSubscription = FirebaseFirestore.instance
           .collection(ThreadModel.tableName)
           .where(
             'participantsList',
@@ -102,6 +106,14 @@ class MessageScreenController extends GetxController {
     }
   }
 
+  void onChnage(String value) {
+    filteredList =
+        otherUsersList.where((element) {
+          return element.name!.toLowerCase().contains(value.toLowerCase());
+        }).toList();
+    update();
+  }
+
   @override
   void onInit() {
     getUsers();
@@ -112,6 +124,7 @@ class MessageScreenController extends GetxController {
   @override
   void onClose() async {
     await subscription?.cancel();
+    await threadSubscription?.cancel();
     super.onClose();
   }
 }

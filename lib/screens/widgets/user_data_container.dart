@@ -10,7 +10,7 @@ class UserDataContainer extends StatelessWidget {
     required this.name,
     required this.distance,
     required this.age,
-    required this.count,
+    // required this.count,
     required this.image,
     required this.isShownGreen,
     required this.onTapContainer,
@@ -20,7 +20,7 @@ class UserDataContainer extends StatelessWidget {
   final String image;
   final double distance;
   final String age;
-  final int count;
+  // final int count;
   final bool isShownGreen;
   final void Function() onTapContainer;
 
@@ -105,22 +105,22 @@ class UserDataContainer extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
-                        spacing: 3,
-                        children: [
-                          Icon(
-                            Icons.camera_alt,
-                            color: AppColors.whiteColor,
-                            size: 11,
-                          ),
-                          Text(
-                            count.toString(),
-                            style: AppTextStyle.whiteMedium.copyWith(
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   spacing: 3,
+                      //   children: [
+                      //     Icon(
+                      //       Icons.camera_alt,
+                      //       color: AppColors.whiteColor,
+                      //       size: 11,
+                      //     ),
+                      //     Text(
+                      //       count.toString(),
+                      //       style: AppTextStyle.whiteMedium.copyWith(
+                      //         fontSize: 12,
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ],

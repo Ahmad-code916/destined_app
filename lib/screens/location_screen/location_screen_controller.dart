@@ -110,6 +110,8 @@ class LocationScreenController extends GetxController {
         final userModel2 = userModel.copyWith(
           location:
               '${currentUserData!.subLocality},${currentUserData!.locality},${currentUserData!.country}',
+          lat: currentPosition!.latitude.toDouble(),
+          lng: currentPosition!.longitude.toDouble(),
           page4: true,
         );
         await FirebaseFirestore.instance

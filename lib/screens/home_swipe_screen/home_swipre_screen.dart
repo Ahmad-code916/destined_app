@@ -87,6 +87,13 @@ class HomeSwipreScreen extends StatelessWidget {
                                     cardsCount: controller.userList.length,
                                     cardBuilder: (context, index, prev, ind) {
                                       final user = controller.userList[index];
+                                      final distance =
+                                          AppFunctions.calculateDistance(
+                                            UserBaseController.userData.lat!,
+                                            UserBaseController.userData.lng!,
+                                            user.lat!,
+                                            user.lng!,
+                                          );
                                       return GestureDetector(
                                         onTap: () {},
                                         child: Container(
@@ -169,7 +176,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                                                     ),
                                                               ),
                                                               Text(
-                                                                '1.5 km away',
+                                                                '$distance km away',
                                                                 style:
                                                                     AppTextStyle
                                                                         .whiteRegular,

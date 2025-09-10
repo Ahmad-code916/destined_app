@@ -54,7 +54,7 @@ class AppStrings {
   static const String bePatientSubStr =
       'Don\'t loose heart, keep\nbrowsing to find your best\nmatch';
   static const String addNewMessage = 'Add New Message';
-  static const String newMatches = 'New Matches';
+  static const String newMatches = 'All Matches';
   static const String allMessages = 'All Messages';
   static const String login = 'Login';
   static const String logOut = 'Log Out';

@@ -48,27 +48,9 @@ class UsersScreen extends StatelessWidget {
                 Tab(
                   child:
                       controller.selectedIndex == 1
-                          ? Image.asset(AppImages.onlineTextImage, height: 13)
+                          ? Image.asset(AppImages.likedYouTextImage, height: 13)
                           : Text(
-                            'Online',
-                            style: AppTextStyle.lightPurpleSecMedium,
-                          ),
-                ),
-                Tab(
-                  child:
-                      controller.selectedIndex == 2
-                          ? Image.asset(AppImages.newDaterTextImage, height: 14)
-                          : Text(
-                            'New Daters',
-                            style: AppTextStyle.lightPurpleSecMedium,
-                          ),
-                ),
-                Tab(
-                  child:
-                      controller.selectedIndex == 3
-                          ? Image.asset(AppImages.likedYouTextImage, height: 14)
-                          : Text(
-                            'Liked you',
+                            'Liked You',
                             style: AppTextStyle.lightPurpleSecMedium,
                           ),
                 ),
@@ -101,6 +83,12 @@ class UsersScreen extends StatelessWidget {
                                 ),
                             itemBuilder: (context, index) {
                               final user = controller.userList[index];
+                              final distnace = AppFunctions.calculateDistance(
+                                UserBaseController.userData.lat!,
+                                UserBaseController.userData.lng!,
+                                user.lat!,
+                                user.lng!,
+                              );
                               return UserDataContainer(
                                 onTapContainer:
                                     () => Get.to(() => UserDetailsScreen()),
@@ -114,8 +102,7 @@ class UsersScreen extends StatelessWidget {
                                       user.dateOfBirth!,
                                     ).toString(),
                                 name: user.name ?? "",
-                                distance: 2.5,
-                                count: 30,
+                                distance: double.parse(distnace),
                               );
                             },
                           ),
@@ -123,33 +110,61 @@ class UsersScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('HY', style: TextStyle(color: Colors.white)),
-                      ],
+                  if (controller.filteredList.isEmpty)
+                    Center(
+                      child: Text(
+                        'No user found!',
+                        style: AppTextStyle.whiteMedium,
+                      ),
+                    )
+                  else
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: GridView.builder(
+                              itemCount: controller.filteredList.length,
+                              shrinkWrap: true,
+                              primary: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 22,
+                                    crossAxisSpacing: 20,
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.9,
+                                  ),
+                              itemBuilder: (context, index) {
+                                final user = controller.filteredList[index];
+                                final distance = AppFunctions.calculateDistance(
+                                  UserBaseController.userData.lat!,
+                                  UserBaseController.userData.lng!,
+                                  user.lat!,
+                                  user.lng!,
+                                );
+                                return UserDataContainer(
+                                  onTapContainer:
+                                      () => Get.to(() => UserDetailsScreen()),
+                                  isShownGreen:
+                                      index == 0 || index == 2 || index == 5
+                                          ? true
+                                          : false,
+                                  image: user.imageUrl ?? "",
+                                  age:
+                                      AppFunctions.calculateAge(
+                                        user.dateOfBirth!,
+                                      ).toString(),
+                                  name: user.name ?? "",
+                                  distance: double.parse(distance),
+                                  // count: 30,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('HY', style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('HY', style: TextStyle(color: Colors.white)),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),

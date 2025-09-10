@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:math';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -46,5 +47,33 @@ class AppFunctions {
       15,
       (index) => chars[random.nextInt(chars.length)],
     ).join();
+  }
+
+  static String calculateDistance(
+    double currentUserLat,
+    double currentUserLng,
+    double otherUserLat,
+    double otherUserLng,
+  ) {
+    const earthRadiusKm = 6371; // Radius of the Earth in km
+
+    final dLat = _degreesToRadians(otherUserLat - currentUserLat);
+    final dLng = _degreesToRadians(otherUserLng - currentUserLng);
+
+    final a =
+        sin(dLat / 2) * sin(dLat / 2) +
+        cos(_degreesToRadians(currentUserLat)) *
+            cos(_degreesToRadians(otherUserLat)) *
+            sin(dLng / 2) *
+            sin(dLng / 2);
+
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    final distance = earthRadiusKm * c; // distance in km
+
+    return distance.toStringAsFixed(1); // return as String with 1 decimal place
+  }
+
+  static double _degreesToRadians(double degree) {
+    return degree * pi / 180;
   }
 }
