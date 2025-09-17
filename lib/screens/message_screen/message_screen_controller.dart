@@ -18,9 +18,12 @@ class MessageScreenController extends GetxController {
   List<UserModel> filteredList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
+  bool isLoading = false;
 
-  void getUsers() async {
+  Future getUsers() async {
     try {
+      isLoading = true;
+      update();
       subscription = FirebaseFirestore.instance
           .collection(UserModel.tableName)
           .snapshots()
@@ -38,10 +41,15 @@ class MessageScreenController extends GetxController {
                       })
                       .toList();
               filteredList = otherUsersList;
+              isLoading = false;
               update();
             }
+            isLoading = false;
+            update();
           });
     } catch (e) {
+      isLoading = false;
+      update();
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',
@@ -50,8 +58,10 @@ class MessageScreenController extends GetxController {
     }
   }
 
-  void getThreads() async {
+  Future getThreads() async {
     try {
+      isLoading = true;
+      update();
       threadSubscription = FirebaseFirestore.instance
           .collection(ThreadModel.tableName)
           .where(
@@ -71,10 +81,16 @@ class MessageScreenController extends GetxController {
                 );
                 getOtherUserData(otherUserid);
               }
+              isLoading = false;
+              update();
+            } else {
+              isLoading = false;
               update();
             }
           });
     } catch (e) {
+      isLoading = false;
+      update();
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',
