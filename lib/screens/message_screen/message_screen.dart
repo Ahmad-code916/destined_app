@@ -11,7 +11,6 @@ import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../utils/app_colors.dart';
 
 class MessageScreen extends StatelessWidget {
@@ -105,19 +104,13 @@ class MessageScreen extends StatelessWidget {
                                               ),
                                               shape: BoxShape.circle,
                                             ),
-                                            child:
-                                                (user.imageUrl != null ||
-                                                        user
-                                                            .imageUrl!
-                                                            .isNotEmpty)
-                                                    ? CircleAvatar(
-                                                      radius: 50,
-                                                      backgroundImage:
-                                                          CachedNetworkImageProvider(
-                                                            user.imageUrl ?? "",
-                                                          ),
-                                                    )
-                                                    : Text('No Image'),
+                                            child: CircleAvatar(
+                                              radius: 50,
+                                              backgroundImage:
+                                                  CachedNetworkImageProvider(
+                                                    user.imageUrl ?? "",
+                                                  ),
+                                            ),
                                           ),
                                           Expanded(
                                             child: Text(
@@ -156,8 +149,11 @@ class MessageScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     final thread = controller.threadList[index];
                                     final user =
-                                        (index < controller.filteredList.length)
-                                            ? controller.filteredList[index]
+                                        (index <
+                                                controller
+                                                    .otherUsersList
+                                                    .length)
+                                            ? controller.otherUsersList[index]
                                             : null;
                                     return Padding(
                                       padding: const EdgeInsets.only(
@@ -188,6 +184,19 @@ class MessageScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
+                            SizedBox(
+                              height: 50,
+                              child: ListView.builder(
+                                itemCount: controller.filteredList.length,
+                                itemBuilder: (context, index) {
+                                  final user = controller.otherUsersList[index];
+                                  return Text(
+                                    user.name ?? "",
+                                    style: AppTextStyle.whiteRegular,
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),

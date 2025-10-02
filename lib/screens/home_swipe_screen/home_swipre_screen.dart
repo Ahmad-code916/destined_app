@@ -81,9 +81,15 @@ class HomeSwipreScreen extends StatelessWidget {
                                       return true;
                                     },
                                     numberOfCardsDisplayed:
-                                        controller.userList.length < 2
-                                            ? controller.userList.length
-                                            : 2,
+                                        controller.userList.length >= 3
+                                            ? 3
+                                            : controller.userList.length < 3 &&
+                                                controller.userList.length == 2
+                                            ? 2
+                                            : 1,
+                                    // controller.userList.length < 2
+                                    //     ? controller.userList.length
+                                    //     : 2,
                                     cardsCount: controller.userList.length,
                                     cardBuilder: (context, index, prev, ind) {
                                       final user = controller.userList[index];

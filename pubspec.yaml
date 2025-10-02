@@ -48,6 +48,13 @@ dependencies:
   geolocator: ^14.0.2
   geocoding: ^4.0.0
   cached_network_image: ^3.4.1
+  flutter_launcher_icons: "^0.14.4"
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.jpg"
  
 
 dev_dependencies:

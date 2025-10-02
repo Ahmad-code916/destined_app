@@ -75,11 +75,16 @@ class MessageScreenController extends GetxController {
                   event.docs.map((e) {
                     return ThreadModel.fromMap(e.data());
                   }).toList();
+              threadList.sort((a, b) {
+                return b.lastMessageTime!.compareTo(a.lastMessageTime!);
+              });
+              otherUsersList.clear();
               for (var thread in threadList) {
                 String otherUserid = fetchOtherUserId(
                   thread.participantsList ?? [],
                 );
                 getOtherUserData(otherUserid);
+                update();
               }
               isLoading = false;
               update();
@@ -120,6 +125,7 @@ class MessageScreenController extends GetxController {
       otherUsersList.add(userData!);
       update();
     }
+    update();
   }
 
   void onChnage(String value) {

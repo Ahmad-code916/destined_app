@@ -88,6 +88,7 @@ class HomeSwipeScreenController extends GetxController {
           );
       await createThread(user);
       AppFunctions.showSnakBar('Congratulations', 'Your match created');
+      update();
       Get.to(() => MatchSceen());
     } else {
       await FirebaseFirestore.instance
@@ -108,6 +109,7 @@ class HomeSwipeScreenController extends GetxController {
           );
       AppFunctions.showSnakBar('Added', 'You liked this profile');
     }
+    update();
   }
 
   Future onSwipeLeft(int index) async {
