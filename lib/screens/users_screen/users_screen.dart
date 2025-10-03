@@ -95,10 +95,6 @@ class UsersScreen extends StatelessWidget {
                                       () => UserDetailsScreen(),
                                       arguments: {'uid': user.uid},
                                     ),
-                                isShownGreen:
-                                    index == 0 || index == 2 || index == 5
-                                        ? true
-                                        : false,
                                 image: user.imageUrl ?? "",
                                 age:
                                     AppFunctions.calculateAge(
@@ -149,10 +145,6 @@ class UsersScreen extends StatelessWidget {
                                 return UserDataContainer(
                                   onTapContainer:
                                       () => Get.to(() => UserDetailsScreen()),
-                                  isShownGreen:
-                                      index == 0 || index == 2 || index == 5
-                                          ? true
-                                          : false,
                                   image: user.imageUrl ?? "",
                                   age:
                                       AppFunctions.calculateAge(

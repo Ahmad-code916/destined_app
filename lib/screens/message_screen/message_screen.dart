@@ -65,7 +65,9 @@ class MessageScreen extends StatelessWidget {
                             AppFunctions.height(32),
                             TextFormFieldWidget(
                               onChange: (p0) {
-                                controller.onChnage(p0);
+                                controller.onChange(
+                                  controller.searchController.text,
+                                );
                               },
                               controller: controller.searchController,
                               hintText: 'Search Message, Match',
@@ -148,13 +150,8 @@ class MessageScreen extends StatelessWidget {
                                   itemCount: controller.threadList.length,
                                   itemBuilder: (context, index) {
                                     final thread = controller.threadList[index];
-                                    final user =
-                                        (index <
-                                                controller
-                                                    .otherUsersList
-                                                    .length)
-                                            ? controller.otherUsersList[index]
-                                            : null;
+                                    // final thread =
+                                    //     controller.filteredUserList[index];
                                     return Padding(
                                       padding: const EdgeInsets.only(
                                         bottom: 16,
@@ -166,15 +163,17 @@ class MessageScreen extends StatelessWidget {
                                             () => ChatScreen(),
                                             arguments: {
                                               'threadId': thread.id,
-                                              'user': user,
+                                              'user': thread.userDetails,
                                               'threadModel': thread,
                                             },
                                           );
                                         },
                                         child: MessageWidget(
-                                          name: user?.name ?? "",
+                                          name: thread.userDetails?.name ?? "",
                                           lastMessage: thread.lastMessage ?? "",
-                                          image: user?.imageUrl ?? "",
+                                          image:
+                                              thread.userDetails?.imageUrl ??
+                                              "",
                                           dateTime:
                                               '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
                                           count: '3',
@@ -187,11 +186,12 @@ class MessageScreen extends StatelessWidget {
                             SizedBox(
                               height: 50,
                               child: ListView.builder(
-                                itemCount: controller.filteredList.length,
+                                itemCount: controller.filteredUserList.length,
                                 itemBuilder: (context, index) {
-                                  final user = controller.otherUsersList[index];
+                                  final user =
+                                      controller.filteredUserList[index];
                                   return Text(
-                                    user.name ?? "",
+                                    user.userDetails?.name ?? "",
                                     style: AppTextStyle.whiteRegular,
                                   );
                                 },

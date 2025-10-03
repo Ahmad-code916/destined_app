@@ -14,38 +14,36 @@ class HomeSwipeScreenController extends GetxController {
   bool isLoading = false;
   final CardSwiperController swiperController = CardSwiperController();
   List<UserModel> userList = [];
-  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
 
   void getUsers() async {
     try {
       isLoading = true;
       update();
-      subscription = FirebaseFirestore.instance
-          .collection(UserModel.tableName)
-          .where('uid', isNotEqualTo: UserBaseController.userData.uid)
-          .snapshots()
-          .listen((event) {
-            if (event.docs.isNotEmpty) {
-              userList =
-                  event.docs
-                      .map((e) {
-                        return UserModel.fromMap(e.data());
-                      })
-                      .where((ele) {
-                        return !((UserBaseController.userData.myLikes!.contains(
-                              ele.uid,
-                            )) ||
-                            (UserBaseController.userData.myDislikes!.contains(
-                              ele.uid,
-                            )));
-                      })
-                      .toList();
-              isLoading = false;
-              update();
-            }
-            isLoading = false;
-            update();
-          });
+      final snapShot =
+          await FirebaseFirestore.instance
+              .collection(UserModel.tableName)
+              .where('uid', isNotEqualTo: UserBaseController.userData.uid)
+              .get();
+      if (snapShot.docs.isNotEmpty) {
+        userList =
+            snapShot.docs
+                .map((e) {
+                  return UserModel.fromMap(e.data());
+                })
+                .where((ele) {
+                  return !((UserBaseController.userData.myLikes!.contains(
+                        ele.uid,
+                      )) ||
+                      (UserBaseController.userData.myDislikes!.contains(
+                        ele.uid,
+                      )));
+                })
+                .toList();
+        isLoading = false;
+        update();
+      }
+      isLoading = false;
+      update();
     } catch (e) {
       isLoading = false;
       update();
@@ -170,11 +168,5 @@ class HomeSwipeScreenController extends GetxController {
       '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${UserBaseController.userData.name}',
     );
     super.onInit();
-  }
-
-  @override
-  void onClose() async {
-    await subscription?.cancel();
-    super.onClose();
   }
 }

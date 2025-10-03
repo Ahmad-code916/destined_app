@@ -14,8 +14,8 @@ class MessageScreenController extends GetxController {
   List<ThreadModel> threadList = [];
   List<String> participientUsers = [];
   UserModel? userData;
-  List<UserModel> otherUsersList = [];
-  List<UserModel> filteredList = [];
+  // List<UserModel> filteredList = [];
+  List<ThreadModel> filteredUserList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
   bool isLoading = false;
@@ -40,7 +40,7 @@ class MessageScreenController extends GetxController {
                         );
                       })
                       .toList();
-              filteredList = otherUsersList;
+              // filteredList = otherUsersList;
               isLoading = false;
               update();
             }
@@ -69,24 +69,24 @@ class MessageScreenController extends GetxController {
             arrayContains: UserBaseController.userData.uid ?? "",
           )
           .snapshots()
-          .listen((event) {
+          .listen((event) async {
             if (event.docs.isNotEmpty) {
-              threadList =
-                  event.docs.map((e) {
-                    return ThreadModel.fromMap(e.data());
-                  }).toList();
-              threadList.sort((a, b) {
-                return b.lastMessageTime!.compareTo(a.lastMessageTime!);
-              });
-              otherUsersList.clear();
-              for (var thread in threadList) {
+              threadList.clear();
+              update();
+              for (final e in event.docs) {
+                final model = ThreadModel.fromMap(e.data());
                 String otherUserid = fetchOtherUserId(
-                  thread.participantsList ?? [],
+                  model.participantsList ?? [],
                 );
-                getOtherUserData(otherUserid);
-                update();
+                model.userDetails = await getOtherUserData(otherUserid);
+                threadList.add(model);
               }
-              isLoading = false;
+              threadList.sort(
+                (a, b) => (b.lastMessageTime ?? DateTime.now()).compareTo(
+                  a.lastMessageTime ?? DateTime.now(),
+                ),
+              );
+              filteredUserList = threadList;
               update();
             } else {
               isLoading = false;
@@ -114,7 +114,7 @@ class MessageScreenController extends GetxController {
     return otherUserId;
   }
 
-  Future getOtherUserData(String otherUserId) async {
+  Future<UserModel?> getOtherUserData(String otherUserId) async {
     final user =
         await FirebaseFirestore.instance
             .collection(UserModel.tableName)
@@ -122,19 +122,28 @@ class MessageScreenController extends GetxController {
             .get();
     if (user.exists) {
       userData = UserModel.fromMap(user.data()!);
-      otherUsersList.add(userData!);
-      update();
+      return userData;
     }
-    update();
+    return null;
   }
 
-  void onChnage(String value) {
-    filteredList =
-        otherUsersList.where((element) {
-          return element.name!.toLowerCase().contains(value.toLowerCase());
+  void onChange(String value) {
+    filteredUserList =
+        threadList.where((element) {
+          return element.userDetails!.name!.toLowerCase().contains(
+            value.toLowerCase(),
+          );
         }).toList();
     update();
   }
+
+  // void onChnage(String value) {
+  //   filteredList =
+  //       otherUsersList.where((element) {
+  //         return element.name!.toLowerCase().contains(value.toLowerCase());
+  //       }).toList();
+  //   update();
+  // }
 
   @override
   void onInit() {

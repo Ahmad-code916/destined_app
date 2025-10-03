@@ -11,6 +11,7 @@ class ThreadModel {
   DateTime? lastMessageTime;
   List<String>? participantsList;
   String? senderId;
+  UserModel? userDetails;
   int? unseenMessageCount;
   UserModel? userModel;
 
@@ -20,6 +21,7 @@ class ThreadModel {
     this.lastMessageTime,
     this.participantsList,
     this.senderId,
+    this.userDetails,
     this.unseenMessageCount,
     this.userModel,
   });

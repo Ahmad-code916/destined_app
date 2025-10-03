@@ -60,6 +60,9 @@ class HomeSwipreScreen extends StatelessWidget {
                                 SizedBox(
                                   height: Get.height * 0.6,
                                   child: CardSwiper(
+                                    onEnd: () {
+                                      controller.getUsers();
+                                    },
                                     onSwipe: (
                                       previousIndex,
                                       currentIndex,

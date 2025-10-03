@@ -12,7 +12,7 @@ class UserDataContainer extends StatelessWidget {
     required this.age,
     // required this.count,
     required this.image,
-    required this.isShownGreen,
+    // required this.isShownGreen,
     required this.onTapContainer,
   });
 
@@ -21,7 +21,7 @@ class UserDataContainer extends StatelessWidget {
   final double distance;
   final String age;
   // final int count;
-  final bool isShownGreen;
+  // final bool isShownGreen;
   final void Function() onTapContainer;
 
   @override
@@ -62,21 +62,21 @@ class UserDataContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (isShownGreen == true)
-                    Container(
-                      margin: EdgeInsets.only(right: 13, top: 12),
-                      height: 15,
-                      width: 15,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          stops: [0.0, 1.0],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Color(0xffBFFF6F), Color(0xff12D13C)],
-                        ),
-                      ),
-                    ),
+                  // if (isShownGreen == true)
+                  //   Container(
+                  //     margin: EdgeInsets.only(right: 13, top: 12),
+                  //     height: 15,
+                  //     width: 15,
+                  //     decoration: BoxDecoration(
+                  //       shape: BoxShape.circle,
+                  //       gradient: LinearGradient(
+                  //         stops: [0.0, 1.0],
+                  //         begin: Alignment.topLeft,
+                  //         end: Alignment.bottomRight,
+                  //         colors: [Color(0xffBFFF6F), Color(0xff12D13C)],
+                  //       ),
+                  //     ),
+                  //   ),
                 ],
               ),
             ),
