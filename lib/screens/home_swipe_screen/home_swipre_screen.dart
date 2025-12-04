@@ -44,8 +44,8 @@ class HomeSwipreScreen extends StatelessWidget {
                                 image:
                                     UserBaseController.userData.imageUrl ?? "",
                                 name: UserBaseController.userData.name ?? "",
-                                onTapFilter: () => Get.to(() => FilterScreen()),
-                                onTapnotification: () {},
+                                // onTapFilter: () => Get.to(() => FilterScreen()),
+                                // onTapnotification: () {},
                               ),
                               AppFunctions.height(30),
                               if (controller.userList.isEmpty)
@@ -263,7 +263,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                   ),
                                 ),
                               AppFunctions.height(20),
-                              Padding(
+                              /* Padding(
                                 padding: const EdgeInsets.only(
                                   left: 50,
                                   right: 50,
@@ -306,7 +306,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              ),
+                              ),*/
                             ],
                           ),
                         ),

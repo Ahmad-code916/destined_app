@@ -98,14 +98,14 @@ class MatchSceen extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              AppStrings.congrats,
+                              AppStrings.congrats.tr,
                               style: AppTextStyle.whiteBold.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               textAlign: TextAlign.center,
-                              AppStrings.congratsSubStr,
+                              AppStrings.congratsSubStr.tr,
                               style: AppTextStyle.whiteRegular,
                             ),
                             AppFunctions.height(20),
@@ -117,7 +117,7 @@ class MatchSceen extends StatelessWidget {
                             AppFunctions.height(6),
                             Text(
                               textAlign: TextAlign.center,
-                              AppStrings.startConversation,
+                              AppStrings.startConversation.tr,
                               style: AppTextStyle.whiteMedium.copyWith(
                                 color: AppColors.yellowColor,
                                 fontWeight: FontWeight.w600,

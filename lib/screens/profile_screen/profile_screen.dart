@@ -1,6 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:destined_app/screens/edit_screen/edit_screen.dart';
 import 'package:destined_app/screens/profile_screen/profile_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
+import 'package:destined_app/screens/widgets/filter_screen_gradient_container.dart';
 import 'package:destined_app/screens/widgets/profile_page_row.dart';
+import 'package:destined_app/services/local_controller.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +24,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localeController = Get.put(LocalController());
     return Scaffold(
       body: PrimaryGradient(
         firstColor: AppColors.gradientSecondryFirst,
@@ -46,8 +51,10 @@ class ProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: Image.network(
-                                  UserBaseController.userData.imageUrl ?? "",
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      UserBaseController.userData.imageUrl ??
+                                      "",
                                 ),
                               ),
                               Container(
@@ -74,7 +81,6 @@ class ProfileScreen extends StatelessWidget {
                                                   .likedBy!
                                                   .length
                                                   .toString(),
-                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -89,7 +95,6 @@ class ProfileScreen extends StatelessWidget {
                                         child: ProfilePageRow(
                                           icon: Icons.thumb_up,
                                           text1: '2.7',
-                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -104,7 +109,6 @@ class ProfileScreen extends StatelessWidget {
                                         child: ProfilePageRow(
                                           icon: Icons.message_outlined,
                                           text1: '2.7',
-                                          // text2: 'k',
                                         ),
                                       ),
                                     ),
@@ -118,12 +122,17 @@ class ProfileScreen extends StatelessWidget {
                                         bottom: 10,
                                         top: 10,
                                       ),
-                                      child: GradientSecondryContainer(
-                                        firstColor: AppColors.lightBlue,
-                                        thirdColor: AppColors.darkBlue,
-                                        child: Icon(
-                                          Icons.edit,
-                                          color: AppColors.whiteColor,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.to(() => EditScreen());
+                                        },
+                                        child: GradientSecondryContainer(
+                                          firstColor: AppColors.lightBlue,
+                                          thirdColor: AppColors.darkBlue,
+                                          child: Icon(
+                                            Icons.edit,
+                                            color: AppColors.whiteColor,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -248,7 +257,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 AppFunctions.height(30),
                                 Text(
-                                  AppStrings.interest,
+                                  AppStrings.interest.tr,
                                   style: AppTextStyle.whiteMedium,
                                 ),
                                 AppFunctions.height(16),
@@ -281,12 +290,31 @@ class ProfileScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
+                                AppFunctions.height(30),
+                                Text(
+                                  AppStrings.language.tr,
+                                  style: AppTextStyle.whiteMedium,
+                                ),
+                                AppFunctions.height(20),
+                                FilterScreenGradientContainer(
+                                  widget: Text(
+                                    controller.selectedLanguage,
+                                    style: AppTextStyle.whiteRegular,
+                                  ),
+                                  icon: Icon(
+                                    Icons.add,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                  onTap: () {
+                                    localeController.showDialoge();
+                                  },
+                                ),
                                 AppFunctions.height(20),
                                 Align(
                                   alignment: Alignment.center,
                                   child: ButtonWidget(
                                     isLoading: controller.isLoading,
-                                    buttonText: 'LogOut',
+                                    buttonText: AppStrings.logOut.tr,
                                     onTap: () {
                                       controller.logOut();
                                     },

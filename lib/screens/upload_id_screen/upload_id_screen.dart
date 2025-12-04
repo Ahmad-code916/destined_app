@@ -41,13 +41,13 @@ class UploadIdScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(30),
                       Text(
-                        AppStrings.uploadId,
+                        AppStrings.uploadId.tr,
                         style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
                       ),
                       AppFunctions.height(12),
                       Text(
                         textAlign: TextAlign.center,
-                        AppStrings.uploadIdSubString,
+                        AppStrings.uploadIdSubString.tr,
                         style: AppTextStyle.whiteMedium.copyWith(fontSize: 16),
                       ),
                       AppFunctions.height(36),
@@ -67,7 +67,7 @@ class UploadIdScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  AppStrings.idProof,
+                                  AppStrings.idProof.tr,
                                   style: AppTextStyle.whiteMedium.copyWith(
                                     color: AppColors.purpleColor,
                                   ),
@@ -103,7 +103,7 @@ class UploadIdScreen extends StatelessWidget {
                       AppFunctions.height(46),
                       ButtonWidget(
                         isLoading: controller.isLoading,
-                        buttonText: AppStrings.continu,
+                        buttonText: AppStrings.continu.tr,
                         onTap: () {
                           controller.updateUserInFirebase();
                         },

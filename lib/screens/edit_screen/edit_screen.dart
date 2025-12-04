@@ -1,65 +1,42 @@
-import 'package:destined_app/screens/login_screen/login_screen.dart';
-import 'package:destined_app/screens/personal_details_screen/personal_details_screen_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:destined_app/screens/edit_screen/edit_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/drop_down_widget.dart';
 import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
-import 'package:destined_app/utils/app_images.dart';
+import 'package:destined_app/services/user_base_controller.dart';
+import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
-import '../../utils/app_colors.dart';
 import 'package:get/get.dart';
 
-class PersonalDetailsScreen extends StatelessWidget {
-  PersonalDetailsScreen({super.key});
-
-  final PersonalDetailsScreenController controller = Get.put(
-    PersonalDetailsScreenController(),
-  );
+class EditScreen extends StatelessWidget {
+  const EditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(EditScreenController());
     return Scaffold(
-      body: PrimaryGradient(
-        firstColor: Color(0xff641C3C),
-        secondColor: Color(0xff07011A),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: GetBuilder<PersonalDetailsScreenController>(
-              builder: (context) {
-                return SingleChildScrollView(
+      body: GetBuilder<EditScreenController>(
+        builder: (context) {
+          return PrimaryGradient(
+            firstColor: AppColors.gradientSecondryFirst,
+            secondColor: AppColors.gradientSecondrySec,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: SingleChildScrollView(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => LoginScreen());
-                          },
-                          child: Text(
-                            AppStrings.login.tr,
-                            style: AppTextStyle.whiteBold.copyWith(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
                       AppFunctions.height(30),
                       Text(
                         AppStrings.profileDetails.tr,
                         style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
                       ),
                       AppFunctions.height(12),
-                      Text(
-                        AppStrings.filldetails.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 16),
-                      ),
-                      AppFunctions.height(40),
                       Align(
                         alignment: Alignment.center,
                         child: Stack(
@@ -81,13 +58,15 @@ class PersonalDetailsScreen extends StatelessWidget {
                                 child: Center(
                                   child:
                                       controller.image == null
-                                          ? Image.asset(
-                                            AppImages.profileImage,
-                                            fit: BoxFit.cover,
-                                            height: 50,
+                                          ? CachedNetworkImage(
+                                            imageUrl:
+                                                UserBaseController
+                                                    .userData
+                                                    .imageUrl ??
+                                                "",
                                           )
                                           : CircleAvatar(
-                                            radius: 110,
+                                            radius: 100,
                                             backgroundImage: FileImage(
                                               controller.image!,
                                             ),
@@ -131,31 +110,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      AppFunctions.height(36),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          AppStrings.email.tr,
-                          style: AppTextStyle.pinkMedium,
-                        ),
-                      ),
-                      AppFunctions.height(10),
-                      TextFormFieldWidget(
-                        controller: controller.emailController,
-                      ),
-                      AppFunctions.height(22),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          AppStrings.password.tr,
-                          style: AppTextStyle.pinkMedium,
-                        ),
-                      ),
-                      AppFunctions.height(10),
-                      TextFormFieldWidget(
-                        controller: controller.passwordController,
-                      ),
-                      AppFunctions.height(22),
+                      AppFunctions.height(30),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -163,11 +118,11 @@ class PersonalDetailsScreen extends StatelessWidget {
                           style: AppTextStyle.pinkMedium,
                         ),
                       ),
-                      AppFunctions.height(10),
+                      AppFunctions.height(16),
                       TextFormFieldWidget(
                         controller: controller.firstNameController,
                       ),
-                      AppFunctions.height(22),
+                      AppFunctions.height(20),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -175,9 +130,25 @@ class PersonalDetailsScreen extends StatelessWidget {
                           style: AppTextStyle.pinkMedium,
                         ),
                       ),
-                      AppFunctions.height(10),
+                      AppFunctions.height(16),
                       TextFormFieldWidget(
                         controller: controller.lastNameController,
+                      ),
+                      AppFunctions.height(20),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          AppStrings.gender.tr,
+                          style: AppTextStyle.pinkMedium,
+                        ),
+                      ),
+                      AppFunctions.height(16),
+                      DropDownWidget(
+                        items: controller.genderList,
+                        onChange: (value) {
+                          controller.onChange(value);
+                        },
+                        selectedValue: controller.selectedDropDownValue,
                       ),
                       AppFunctions.height(22),
                       Align(
@@ -223,38 +194,21 @@ class PersonalDetailsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppFunctions.height(22),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          AppStrings.gender.tr,
-                          style: AppTextStyle.pinkMedium,
-                        ),
-                      ),
-                      AppFunctions.height(10),
-                      DropDownWidget(
-                        selectedValue:
-                            controller.selectedGender == null
-                                ? null
-                                : controller.selectedGender ?? "",
-                        items: controller.genderList,
-                        onChange: controller.onChange,
-                      ),
-                      AppFunctions.height(44),
+                      AppFunctions.height(30),
                       ButtonWidget(
-                        isLoading: controller.isLoading,
-                        buttonText: AppStrings.continu.tr,
+                        buttonText: AppStrings.saveEdit.tr,
                         onTap: () {
-                          controller.signUp();
+                          controller.updateProfile();
                         },
+                        isLoading: controller.isLoading,
                       ),
                     ],
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

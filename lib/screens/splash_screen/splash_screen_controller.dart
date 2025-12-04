@@ -18,7 +18,7 @@ class SplashScreenController extends GetxController {
       final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
         AppFunctions.showSnakBar('Error', 'User not found!');
-        Get.to(() => PersonalDetailsScreen());
+        Get.offAll(() => PersonalDetailsScreen());
       } else {
         final user =
             await FirebaseFirestore.instance

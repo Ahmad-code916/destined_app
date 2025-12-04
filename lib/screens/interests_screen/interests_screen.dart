@@ -40,12 +40,12 @@ class InterestsScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(30),
                       Text(
-                        AppStrings.likes,
+                        AppStrings.likes.tr,
                         style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
                       ),
                       AppFunctions.height(12),
                       Text(
-                        AppStrings.shareYourLikes,
+                        AppStrings.shareYourLikes.tr,
                         style: AppTextStyle.whiteMedium.copyWith(fontSize: 16),
                       ),
                       AppFunctions.height(36),
@@ -139,7 +139,7 @@ class InterestsScreen extends StatelessWidget {
                       ),
                       ButtonWidget(
                         isLoading: controller.isLoading,
-                        buttonText: AppStrings.continu,
+                        buttonText: AppStrings.continu.tr,
                         onTap: () {
                           controller.updateUserInFirebase();
                         },

@@ -28,8 +28,8 @@ class UsersScreen extends StatelessWidget {
             title: HeadRowWidget(
               image: UserBaseController.userData.imageUrl ?? "",
               name: UserBaseController.userData.name ?? "",
-              onTapFilter: () => Get.to(() => FilterScreen()),
-              onTapnotification: () {},
+              // onTapFilter: () => Get.to(() => FilterScreen()),
+              // onTapnotification: () {},
             ),
             backgroundColor: AppColors.gradientSecondryFirst,
             bottom: TabBar(
@@ -69,43 +69,51 @@ class UsersScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: GridView.builder(
-                            itemCount: controller.userList.length,
-                            shrinkWrap: true,
-                            primary: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 22,
-                                  crossAxisSpacing: 20,
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 0.9,
-                                ),
-                            itemBuilder: (context, index) {
-                              final user = controller.userList[index];
-                              final distnace = AppFunctions.calculateDistance(
-                                UserBaseController.userData.lat!,
-                                UserBaseController.userData.lng!,
-                                user.lat!,
-                                user.lng!,
-                              );
-                              return UserDataContainer(
-                                onTapContainer:
-                                    () => Get.to(
-                                      () => UserDetailsScreen(),
-                                      arguments: {'uid': user.uid},
-                                    ),
-                                image: user.imageUrl ?? "",
-                                age:
-                                    AppFunctions.calculateAge(
-                                      user.dateOfBirth!,
-                                    ).toString(),
-                                name: user.name ?? "",
-                                distance: double.parse(distnace),
-                              );
-                            },
+                        if (controller.userList.isEmpty)
+                          Center(
+                            child: Text(
+                              'No user found!',
+                              style: AppTextStyle.whiteMedium,
+                            ),
+                          )
+                        else
+                          Expanded(
+                            child: GridView.builder(
+                              itemCount: controller.userList.length,
+                              shrinkWrap: true,
+                              primary: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 22,
+                                    crossAxisSpacing: 20,
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.9,
+                                  ),
+                              itemBuilder: (context, index) {
+                                final user = controller.userList[index];
+                                final distnace = AppFunctions.calculateDistance(
+                                  UserBaseController.userData.lat!,
+                                  UserBaseController.userData.lng!,
+                                  user.lat!,
+                                  user.lng!,
+                                );
+                                return UserDataContainer(
+                                  onTapContainer:
+                                      () => Get.to(
+                                        () => UserDetailsScreen(),
+                                        arguments: {'uid': user.uid},
+                                      ),
+                                  image: user.imageUrl ?? "",
+                                  age:
+                                      AppFunctions.calculateAge(
+                                        user.dateOfBirth!,
+                                      ).toString(),
+                                  name: user.name ?? "",
+                                  distance: double.parse(distnace),
+                                );
+                              },
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

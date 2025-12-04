@@ -47,7 +47,7 @@ class LocationScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                AppStrings.location,
+                                AppStrings.location.tr,
                                 style: AppTextStyle.whiteBold.copyWith(
                                   fontSize: 36,
                                 ),
@@ -56,7 +56,7 @@ class LocationScreen extends StatelessWidget {
                               AppFunctions.height(12),
                               Text(
                                 textAlign: TextAlign.center,
-                                AppStrings.locationSubString,
+                                AppStrings.locationSubString.tr,
                                 style: AppTextStyle.whiteMedium.copyWith(
                                   fontSize: 16,
                                 ),
@@ -65,7 +65,7 @@ class LocationScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  AppStrings.currentLocation,
+                                  AppStrings.currentLocation.tr,
                                   style: AppTextStyle.pinkMedium,
                                 ),
                               ),
@@ -94,7 +94,7 @@ class LocationScreen extends StatelessWidget {
                                         Expanded(
                                           child: Text(
                                             controller.currentUserData == null
-                                                ? 'Select'
+                                                ? AppStrings.select.tr
                                                 : '${controller.currentUserData!.subLocality},${controller.currentUserData!.locality},${controller.currentUserData!.country}',
                                             style: AppTextStyle.whiteMedium,
                                           ),
@@ -111,7 +111,7 @@ class LocationScreen extends StatelessWidget {
                               AppFunctions.height(40),
                               ButtonWidget(
                                 isLoading: controller.isUpdatingData,
-                                buttonText: AppStrings.continu,
+                                buttonText: AppStrings.continu.tr,
                                 onTap: () {
                                   controller.updateUserInFirebase();
                                 },

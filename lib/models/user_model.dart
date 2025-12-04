@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   static const tableName = "dating_app_users";
 
@@ -58,7 +60,7 @@ class UserModel {
       lastName: map["lastName"] ?? "",
       dateOfBirth:
           map["dateOfBirth"] != null
-              ? DateTime.tryParse(map["dateOfBirth"])
+              ? (map["dateOfBirth"] as Timestamp).toDate()
               : null,
       gender: map["gender"] ?? "",
       interestList:
@@ -88,7 +90,8 @@ class UserModel {
       "name": name,
       "email": email,
       "lastName": lastName,
-      "dateOfBirth": dateOfBirth?.toIso8601String(),
+      "dateOfBirth":
+          dateOfBirth == null ? dateOfBirth : Timestamp.fromDate(dateOfBirth!),
       "gender": gender,
       "interestList": interestList,
       "imageUrl": imageUrl,

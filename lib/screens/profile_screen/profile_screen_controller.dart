@@ -7,6 +7,7 @@ class ProfileScreenController extends GetxController {
   List<String> choiceList = ['Pictures', 'Videos'];
   List<String> interestList = ['Music', 'Gaming'];
   bool isLoading = false;
+  String selectedLanguage = 'English';
 
   void logOut() {
     isLoading = true;

@@ -10,14 +10,14 @@ class HeadRowWidget extends StatelessWidget {
     super.key,
     required this.image,
     required this.name,
-    required this.onTapFilter,
-    required this.onTapnotification,
+    // required this.onTapFilter,
+    // required this.onTapnotification,
   });
 
   final String image;
   final String name;
-  final void Function() onTapFilter;
-  final void Function() onTapnotification;
+  // final void Function() onTapFilter;
+  // final void Function() onTapnotification;
 
   @override
   Widget build(BuildContext context) {
@@ -42,42 +42,37 @@ class HeadRowWidget extends StatelessWidget {
             ),
           ],
         ),
-        Row(
+        /*    Row(
           children: [
             Icon(Icons.search, color: AppColors.whiteColor, size: 25),
             AppFunctions.width(25),
-            GestureDetector(
-              onTap: onTapnotification,
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Icon(
-                    Icons.notifications_rounded,
-                    color: AppColors.whiteColor,
-                    size: 25,
-                  ),
-                  Container(
-                    height: 12,
-                    width: 12,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: AppColors.darkBlackColor,
-                        width: 2,
-                      ),
-                      color: AppColors.whiteColor,
-                      borderRadius: AppFunctions.borderRadius(25),
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Icon(
+                  Icons.notifications_rounded,
+                  color: AppColors.whiteColor,
+                  size: 25,
+                ),
+                Container(
+                  height: 12,
+                  width: 12,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.darkBlackColor,
+                      width: 2,
                     ),
+                    color: AppColors.whiteColor,
+                    borderRadius: AppFunctions.borderRadius(25),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             AppFunctions.width(25),
-            GestureDetector(
-              onTap: onTapFilter,
-              child: Image.asset(AppImages.filterImage, height: 22),
-            ),
+            Image.asset(AppImages.filterImage, height: 22),
           ],
         ),
+        */
       ],
     );
   }

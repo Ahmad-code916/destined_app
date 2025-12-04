@@ -52,7 +52,7 @@ class MessageScreen extends StatelessWidget {
                                     ),
                                     AppFunctions.width(11),
                                     Text(
-                                      AppStrings.addNewMessage,
+                                      AppStrings.addNewMessage.tr,
                                       style: AppTextStyle.whiteMedium.copyWith(
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -70,12 +70,12 @@ class MessageScreen extends StatelessWidget {
                                 );
                               },
                               controller: controller.searchController,
-                              hintText: 'Search Message, Match',
+                              hintText: 'Search',
                               hintStyle: AppTextStyle.whiteMedium,
                             ),
                             AppFunctions.height(30),
                             Text(
-                              AppStrings.newMatches,
+                              AppStrings.newMatches.tr,
                               style: AppTextStyle.whiteMedium,
                             ),
                             AppFunctions.height(32),
@@ -92,6 +92,7 @@ class MessageScreen extends StatelessWidget {
                                 child: ListView.builder(
                                   itemCount: controller.userList.length,
                                   scrollDirection: Axis.horizontal,
+
                                   itemBuilder: (context, index) {
                                     final user = controller.userList[index];
                                     return Padding(
@@ -128,7 +129,7 @@ class MessageScreen extends StatelessWidget {
                               ),
                             AppFunctions.height(30),
                             Text(
-                              AppStrings.allMessages,
+                              AppStrings.allMessages.tr,
                               style: AppTextStyle.whiteMedium.copyWith(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 24,
@@ -143,60 +144,53 @@ class MessageScreen extends StatelessWidget {
                                 ),
                               )
                             else if (controller.userList.isNotEmpty)
-                              SizedBox(
-                                height: Get.height * 0.6,
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: controller.threadList.length,
-                                  itemBuilder: (context, index) {
-                                    final thread = controller.threadList[index];
-                                    // final thread =
-                                    //     controller.filteredUserList[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 16,
-                                      ),
-                                      child: GestureDetector(
-                                        behavior: HitTestBehavior.opaque,
-                                        onTap: () {
-                                          Get.to(
-                                            () => ChatScreen(),
-                                            arguments: {
-                                              'threadId': thread.id,
-                                              'user': thread.userDetails,
-                                              'threadModel': thread,
-                                            },
-                                          );
-                                        },
-                                        child: MessageWidget(
-                                          name: thread.userDetails?.name ?? "",
-                                          lastMessage: thread.lastMessage ?? "",
-                                          image:
-                                              thread.userDetails?.imageUrl ??
-                                              "",
-                                          dateTime:
-                                              '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
-                                          count: '3',
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            SizedBox(
-                              height: 50,
-                              child: ListView.builder(
-                                itemCount: controller.filteredUserList.length,
+                              ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.threadList.length,
                                 itemBuilder: (context, index) {
-                                  final user =
-                                      controller.filteredUserList[index];
-                                  return Text(
-                                    user.userDetails?.name ?? "",
-                                    style: AppTextStyle.whiteRegular,
+                                  final thread = controller.threadList[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 16),
+                                    child: GestureDetector(
+                                      behavior: HitTestBehavior.opaque,
+                                      onTap: () {
+                                        Get.to(
+                                          () => ChatScreen(),
+                                          arguments: {
+                                            'threadId': thread.id,
+                                            'user': thread.userDetails,
+                                            'threadModel': thread,
+                                          },
+                                        );
+                                      },
+                                      child: MessageWidget(
+                                        name: thread.userDetails?.name ?? "",
+                                        lastMessage: thread.lastMessage ?? "",
+                                        image:
+                                            thread.userDetails?.imageUrl ?? "",
+                                        dateTime:
+                                            '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
+                                        count: '3',
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
-                            ),
+                            // SizedBox(
+                            //   height: 50,
+                            //   child: ListView.builder(
+                            //     itemCount: controller.filteredUserList.length,
+                            //     itemBuilder: (context, index) {
+                            //       final user =
+                            //           controller.filteredUserList[index];
+                            //       return Text(
+                            //         user.userDetails?.name ?? "",
+                            //         style: AppTextStyle.whiteRegular,
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                             Get.to(() => PersonalDetailsScreen());
                           },
                           child: Text(
-                            AppStrings.createAccount,
+                            AppStrings.createAccount.tr,
                             style: AppTextStyle.whiteBold.copyWith(
                               fontSize: 16,
                             ),
@@ -45,12 +45,12 @@ class LoginScreen extends StatelessWidget {
                       ),
                       AppFunctions.height(30),
                       Text(
-                        AppStrings.login,
+                        AppStrings.login.tr,
                         style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
                       ),
                       AppFunctions.height(12),
                       Text(
-                        AppStrings.filldetails,
+                        AppStrings.filldetails.tr,
                         style: AppTextStyle.whiteBold.copyWith(fontSize: 16),
                       ),
                       AppFunctions.height(70),
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.email,
+                          AppStrings.email.tr,
                           style: AppTextStyle.pinkMedium,
                         ),
                       ),
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          AppStrings.password,
+                          AppStrings.password.tr,
                           style: AppTextStyle.pinkMedium,
                         ),
                       ),

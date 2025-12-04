@@ -16,44 +16,50 @@ class InterestsScreenController extends GetxController {
   List<String> selectedInterestList = [];
   List<LocalListModel> interestList = [
     LocalListModel(
-      interest: AppStrings.photography,
+      interest: AppStrings.photography.tr,
       image: AppImages.cameraImage,
     ),
-    LocalListModel(interest: AppStrings.cooking, image: AppImages.cookingImage),
     LocalListModel(
-      interest: AppStrings.videoGames,
+      interest: AppStrings.cooking.tr,
+      image: AppImages.cookingImage,
+    ),
+    LocalListModel(
+      interest: AppStrings.videoGames.tr,
       image: AppImages.videoGameImage,
     ),
-    LocalListModel(interest: AppStrings.music, image: AppImages.musicImage),
+    LocalListModel(interest: AppStrings.music.tr, image: AppImages.musicImage),
     LocalListModel(
-      interest: AppStrings.travelling,
+      interest: AppStrings.travelling.tr,
       image: AppImages.travellingImage,
     ),
     LocalListModel(
-      interest: AppStrings.shopping,
+      interest: AppStrings.shopping.tr,
       image: AppImages.shoppingImage,
     ),
     LocalListModel(
-      interest: AppStrings.speeches,
+      interest: AppStrings.speeches.tr,
       image: AppImages.speecheImage,
     ),
     LocalListModel(
-      interest: AppStrings.artCrafts,
+      interest: AppStrings.artCrafts.tr,
       image: AppImages.artCreaftImage,
     ),
     LocalListModel(
-      interest: AppStrings.swimming,
+      interest: AppStrings.swimming.tr,
       image: AppImages.swimmingImage,
     ),
     LocalListModel(
-      interest: AppStrings.drinking,
+      interest: AppStrings.drinking.tr,
       image: AppImages.drinkingImage,
     ),
     LocalListModel(
-      interest: AppStrings.extremeSports,
+      interest: AppStrings.extremeSports.tr,
       image: AppImages.sportsImage,
     ),
-    LocalListModel(interest: AppStrings.fitness, image: AppImages.fitnessImage),
+    LocalListModel(
+      interest: AppStrings.fitness.tr,
+      image: AppImages.fitnessImage,
+    ),
   ];
 
   void addInterestToList(int index) {

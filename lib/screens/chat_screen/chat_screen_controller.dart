@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/chat_model.dart';
@@ -128,6 +127,10 @@ class ChatScreenController extends GetxController {
             .collection(ChatModel.tableName)
             .doc(messageId)
             .delete();
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .update({'lastMessage': 'Message Deleted!'});
         Get.back();
         AppFunctions.showSnakBar('Deleted', 'This message has deleted.');
         update();
