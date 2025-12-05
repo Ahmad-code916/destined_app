@@ -136,7 +136,7 @@ class MessageScreen extends StatelessWidget {
                               ),
                             ),
                             AppFunctions.height(30),
-                            if (controller.threadList.isEmpty)
+                            if (controller.filteredUserList.isEmpty)
                               Center(
                                 child: Text(
                                   'No User Found',
@@ -147,9 +147,10 @@ class MessageScreen extends StatelessWidget {
                               ListView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: controller.threadList.length,
+                                itemCount: controller.filteredUserList.length,
                                 itemBuilder: (context, index) {
-                                  final thread = controller.threadList[index];
+                                  final thread =
+                                      controller.filteredUserList[index];
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 16),
                                     child: GestureDetector(
@@ -177,20 +178,6 @@ class MessageScreen extends StatelessWidget {
                                   );
                                 },
                               ),
-                            // SizedBox(
-                            //   height: 50,
-                            //   child: ListView.builder(
-                            //     itemCount: controller.filteredUserList.length,
-                            //     itemBuilder: (context, index) {
-                            //       final user =
-                            //           controller.filteredUserList[index];
-                            //       return Text(
-                            //         user.userDetails?.name ?? "",
-                            //         style: AppTextStyle.whiteRegular,
-                            //       );
-                            //     },
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),

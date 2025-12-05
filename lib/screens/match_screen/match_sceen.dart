@@ -1,4 +1,3 @@
-import 'package:destined_app/screens/message_screen/message_screen.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/utils/app_colors.dart';

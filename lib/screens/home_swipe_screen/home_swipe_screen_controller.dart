@@ -4,6 +4,7 @@ import 'package:destined_app/models/thread_model.dart';
 import 'package:destined_app/screens/match_screen/match_sceen.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -14,6 +15,9 @@ class HomeSwipeScreenController extends GetxController {
   bool isLoading = false;
   final CardSwiperController swiperController = CardSwiperController();
   List<UserModel> userList = [];
+  int pageIndex = 0;
+  PageController pageController = PageController();
+  ScrollController scrollController = ScrollController();
 
   void getUsers() async {
     try {
@@ -161,12 +165,26 @@ class HomeSwipeScreenController extends GetxController {
     }
   }
 
+  void scrollContainer() {
+    scrollController.animateTo(
+      pageIndex * 20.0,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void changePageIndex(int value) {
+    pageIndex = value;
+    update();
+  }
+
   @override
   void onInit() {
     getUsers();
     print(
       '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${UserBaseController.userData.name}',
     );
+
     super.onInit();
   }
 }

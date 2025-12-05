@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/app_images.dart';
 import '../../utils/app_text_style.dart';
-import '../filter_screen/filter_screen.dart';
 
 class UsersScreen extends StatelessWidget {
   UsersScreen({super.key});
@@ -28,8 +27,6 @@ class UsersScreen extends StatelessWidget {
             title: HeadRowWidget(
               image: UserBaseController.userData.imageUrl ?? "",
               name: UserBaseController.userData.name ?? "",
-              // onTapFilter: () => Get.to(() => FilterScreen()),
-              // onTapnotification: () {},
             ),
             backgroundColor: AppColors.gradientSecondryFirst,
             bottom: TabBar(
@@ -160,7 +157,6 @@ class UsersScreen extends StatelessWidget {
                                       ).toString(),
                                   name: user.name ?? "",
                                   distance: double.parse(distance),
-                                  // count: 30,
                                 );
                               },
                             ),

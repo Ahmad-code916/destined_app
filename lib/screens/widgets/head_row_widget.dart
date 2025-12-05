@@ -1,23 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../services/app_functions.dart';
-import '../../utils/app_colors.dart';
-import '../../utils/app_images.dart';
 import '../../utils/app_text_style.dart';
 
 class HeadRowWidget extends StatelessWidget {
-  const HeadRowWidget({
-    super.key,
-    required this.image,
-    required this.name,
-    // required this.onTapFilter,
-    // required this.onTapnotification,
-  });
+  const HeadRowWidget({super.key, required this.image, required this.name});
 
   final String image;
   final String name;
-  // final void Function() onTapFilter;
-  // final void Function() onTapnotification;
 
   @override
   Widget build(BuildContext context) {
@@ -42,37 +32,6 @@ class HeadRowWidget extends StatelessWidget {
             ),
           ],
         ),
-        /*    Row(
-          children: [
-            Icon(Icons.search, color: AppColors.whiteColor, size: 25),
-            AppFunctions.width(25),
-            Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Icon(
-                  Icons.notifications_rounded,
-                  color: AppColors.whiteColor,
-                  size: 25,
-                ),
-                Container(
-                  height: 12,
-                  width: 12,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.darkBlackColor,
-                      width: 2,
-                    ),
-                    color: AppColors.whiteColor,
-                    borderRadius: AppFunctions.borderRadius(25),
-                  ),
-                ),
-              ],
-            ),
-            AppFunctions.width(25),
-            Image.asset(AppImages.filterImage, height: 22),
-          ],
-        ),
-        */
       ],
     );
   }

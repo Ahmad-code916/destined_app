@@ -14,7 +14,6 @@ class MessageScreenController extends GetxController {
   List<ThreadModel> threadList = [];
   List<String> participientUsers = [];
   UserModel? userData;
-  // List<UserModel> filteredList = [];
   List<ThreadModel> filteredUserList = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
@@ -40,7 +39,6 @@ class MessageScreenController extends GetxController {
                         );
                       })
                       .toList();
-              // filteredList = otherUsersList;
               isLoading = false;
               update();
             }
@@ -136,14 +134,6 @@ class MessageScreenController extends GetxController {
         }).toList();
     update();
   }
-
-  // void onChnage(String value) {
-  //   filteredList =
-  //       otherUsersList.where((element) {
-  //         return element.name!.toLowerCase().contains(value.toLowerCase());
-  //       }).toList();
-  //   update();
-  // }
 
   @override
   void onInit() {

@@ -114,7 +114,6 @@ class PersonalDetailsScreenController extends GetxController {
         );
         return [];
       }
-      return [];
     }
   }
 

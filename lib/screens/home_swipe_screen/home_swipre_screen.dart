@@ -133,22 +133,28 @@ class HomeSwipreScreen extends StatelessWidget {
                                                   padding: const EdgeInsets.all(
                                                     16,
                                                   ),
-                                                  child: ListView.builder(
+                                                  child: PageView.builder(
+                                                    controller:
+                                                        controller
+                                                            .pageController,
+                                                    onPageChanged: (value) {
+                                                      controller
+                                                          .changePageIndex(
+                                                            value,
+                                                          );
+                                                    },
                                                     scrollDirection:
                                                         Axis.horizontal,
                                                     itemCount:
-                                                        UserBaseController
-                                                            .userData
+                                                        user
                                                             .profileImages!
                                                             .length,
                                                     itemBuilder: (
                                                       context,
-                                                      index,
+                                                      imgIndex,
                                                     ) {
                                                       final image =
-                                                          UserBaseController
-                                                              .userData
-                                                              .profileImages![index];
+                                                          user.profileImages![imgIndex];
                                                       return Padding(
                                                         padding:
                                                             const EdgeInsets.only(
@@ -247,8 +253,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                                           height: 10,
                                                           child: ListView.builder(
                                                             itemCount:
-                                                                UserBaseController
-                                                                    .userData
+                                                                user
                                                                     .profileImages!
                                                                     .length,
                                                             scrollDirection:
@@ -257,12 +262,8 @@ class HomeSwipreScreen extends StatelessWidget {
                                                             primary: true,
                                                             itemBuilder: (
                                                               context,
-                                                              index,
+                                                              imgIndex2,
                                                             ) {
-                                                              final imageIndex =
-                                                                  UserBaseController
-                                                                      .userData
-                                                                      .profileImages![index];
                                                               return Container(
                                                                 margin:
                                                                     EdgeInsets.only(
@@ -273,7 +274,8 @@ class HomeSwipreScreen extends StatelessWidget {
                                                                 width: 10,
                                                                 decoration: BoxDecoration(
                                                                   color:
-                                                                      index == 0
+                                                                      imgIndex2 ==
+                                                                              controller.pageIndex
                                                                           ? AppColors
                                                                               .whiteColor
                                                                           : AppColors

@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/app_functions.dart';
 import '../../utils/app_colors.dart';
-import '../../utils/app_images.dart';
 import '../../utils/app_strings.dart';
 import '../../utils/app_text_style.dart';
 import '../widgets/gradient_secondry_container.dart';
@@ -212,12 +211,7 @@ class ProfileScreen extends StatelessWidget {
                                         child: CachedNetworkImage(
                                           imageUrl: image,
                                         ),
-                                        // Image.asset(
-                                        //   AppImages.cameraImage,
-                                        //   fit: BoxFit.contain,
-                                        // ),
                                       );
-                                      return null;
                                     },
                                   ),
                                 ),
