@@ -126,17 +126,6 @@ class InterestsScreen extends StatelessWidget {
                         },
                       ),
                       AppFunctions.height(40),
-                      Text('hy', style: AppTextStyle.whiteRegular),
-                      SizedBox(
-                        height: 80,
-                        child: ListView.builder(
-                          itemCount: controller.selectedInterestList.length,
-                          itemBuilder: (context, index) {
-                            final data = controller.selectedInterestList[index];
-                            return Text(data, style: AppTextStyle.whiteRegular);
-                          },
-                        ),
-                      ),
                       ButtonWidget(
                         isLoading: controller.isLoading,
                         buttonText: AppStrings.continu.tr,

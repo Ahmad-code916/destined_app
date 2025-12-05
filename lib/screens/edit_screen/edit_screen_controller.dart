@@ -102,15 +102,31 @@ class EditScreenController extends GetxController {
     try {
       isLoading = true;
       update();
-      await FirebaseFirestore.instance
-          .collection(UserModel.tableName)
-          .doc(UserBaseController.userData.uid)
-          .update({
-            'name': firstNameController.text.trim(),
-            'lastName': lastNameController.text.trim(),
-            'dateOfBirth': selectedDate,
-            'gender': selectedDropDownValue,
-          });
+      if (image == null) {
+        await FirebaseFirestore.instance
+            .collection(UserModel.tableName)
+            .doc(UserBaseController.userData.uid)
+            .update({
+              'name': firstNameController.text.trim(),
+              'lastName': lastNameController.text.trim(),
+              'dateOfBirth': selectedDate,
+              'gender': selectedDropDownValue,
+            });
+      } else {
+        isLoading = true;
+        update();
+        String imageUrl = await uploadImage();
+        await FirebaseFirestore.instance
+            .collection(UserModel.tableName)
+            .doc(UserBaseController.userData.uid)
+            .update({
+              'name': firstNameController.text.trim(),
+              'lastName': lastNameController.text.trim(),
+              'dateOfBirth': selectedDate,
+              'gender': selectedDropDownValue,
+              'imageUrl': imageUrl,
+            });
+      }
       final user =
           await FirebaseFirestore.instance
               .collection(UserModel.tableName)

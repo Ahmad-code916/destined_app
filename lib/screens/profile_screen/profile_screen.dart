@@ -173,56 +173,10 @@ class ProfileScreen extends StatelessWidget {
                                   ],
                                 ),
                                 AppFunctions.height(25),
-                                SizedBox(
-                                  height: 40,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: controller.choiceList.length,
-                                    itemBuilder: (context, index) {
-                                      final data = controller.choiceList[index];
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 15,
-                                        ),
-                                        child: GestureDetector(
-                                          behavior: HitTestBehavior.opaque,
-                                          onTap: () {
-                                            controller.selectChoiceListOption(
-                                              index,
-                                            );
-                                          },
-                                          child: Column(
-                                            spacing: 8,
-                                            children: [
-                                              Text(
-                                                data,
-                                                style: AppTextStyle.whiteMedium
-                                                    .copyWith(
-                                                      color:
-                                                          controller.selectedChoice ==
-                                                                  data
-                                                              ? AppColors
-                                                                  .purpleColor
-                                                              : AppColors
-                                                                  .pinkColor,
-                                                    ),
-                                              ),
-                                              Container(
-                                                height: 3,
-                                                width: 70,
-                                                color:
-                                                    controller.selectedChoice ==
-                                                            data
-                                                        ? AppColors.whiteColor
-                                                        : AppColors
-                                                            .transparentColor,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    },
+                                Text(
+                                  'Pictures',
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    color: AppColors.whiteColor,
                                   ),
                                 ),
                                 AppFunctions.height(30),
@@ -233,8 +187,16 @@ class ProfileScreen extends StatelessWidget {
                                     physics: BouncingScrollPhysics(),
                                     shrinkWrap: true,
                                     primary: true,
-                                    itemCount: 10,
+                                    itemCount:
+                                        UserBaseController
+                                            .userData
+                                            .profileImages!
+                                            .length,
                                     itemBuilder: (context, index) {
+                                      final image =
+                                          UserBaseController
+                                              .userData
+                                              .profileImages![index];
                                       return Container(
                                         height: 90,
                                         width: 90,
@@ -247,11 +209,15 @@ class ProfileScreen extends StatelessWidget {
                                           borderRadius:
                                               AppFunctions.borderRadius(12),
                                         ),
-                                        child: Image.asset(
-                                          AppImages.cameraImage,
-                                          fit: BoxFit.contain,
+                                        child: CachedNetworkImage(
+                                          imageUrl: image,
                                         ),
+                                        // Image.asset(
+                                        //   AppImages.cameraImage,
+                                        //   fit: BoxFit.contain,
+                                        // ),
                                       );
+                                      return null;
                                     },
                                   ),
                                 ),

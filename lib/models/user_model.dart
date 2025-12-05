@@ -29,6 +29,9 @@ class UserModel {
   double? lat;
   double? lng;
 
+  /// NEW FIELD → List of profile images
+  List<String>? profileImages;
+
   UserModel({
     this.uid,
     this.name,
@@ -50,6 +53,7 @@ class UserModel {
     this.page4,
     this.lat,
     this.lng,
+    this.profileImages, // <-- Added here
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -81,6 +85,12 @@ class UserModel {
       page4: map["page4"] ?? false,
       lat: map["lat"] != null ? (map["lat"] as num).toDouble() : null,
       lng: map["lng"] != null ? (map["lng"] as num).toDouble() : null,
+
+      // NEW FIELD
+      profileImages:
+          map["profileImages"] != null
+              ? List<String>.from(map["profileImages"])
+              : [],
     );
   }
 
@@ -107,6 +117,9 @@ class UserModel {
       "page4": page4,
       "lat": lat,
       "lng": lng,
+
+      // NEW FIELD
+      "profileImages": profileImages,
     };
   }
 
@@ -131,6 +144,9 @@ class UserModel {
     bool? page4,
     double? lat,
     double? lng,
+
+    /// NEW FIELD
+    List<String>? profileImages,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -153,6 +169,9 @@ class UserModel {
       page4: page4 ?? this.page4,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
+
+      // NEW FIELD
+      profileImages: profileImages ?? this.profileImages,
     );
   }
 }

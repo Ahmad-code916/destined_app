@@ -24,6 +24,8 @@ class PersonalDetailsScreenController extends GetxController {
   List<String> genderList = ['Male', 'Female', 'Other'];
   String? selectedGender;
   File? image;
+  List<File> extraImages2 = [];
+  List<String> extraImagesUrl = [];
   final supabase = Supabase.instance.client;
 
   void onChange(String? value) {
@@ -78,6 +80,44 @@ class PersonalDetailsScreenController extends GetxController {
     }
   }
 
+  void pickImageAndAdddToList() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    extraImages2.add(File(pickedImage!.path));
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Added');
+    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${extraImages2.length}');
+    update();
+  }
+
+  Future<List<String>> uploadExtraProfileImages() async {
+    if (extraImages2.isEmpty) {
+      return [];
+    } else {
+      try {
+        for (var e in extraImages2) {
+          final fileName =
+              '${DateTime.now().millisecondsSinceEpoch.toString()}.jpg';
+          await supabase.storage.from('users_images').upload(fileName, e);
+          String imageUrl = supabase.storage
+              .from('users_images')
+              .getPublicUrl(fileName);
+          print('-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl');
+          extraImagesUrl.add(imageUrl);
+          print(
+            '-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>${extraImagesUrl.length}',
+          );
+        }
+        return extraImagesUrl;
+      } catch (e) {
+        Get.dialog(
+          AlertDialog(title: Text('Error!'), content: Text(e.toString())),
+        );
+        return [];
+      }
+      return [];
+    }
+  }
+
   void signUp() async {
     if (image == null) {
       showOkAlertDialog(
@@ -121,11 +161,19 @@ class PersonalDetailsScreenController extends GetxController {
         title: 'Error',
         message: 'Please select your gender',
       );
+    } else if (extraImages2.isEmpty) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: 'Please select your profile images.',
+      );
     } else {
       try {
         isLoading = true;
         update();
         String imageUrl2 = await uploadImage();
+        final imagesList = await uploadExtraProfileImages();
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${imagesList.length}');
         final userCredential = await firebaseAuth
             .createUserWithEmailAndPassword(
               email: emailController.text,
@@ -139,6 +187,7 @@ class PersonalDetailsScreenController extends GetxController {
           name: firstNameController.text,
           lastName: lastNameController.text,
           email: emailController.text,
+          profileImages: imagesList,
           page1: true,
           page2: false,
           page3: false,

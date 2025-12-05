@@ -240,6 +240,55 @@ class PersonalDetailsScreen extends StatelessWidget {
                         items: controller.genderList,
                         onChange: controller.onChange,
                       ),
+
+                      AppFunctions.height(22),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Add Profile Images',
+                          style: AppTextStyle.pinkMedium,
+                        ),
+                      ),
+                      AppFunctions.height(15),
+                      GestureDetector(
+                        onTap: () {
+                          controller.pickImageAndAdddToList();
+                        },
+                        child: GradientContainer(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: AppColors.whiteColor,
+                              size: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (controller.extraImages2.isNotEmpty)
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            height: 100,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: controller.extraImages2.length,
+                              itemBuilder: (context, index) {
+                                final image = controller.extraImages2[index];
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleAvatar(
+                                    radius: 40,
+                                    backgroundImage: FileImage(image),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      AppFunctions.height(10),
+
                       AppFunctions.height(44),
                       ButtonWidget(
                         isLoading: controller.isLoading,

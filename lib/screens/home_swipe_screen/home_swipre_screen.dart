@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
-import 'package:destined_app/screens/filter_screen/filter_screen.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
-import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
@@ -130,9 +128,52 @@ class HomeSwipreScreen extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                user.name ?? "",
-                                                style: AppTextStyle.whiteBold,
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(
+                                                    16,
+                                                  ),
+                                                  child: ListView.builder(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    itemCount:
+                                                        UserBaseController
+                                                            .userData
+                                                            .profileImages!
+                                                            .length,
+                                                    itemBuilder: (
+                                                      context,
+                                                      index,
+                                                    ) {
+                                                      final image =
+                                                          UserBaseController
+                                                              .userData
+                                                              .profileImages![index];
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                              right: 16,
+                                                            ),
+                                                        child: CachedNetworkImage(
+                                                          imageUrl: image,
+                                                          width:
+                                                              Get.width * 0.6,
+                                                          placeholder:
+                                                              (
+                                                                context,
+                                                                url,
+                                                              ) => Center(
+                                                                child: CircularProgressIndicator(
+                                                                  color:
+                                                                      AppColors
+                                                                          .whiteColor,
+                                                                ),
+                                                              ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -205,7 +246,11 @@ class HomeSwipreScreen extends StatelessWidget {
                                                           width: 80,
                                                           height: 10,
                                                           child: ListView.builder(
-                                                            itemCount: 10,
+                                                            itemCount:
+                                                                UserBaseController
+                                                                    .userData
+                                                                    .profileImages!
+                                                                    .length,
                                                             scrollDirection:
                                                                 Axis.horizontal,
                                                             shrinkWrap: true,
@@ -214,6 +259,10 @@ class HomeSwipreScreen extends StatelessWidget {
                                                               context,
                                                               index,
                                                             ) {
+                                                              final imageIndex =
+                                                                  UserBaseController
+                                                                      .userData
+                                                                      .profileImages![index];
                                                               return Container(
                                                                 margin:
                                                                     EdgeInsets.only(
@@ -263,50 +312,6 @@ class HomeSwipreScreen extends StatelessWidget {
                                   ),
                                 ),
                               AppFunctions.height(20),
-                              /* Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 50,
-                                  right: 50,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    GradientSecondryContainer(
-                                      firstColor: Color(0xff34F07F),
-                                      thirdColor: Color(0xff10AA7C),
-                                      child: Icon(
-                                        Icons.thumb_up,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                    GradientSecondryContainer(
-                                      firstColor: Color(0xffFFBC7D),
-                                      thirdColor: Color(0xffEF5533),
-                                      child: Icon(
-                                        Icons.favorite,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                    GradientSecondryContainer(
-                                      firstColor: Color(0xffFF7D95),
-                                      thirdColor: Color(0xffEF3349),
-                                      child: Icon(
-                                        Icons.thumb_down,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                    GradientSecondryContainer(
-                                      firstColor: Color(0xff2285FA),
-                                      thirdColor: Color(0xff1B40C1),
-                                      child: Icon(
-                                        Icons.info_outline_rounded,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),*/
                             ],
                           ),
                         ),
