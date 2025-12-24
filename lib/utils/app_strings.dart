@@ -131,7 +131,7 @@ class AppStrings extends Translations {
       createAccount: 'Create Account',
       message: 'Message',
       language: 'Languages',
-      logOut: 'LogOut',
+      // logOut: 'LogOut',
       selectDate: 'Select Date',
       saveEdit: 'Save Edit',
     },

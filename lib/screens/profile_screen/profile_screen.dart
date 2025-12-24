@@ -258,11 +258,15 @@ class ProfileScreen extends StatelessWidget {
                                 AppFunctions.height(20),
                                 FilterScreenGradientContainer(
                                   widget: Text(
-                                    controller.selectedLanguage,
+                                    // controller.selectedLanguage,
+                                    localeController.currentLocale ==
+                                            Locale('en', 'US')
+                                        ? 'English'
+                                        : 'Urdu',
                                     style: AppTextStyle.whiteRegular,
                                   ),
                                   icon: Icon(
-                                    Icons.add,
+                                    Icons.change_circle,
                                     color: AppColors.whiteColor,
                                   ),
                                   onTap: () {

@@ -58,12 +58,18 @@ class EditScreen extends StatelessWidget {
                                 child: Center(
                                   child:
                                       controller.image == null
-                                          ? CachedNetworkImage(
-                                            imageUrl:
-                                                UserBaseController
-                                                    .userData
-                                                    .imageUrl ??
-                                                "",
+                                          ? ClipRRect(
+                                            borderRadius:
+                                                AppFunctions.borderRadius(50),
+                                            child: CachedNetworkImage(
+                                              width: 120,
+                                              fit: BoxFit.cover,
+                                              imageUrl:
+                                                  UserBaseController
+                                                      .userData
+                                                      .imageUrl ??
+                                                  "",
+                                            ),
                                           )
                                           : CircleAvatar(
                                             radius: 100,
