@@ -210,6 +210,14 @@ class ProfileScreen extends StatelessWidget {
                                         ),
                                         child: CachedNetworkImage(
                                           imageUrl: image,
+                                          placeholder:
+                                              (context, url) => Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                      color:
+                                                          AppColors.whiteColor,
+                                                    ),
+                                              ),
                                         ),
                                       );
                                     },

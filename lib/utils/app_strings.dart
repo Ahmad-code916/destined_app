@@ -50,13 +50,14 @@ class AppStrings extends Translations {
   static const String interest = 'Interest';
   static const String congrats = 'Congrats!';
   static const String congratsSubStr =
-      'It\'s a Match!\nBelle & You both liked each\nother';
+      // 'It\'s a Match!\nBelle & You both liked each\nother';
+      'It\'s a Match! You are friends now.';
   static const String startConversation = 'Start Conversation';
   static const String bePatient = 'Be Patient';
   static const String bePatientSubStr =
       'Don\'t lose heart, keep\nbrowsing to find your best\nmatch';
   static const String addNewMessage = 'Add New Message';
-  static const String newMatches = 'All Matches';
+  static const String newMatches = 'All Friends';
   static const String allMessages = 'All Messages';
   static const String login = 'Login';
   static const String logOut = 'Log Out';
@@ -66,6 +67,7 @@ class AppStrings extends Translations {
   static const String logout = 'LogOut';
   static const String selectDate = 'Select Date';
   static const String saveEdit = 'Save Edit';
+  static const String startChatting = 'Start Chatting';
 
   @override
   Map<String, Map<String, String>> get keys => {
@@ -118,13 +120,13 @@ class AppStrings extends Translations {
       select: 'Select',
       interest: 'Interest',
       congrats: 'Congrats!',
-      congratsSubStr: 'It\'s a Match!\nBelle & You both liked each\nother',
+      congratsSubStr: 'It\'s a Match! You are friends now.',
       startConversation: 'Start Conversation',
       bePatient: 'Be Patient',
       bePatientSubStr:
           'Don\'t lose heart, keep\nbrowsing to find your best\nmatch',
       addNewMessage: 'Add New Message',
-      newMatches: 'All Matches',
+      newMatches: 'All Friends',
       allMessages: 'All Messages',
       login: 'Login',
       logOut: 'Log Out',
@@ -134,6 +136,7 @@ class AppStrings extends Translations {
       // logOut: 'LogOut',
       selectDate: 'Select Date',
       saveEdit: 'Save Edit',
+      startChatting: 'Start Chatting',
     },
     'ur_PK': {
       onlineDatingApp: 'آن لائن ڈیٹنگ ایپ',
@@ -184,13 +187,13 @@ class AppStrings extends Translations {
       select: 'منتخب کریں',
       interest: 'دلچسپی',
       congrats: 'مبارک ہو!',
-      congratsSubStr: 'یہ میچ بن گیا!\nبیل اور آپ دونوں کو ایک دوسرے پسند آئے',
+      congratsSubStr: 'مبارک ہو! آپ دونوں کی جوڑی بن گئی ہے، اب آپ دوست ہیں۔',
       startConversation: 'گفتگو شروع کریں',
       bePatient: 'صبر کریں',
       bePatientSubStr:
           'حوصلہ مت ہاریں، اپنی بہترین جوڑی تلاش کرنے کے لیے\nتلاش جاری رکھیں',
       addNewMessage: 'نیا پیغام شامل کریں',
-      newMatches: 'تمام میچز',
+      newMatches: 'تمام دوست',
       allMessages: 'تمام پیغامات',
       login: 'لاگ ان',
       logOut: 'لاگ آؤٹ',
@@ -200,6 +203,7 @@ class AppStrings extends Translations {
       logout: 'لاگ آؤٹ',
       selectDate: 'تاریخ منتخب کریں',
       saveEdit: 'تبدیلی محفوظ کریں',
+      startChatting: 'چیٹنگ شروع کریں',
     },
   };
 }

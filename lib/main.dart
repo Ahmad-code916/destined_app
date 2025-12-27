@@ -13,7 +13,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Supabase.initialize(
     anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhcG11Z2Npa3p4bGV4dnVwY3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMjc4NTQsImV4cCI6MjA3MDkwMzg1NH0.DYC7K8cEOWKb9pRyX12o4TneJo8FpIdBAukY0P_0PgA',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSzIsInJlZiI6InZhcG11Z2Npa3p4bGV4dnVwY3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMjc4NTQsImV4cCI6MjA3MDkwMzg1NH0.DYC7K8cEOWKb9pRyX12o4TneJo8FpIdBAukY0P_0PgA',
     url: 'https://vapmugcikzxlexvupcvd.supabase.co',
   );
 

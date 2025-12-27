@@ -127,9 +127,12 @@ class MatchSceen extends StatelessWidget {
                               onTap: () {
                                 Get.back();
                               },
-                              child: Image.asset(
-                                AppImages.keepDatingText,
-                                height: 30,
+                              child: Text(
+                                AppStrings.startChatting.tr,
+                                style: AppTextStyle.pinkMedium.copyWith(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                             AppFunctions.height(20),
