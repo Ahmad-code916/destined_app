@@ -71,9 +71,11 @@ class EditScreenController extends GetxController {
       try {
         final fileName =
             '${DateTime.now().millisecondsSinceEpoch.toString()}.jpg';
-        await supabase.storage.from('users_images').upload(fileName, image!);
+        await supabase.storage
+            .from('chatting_app_images')
+            .upload(fileName, image!);
         String imageUrl = supabase.storage
-            .from('users_images')
+            .from('chatting_app_images')
             .getPublicUrl(fileName);
         print('-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl');
         return imageUrl;

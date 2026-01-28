@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
+import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
@@ -44,6 +45,32 @@ class HomeSwipreScreen extends StatelessWidget {
                                 name: UserBaseController.userData.name ?? "",
                                 // onTapFilter: () => Get.to(() => FilterScreen()),
                                 // onTapnotification: () {},
+                              ),
+                              AppFunctions.height(12),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.createChatWithAi();
+                                },
+                                child: GradientContainer(
+                                  height: 50,
+                                  child: Center(
+                                    child:
+                                        controller.isCreatingChat == true
+                                            ? Center(
+                                              child: CircularProgressIndicator(
+                                                color: AppColors.whiteColor,
+                                              ),
+                                            )
+                                            : Text(
+                                              textAlign: TextAlign.start,
+                                              'Chat With AI',
+                                              style: TextStyle(
+                                                color: AppColors.whiteColor,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                  ),
+                                ),
                               ),
                               AppFunctions.height(30),
                               if (controller.userList.isEmpty)

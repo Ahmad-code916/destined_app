@@ -25,7 +25,7 @@ class ChatScreen extends StatelessWidget {
         secondColor: AppColors.gradientSecondrySec,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 16),
             child: GetBuilder<ChatScreenController>(
               builder: (context) {
                 return Column(
@@ -71,6 +71,7 @@ class ChatScreen extends StatelessWidget {
                         child: Padding(
                           padding: EdgeInsets.only(top: 16, bottom: 16),
                           child: ListView.builder(
+                            reverse: true,
                             itemCount: controller.messages.length,
                             itemBuilder: (context, index) {
                               final message = controller.messages[index];

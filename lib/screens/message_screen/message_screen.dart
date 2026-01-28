@@ -6,7 +6,6 @@ import 'package:destined_app/screens/widgets/message_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
-import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -38,28 +37,22 @@ class MessageScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    GradientSecondryContainer(
-                                      firstColor: AppColors.lightRed,
-                                      thirdColor: AppColors.darkRed,
-                                      child: Icon(
-                                        Icons.message,
-                                        color: AppColors.whiteColor,
-                                      ),
-                                    ),
-                                    AppFunctions.width(11),
-                                    Text(
-                                      AppStrings.addNewMessage.tr,
-                                      style: AppTextStyle.whiteMedium.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
+                                GradientSecondryContainer(
+                                  firstColor: AppColors.lightRed,
+                                  thirdColor: AppColors.darkRed,
+                                  child: Icon(
+                                    Icons.message,
+                                    color: AppColors.whiteColor,
+                                  ),
                                 ),
-                                Image.asset(AppImages.archieveIcon, height: 21),
+                                AppFunctions.width(11),
+                                Text(
+                                  AppStrings.addNewMessage.tr,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                             AppFunctions.height(32),

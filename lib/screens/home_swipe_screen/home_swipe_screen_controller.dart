@@ -1,6 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:destined_app/models/chatbot_model.dart';
 import 'package:destined_app/models/thread_model.dart';
+import 'package:destined_app/screens/chatbot_screen/chatbot_screen.dart';
 import 'package:destined_app/screens/match_screen/match_sceen.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
@@ -13,11 +15,58 @@ import '../../models/user_model.dart';
 class HomeSwipeScreenController extends GetxController {
   int currentIndex = 0;
   bool isLoading = false;
+  bool isCreatingChat = false;
   final CardSwiperController swiperController = CardSwiperController();
   List<UserModel> userList = [];
   int pageIndex = 0;
   PageController pageController = PageController();
   ScrollController scrollController = ScrollController();
+  String chatbotId = 'gemini_2_flash_bot';
+
+  void createChatWithAi() async {
+    try {
+      isCreatingChat = true;
+      update();
+      final threadId = AppFunctions.generatedThreadId(
+        UserBaseController.userData.uid ?? "",
+        chatbotId,
+      );
+      final getChatModel =
+          await FirebaseFirestore.instance
+              .collection(ChatBotModel.tableName)
+              .doc(threadId)
+              .get();
+      if (getChatModel.exists) {
+        isLoading = false;
+        update();
+        Get.to(() => ChatbotScreen(), arguments: {'threadId': threadId});
+      } else {
+        final model = ChatBotModel(
+          id: threadId,
+          message: 'Hello!',
+          timeStamp: DateTime.now(),
+          senderId: UserBaseController.userData.uid,
+        );
+        await FirebaseFirestore.instance
+            .collection(ChatBotModel.tableName)
+            .doc(threadId)
+            .set(model.toMap());
+        print('Created');
+        Get.to(() => ChatbotScreen(), arguments: {'threadId': threadId});
+      }
+      isCreatingChat = false;
+      update();
+    } catch (e) {
+      isCreatingChat = false;
+      update();
+      print('Error');
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: e.toString(),
+      );
+    }
+  }
 
   void getUsers() async {
     try {

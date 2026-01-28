@@ -73,7 +73,7 @@ class ChatScreenController extends GetxController {
           .collection(ThreadModel.tableName)
           .doc(threadId)
           .collection(ChatModel.tableName)
-          .orderBy('timestamp', descending: false)
+          .orderBy('timestamp', descending: true)
           .snapshots()
           .listen((event) {
             if (event.docs.isNotEmpty) {
