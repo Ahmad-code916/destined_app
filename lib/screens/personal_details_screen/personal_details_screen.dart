@@ -1,3 +1,4 @@
+import 'package:destined_app/screens/interests_screen/interests_screen.dart';
 import 'package:destined_app/screens/login_screen/login_screen.dart';
 import 'package:destined_app/screens/personal_details_screen/personal_details_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
@@ -22,11 +23,11 @@ class PersonalDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PrimaryGradient(
-        firstColor: Color(0xff641C3C),
-        secondColor: Color(0xff07011A),
-        child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+        body: PrimaryGradient(
+          firstColor: Color(0xff641C3C),
+          secondColor: Color(0xff07011A),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<PersonalDetailsScreenController>(
@@ -44,6 +45,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                           child: Text(
                             AppStrings.login.tr,
                             style: AppTextStyle.whiteBold.copyWith(
+                              color: AppColors.lightPurpleSec,
                               fontSize: 16,
                             ),
                           ),
@@ -52,12 +54,18 @@ class PersonalDetailsScreen extends StatelessWidget {
                       AppFunctions.height(30),
                       Text(
                         AppStrings.profileDetails.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 36,
+                          color: AppColors.darkBlueColor,
+                        ),
                       ),
                       AppFunctions.height(12),
                       Text(
                         AppStrings.filldetails.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 16),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 16,
+                          color: AppColors.lightPurple,
+                        ),
                       ),
                       AppFunctions.height(40),
                       Align(
@@ -72,27 +80,20 @@ class PersonalDetailsScreen extends StatelessWidget {
                               ),
                               height: 120,
                               width: 120,
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.purpleColor,
-                                ),
-                                child: Center(
-                                  child:
-                                      controller.image == null
-                                          ? Image.asset(
-                                            AppImages.profileImage,
-                                            fit: BoxFit.cover,
-                                            height: 50,
-                                          )
-                                          : CircleAvatar(
-                                            radius: 110,
-                                            backgroundImage: FileImage(
-                                              controller.image!,
-                                            ),
+                              child: Center(
+                                child:
+                                    controller.image == null
+                                        ? Image.asset(
+                                          AppImages.profileImage,
+                                          fit: BoxFit.cover,
+                                          height: 50,
+                                        )
+                                        : CircleAvatar(
+                                          radius: 110,
+                                          backgroundImage: FileImage(
+                                            controller.image!,
                                           ),
-                                ),
+                                        ),
                               ),
                             ),
                             GestureDetector(
@@ -105,7 +106,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                                 width: 50,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: AppColors.blackColor,
+                                    color: AppColors.whiteColor,
                                     width: 3,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -154,6 +155,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                       AppFunctions.height(10),
                       TextFormFieldWidget(
                         controller: controller.passwordController,
+                        icon: Icon(Icons.remove_red_eye_outlined, size: 20),
                       ),
                       AppFunctions.height(22),
                       Align(
@@ -192,33 +194,31 @@ class PersonalDetailsScreen extends StatelessWidget {
                         onTap: () {
                           controller.selectDate();
                         },
-                        child: GradientContainer(
-                          child: Container(
-                            height: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: AppFunctions.borderRadius(50),
-                              color: AppColors.blackColor,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    controller.selectedDate == null
-                                        ? AppStrings.selectDate.tr
-                                        : '${controller.selectedDate!.day.toString()}-${controller.selectedDate!.month.toString()}-${controller.selectedDate!.year.toString()}',
-                                    style: AppTextStyle.whiteRegular,
+                        child: Container(
+                          height: 55,
+                          decoration: BoxDecoration(
+                            borderRadius: AppFunctions.borderRadius(50),
+                            color: AppColors.whiteColor,
+                            border: Border.all(color: AppColors.lightPurpleSec),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  controller.selectedDate == null
+                                      ? AppStrings.selectDate.tr
+                                      : '${controller.selectedDate!.day.toString()}-${controller.selectedDate!.month.toString()}-${controller.selectedDate!.year.toString()}',
+                                  style: AppTextStyle.whiteRegular.copyWith(
+                                    color: AppColors.lightPurpleSec,
                                   ),
-                                  Icon(
-                                    Icons.calendar_month,
-                                    color: AppColors.whiteColor,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: AppColors.lightPurpleSec,
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -254,7 +254,12 @@ class PersonalDetailsScreen extends StatelessWidget {
                         onTap: () {
                           controller.pickImageAndAdddToList();
                         },
-                        child: GradientContainer(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColors.blueColor,
+                            borderRadius: BorderRadius.all(Radius.circular(25)),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
@@ -288,7 +293,6 @@ class PersonalDetailsScreen extends StatelessWidget {
                           ),
                         ),
                       AppFunctions.height(10),
-
                       AppFunctions.height(44),
                       ButtonWidget(
                         isLoading: controller.isLoading,

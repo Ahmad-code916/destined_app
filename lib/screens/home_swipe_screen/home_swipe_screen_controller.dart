@@ -6,6 +6,8 @@ import 'package:destined_app/screens/chatbot_screen/chatbot_screen.dart';
 import 'package:destined_app/screens/match_screen/match_sceen.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
+import 'package:destined_app/utils/app_colors.dart';
+import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:get/get.dart';
@@ -212,6 +214,39 @@ class HomeSwipeScreenController extends GetxController {
             ).toMap(),
           );
     }
+  }
+
+  void showDialogOnProfileView() async {
+    Get.dialog(
+      AlertDialog(
+        title: Text(
+          'Error!',
+          style: AppTextStyle.whiteMedium.copyWith(color: AppColors.redColor),
+        ),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('You are not friend.So you cannot see the profile.'),
+            AppFunctions.height(20),
+            GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'Ok',
+                  style: AppTextStyle.whiteRegular.copyWith(
+                    color: AppColors.redColor,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void scrollContainer() {

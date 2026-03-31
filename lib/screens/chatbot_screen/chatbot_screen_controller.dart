@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/chatbot_message_model.dart';
 import 'package:destined_app/models/chatbot_model.dart';
 import 'package:destined_app/services/app_functions.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -17,7 +16,7 @@ class ChatbotScreenController extends GetxController {
   bool isLoading = false;
   late String threadId;
 
-  final String apiKey = 'AIzaSyDumaQksCRPQcNErNBKmu34_Ci_o_FjaQw';
+  final String apiKey = 'Api key';
   final String url =
       'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
   Future<String> sendMessage() async {

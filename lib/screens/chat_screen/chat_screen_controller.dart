@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/chat_model.dart';
@@ -10,6 +11,8 @@ import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ChatScreenController extends GetxController {
   late String threadId;
@@ -20,6 +23,10 @@ class ChatScreenController extends GetxController {
   TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
+  final supabase = Supabase.instance.client;
+  File? image;
+  bool isSendingMessage = false;
+  bool showMenuCard = false;
 
   @override
   updateValue(String? value) {
@@ -28,42 +35,91 @@ class ChatScreenController extends GetxController {
   }
 
   Future createChat() async {
-    if (messageController.text.trim().isEmpty) {
+    if (messageController.text.trim().isEmpty && image == null) {
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',
         message: 'Please enter your message',
       );
     } else {
-      String currentUserId = UserBaseController.userData.uid ?? "";
-      String docId = AppFunctions.generateRandomId();
-      message = messageController.text;
-      await FirebaseFirestore.instance
-          .collection(ThreadModel.tableName)
-          .doc(threadId)
-          .collection(ChatModel.tableName)
-          .doc(docId)
-          .set(
-            ChatModel(
-              id: docId,
-              isSeen: false,
-              message: message,
-              messageType: 'text',
-              receiverId: user.uid,
-              senderId: currentUserId,
-              timestamp: DateTime.now(),
-            ).toMap(),
-          );
-      messageController.clear();
-      await FirebaseFirestore.instance
-          .collection(ThreadModel.tableName)
-          .doc(threadId)
-          .set(
-            threadModel
-                .copyWith(lastMessage: message, lastMessageTime: DateTime.now())
-                .toMap(),
-            SetOptions(merge: true),
-          );
+      if (image == null) {
+        isSendingMessage = true;
+        update();
+        String currentUserId = UserBaseController.userData.uid ?? "";
+        String docId = AppFunctions.generateRandomId();
+        message = messageController.text;
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .collection(ChatModel.tableName)
+            .doc(docId)
+            .set(
+              ChatModel(
+                id: docId,
+                isSeen: false,
+                message: message,
+                messageType: 'text',
+                receiverId: user.uid,
+                senderId: currentUserId,
+                timestamp: DateTime.now(),
+              ).toMap(),
+            );
+        messageController.clear();
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .set(
+              threadModel
+                  .copyWith(
+                    lastMessage: message,
+                    lastMessageTime: DateTime.now(),
+                  )
+                  .toMap(),
+              SetOptions(merge: true),
+            );
+        isSendingMessage = false;
+        update();
+      } else {
+        isSendingMessage = true;
+        update();
+        String currentUserId = UserBaseController.userData.uid ?? "";
+        String imageUrl = await uploadImage();
+        String docId = AppFunctions.generateRandomId();
+        message = messageController.text;
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .collection(ChatModel.tableName)
+            .doc(docId)
+            .set(
+              ChatModel(
+                id: docId,
+                isSeen: false,
+                message: message,
+                messageType: 'media',
+                receiverId: user.uid,
+                senderId: currentUserId,
+                timestamp: DateTime.now(),
+                imageUrl: imageUrl,
+              ).toMap(),
+            );
+        messageController.clear();
+        image == null;
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .set(
+              threadModel
+                  .copyWith(
+                    lastMessage: message!.isEmpty ? 'Image' : message,
+                    lastMessageTime: DateTime.now(),
+                  )
+                  .toMap(),
+              SetOptions(merge: true),
+            );
+        isSendingMessage = false;
+        update();
+      }
     }
   }
 
@@ -136,6 +192,73 @@ class ChatScreenController extends GetxController {
         update();
       },
     );
+  }
+
+  void pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    if (pickedImage != null) {
+      image = File(pickedImage.path);
+      updateValue('');
+      update();
+    } else {
+      Get.dialog(
+        AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
+      );
+    }
+  }
+
+  /*  Future<File?> pickImage() async {
+    final picker = ImagePicker();
+    final pickedImage = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
+    if (pickedImage != null) {
+      image = File(pickedImage.path);
+
+      return image;
+    } else {
+      Get.dialog(
+        AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
+      );
+    }
+    update();
+    return image;
+  }*/
+
+  Future<String> uploadImage() async {
+    if (image == null) {
+      return "";
+    } else {
+      try {
+        final fileName =
+            '${DateTime.now().millisecondsSinceEpoch.toString()}.jpg';
+        await supabase.storage
+            .from('chatting_app_images')
+            .upload(fileName, image!);
+        String imageUrl = supabase.storage
+            .from('chatting_app_images')
+            .getPublicUrl(fileName);
+        print('-------------------------->>>>>>>>>>>>>>>>>>>>>>>>>$imageUrl');
+        return imageUrl;
+      } catch (e) {
+        Get.dialog(
+          AlertDialog(title: Text('Error!'), content: Text(e.toString())),
+        );
+        return "";
+      }
+    }
+  }
+
+  void showMenuOnTapIcon() {
+    if (showMenuCard == false) {
+      showMenuCard = true;
+      update();
+    } else {
+      showMenuCard = false;
+      update();
+    }
   }
 
   @override

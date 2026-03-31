@@ -19,11 +19,11 @@ class UploadIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
-        child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+        body: PrimaryGradient(
+          firstColor: AppColors.gradientSecondryFirst,
+          secondColor: AppColors.gradientSecondrySec,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<UploadIdScreenController>(
@@ -42,42 +42,46 @@ class UploadIdScreen extends StatelessWidget {
                       AppFunctions.height(30),
                       Text(
                         AppStrings.uploadId.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 36,
+                          color: AppColors.darkBlueColor,
+                        ),
                       ),
                       AppFunctions.height(12),
                       Text(
                         textAlign: TextAlign.center,
                         AppStrings.uploadIdSubString.tr,
-                        style: AppTextStyle.whiteMedium.copyWith(fontSize: 16),
+                        style: AppTextStyle.whiteMedium.copyWith(
+                          fontSize: 16,
+                          color: AppColors.lightPurpleSec,
+                        ),
                       ),
                       AppFunctions.height(36),
                       GestureDetector(
                         onTap: () {
                           controller.toggleImage();
                         },
-                        child: GradientContainer(
-                          height: 60,
-                          child: Container(
-                            padding: EdgeInsets.only(left: 16, right: 16),
-                            decoration: BoxDecoration(
-                              color: AppColors.darkBlackColor,
-                              borderRadius: AppFunctions.borderRadius(50),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  AppStrings.idProof.tr,
-                                  style: AppTextStyle.whiteMedium.copyWith(
-                                    color: AppColors.purpleColor,
-                                  ),
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: AppColors.whiteColor,
+                            borderRadius: AppFunctions.borderRadius(50),
+                            border: Border.all(color: AppColors.blueColor),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppStrings.idProof.tr,
+                                style: AppTextStyle.whiteMedium.copyWith(
+                                  color: AppColors.darkBlueColor,
                                 ),
-                                Icon(
-                                  Icons.arrow_drop_down,
-                                  color: AppColors.whiteColor,
-                                ),
-                              ],
-                            ),
+                              ),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                color: AppColors.darkBlueColor,
+                              ),
+                            ],
                           ),
                         ),
                       ),

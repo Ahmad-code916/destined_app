@@ -47,7 +47,12 @@ class ChatbotScreen extends StatelessWidget {
                           ),
                         ),
                         AppFunctions.width(15),
-                        Text('Chatbot', style: AppTextStyle.whiteMedium),
+                        Text(
+                          'Chatbot',
+                          style: AppTextStyle.whiteMedium.copyWith(
+                            color: AppColors.darkBlueColor,
+                          ),
+                        ),
                       ],
                     ),
                     AppFunctions.height(12),
@@ -62,21 +67,22 @@ class ChatbotScreen extends StatelessWidget {
                                 message.isSender == true
                                     ? EdgeInsets.only(left: 70, bottom: 16)
                                     : EdgeInsets.only(right: 70, bottom: 16),
-
                             child: Column(
                               children: [
-                                GradientContainer(
-                                  child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.blackColor,
-                                      borderRadius: AppFunctions.borderRadius(
-                                        50,
-                                      ),
+                                Container(
+                                  width: double.infinity,
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    borderRadius: AppFunctions.borderRadius(50),
+                                    border: Border.all(
+                                      color: AppColors.lightPurpleThird,
                                     ),
-                                    child: Text(
-                                      message.message ?? "",
-                                      style: AppTextStyle.whiteMedium,
+                                  ),
+                                  child: Text(
+                                    message.message ?? "",
+                                    style: AppTextStyle.whiteMedium.copyWith(
+                                      color: AppColors.darkBlueColor,
                                     ),
                                   ),
                                 ),
@@ -87,7 +93,9 @@ class ChatbotScreen extends StatelessWidget {
                                           : Alignment.centerLeft,
                                   child: Text(
                                     '${message.timestamp!.hour}:${message.timestamp!.minute}',
-                                    style: AppTextStyle.whiteRegular,
+                                    style: AppTextStyle.whiteRegular.copyWith(
+                                      color: AppColors.purpleColorNew,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -103,7 +111,9 @@ class ChatbotScreen extends StatelessWidget {
                           child: TextFormFieldWidget(
                             controller: controller.messageText,
                             hintText: 'Write',
-                            hintStyle: TextStyle(color: AppColors.whiteColor),
+                            hintStyle: TextStyle(
+                              color: AppColors.purpleColorNew,
+                            ),
                           ),
                         ),
                         controller.isLoading == false
@@ -113,11 +123,13 @@ class ChatbotScreen extends StatelessWidget {
                               },
                               child: Icon(
                                 Icons.send,
-                                color: AppColors.whiteColor,
+                                color: AppColors.darkBlueColor,
                                 size: 25,
                               ),
                             )
-                            : CircularProgressIndicator(color: Colors.white),
+                            : CircularProgressIndicator(
+                              color: AppColors.darkBlueColor,
+                            ),
                       ],
                     ),
                   ],

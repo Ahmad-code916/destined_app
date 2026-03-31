@@ -6,9 +6,9 @@ import 'package:destined_app/screens/widgets/user_data_container.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
+import 'package:destined_app/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../utils/app_images.dart';
 import '../../utils/app_text_style.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -21,35 +21,38 @@ class UsersScreen extends StatelessWidget {
     return GetBuilder<UsersScreenController>(
       builder: (context) {
         return Scaffold(
-          backgroundColor: AppColors.gradientSecondrySec,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: HeadRowWidget(
               image: UserBaseController.userData.imageUrl ?? "",
               name: UserBaseController.userData.name ?? "",
             ),
-            backgroundColor: AppColors.gradientSecondryFirst,
+            backgroundColor: AppColors.lightBlue2,
             bottom: TabBar(
-              indicatorColor: AppColors.whiteColor,
+              indicatorColor: AppColors.darkBlueColor,
               controller: controller.tabController,
               tabs: [
                 Tab(
-                  child:
-                      controller.selectedIndex == 0
-                          ? Image.asset(AppImages.allTextImage, height: 13)
-                          : Text(
-                            'All',
-                            style: AppTextStyle.lightPurpleSecMedium,
-                          ),
+                  child: Text(
+                    AppStrings.all.tr,
+                    style: AppTextStyle.lightPurpleSecMedium.copyWith(
+                      color:
+                          controller.selectedIndex == 0
+                              ? AppColors.redColor
+                              : AppColors.blueColor,
+                    ),
+                  ),
                 ),
                 Tab(
-                  child:
-                      controller.selectedIndex == 1
-                          ? Image.asset(AppImages.likedYouTextImage, height: 13)
-                          : Text(
-                            'Liked You',
-                            style: AppTextStyle.lightPurpleSecMedium,
-                          ),
+                  child: Text(
+                    AppStrings.likedYou.tr,
+                    style: AppTextStyle.lightPurpleSecMedium.copyWith(
+                      color:
+                          controller.selectedIndex == 1
+                              ? AppColors.redColor
+                              : AppColors.blueColor,
+                    ),
+                  ),
                 ),
               ],
             ),

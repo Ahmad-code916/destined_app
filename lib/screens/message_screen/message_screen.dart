@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/screens/chat_screen/chat_screen.dart';
 import 'package:destined_app/screens/message_screen/message_screen_controller.dart';
+import 'package:destined_app/screens/splash_screen/splash_screen.dart';
 import 'package:destined_app/screens/widgets/gradient_secondry_container.dart';
 import 'package:destined_app/screens/widgets/message_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
@@ -21,7 +22,7 @@ class MessageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
+        firstColor: const Color.fromARGB(255, 20, 0, 52),
         secondColor: AppColors.gradientSecondrySec,
         child: GetBuilder<MessageScreenController>(
           builder: (context) {
@@ -47,10 +48,16 @@ class MessageScreen extends StatelessWidget {
                                   ),
                                 ),
                                 AppFunctions.width(11),
-                                Text(
-                                  AppStrings.addNewMessage.tr,
-                                  style: AppTextStyle.whiteMedium.copyWith(
-                                    fontWeight: FontWeight.w600,
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => SplashScreen());
+                                  },
+                                  child: Text(
+                                    AppStrings.addNewMessage.tr,
+                                    style: AppTextStyle.whiteMedium.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.darkBlueColor,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -64,19 +71,26 @@ class MessageScreen extends StatelessWidget {
                               },
                               controller: controller.searchController,
                               hintText: 'Search',
-                              hintStyle: AppTextStyle.whiteMedium,
+                              hintStyle: AppTextStyle.whiteMedium.copyWith(
+                                color: AppColors.purpleColorNew,
+                              ),
+                              icon: Icon(Icons.search),
                             ),
                             AppFunctions.height(30),
                             Text(
                               AppStrings.newMatches.tr,
-                              style: AppTextStyle.whiteMedium,
+                              style: AppTextStyle.whiteMedium.copyWith(
+                                color: AppColors.purpleColorNew,
+                              ),
                             ),
                             AppFunctions.height(32),
                             if (controller.userList.isEmpty)
                               Center(
                                 child: Text(
-                                  'No match found',
-                                  style: AppTextStyle.whiteMedium,
+                                  AppStrings.noMatchFound.tr,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    color: AppColors.purpleColorNew,
+                                  ),
                                 ),
                               )
                             else
@@ -85,7 +99,6 @@ class MessageScreen extends StatelessWidget {
                                 child: ListView.builder(
                                   itemCount: controller.userList.length,
                                   scrollDirection: Axis.horizontal,
-
                                   itemBuilder: (context, index) {
                                     final user = controller.userList[index];
                                     return Padding(
@@ -111,7 +124,12 @@ class MessageScreen extends StatelessWidget {
                                           Expanded(
                                             child: Text(
                                               user.name ?? "",
-                                              style: AppTextStyle.whiteRegular,
+                                              style: AppTextStyle.whiteRegular
+                                                  .copyWith(
+                                                    color:
+                                                        AppColors
+                                                            .purpleColorNew,
+                                                  ),
                                             ),
                                           ),
                                         ],
@@ -126,14 +144,17 @@ class MessageScreen extends StatelessWidget {
                               style: AppTextStyle.whiteMedium.copyWith(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 24,
+                                color: AppColors.darkBlueColor,
                               ),
                             ),
                             AppFunctions.height(30),
                             if (controller.filteredUserList.isEmpty)
                               Center(
                                 child: Text(
-                                  'No User Found',
-                                  style: AppTextStyle.whiteMedium,
+                                  AppStrings.noUserFound.tr,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    color: AppColors.purpleColorNew,
+                                  ),
                                 ),
                               )
                             else if (controller.userList.isNotEmpty)

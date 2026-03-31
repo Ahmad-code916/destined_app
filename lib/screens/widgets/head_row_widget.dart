@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import '../../services/app_functions.dart';
 import '../../utils/app_text_style.dart';
@@ -28,6 +29,7 @@ class HeadRowWidget extends StatelessWidget {
               name,
               style: AppTextStyle.whiteMedium.copyWith(
                 fontWeight: FontWeight.w500,
+                color: AppColors.darkBlueColor,
               ),
             ),
           ],

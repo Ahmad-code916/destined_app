@@ -26,7 +26,7 @@ class MessageWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.lightBrown,
+        color: AppColors.whiteColor,
         borderRadius: AppFunctions.borderRadius(18),
       ),
       child: Padding(
@@ -65,6 +65,7 @@ class MessageWidget extends StatelessWidget {
                           name,
                           style: AppTextStyle.whiteMedium.copyWith(
                             fontWeight: FontWeight.w600,
+                            color: AppColors.darkBlueColor,
                           ),
                         ),
                         Text(
@@ -86,7 +87,7 @@ class MessageWidget extends StatelessWidget {
                 Text(
                   dateTime,
                   style: AppTextStyle.lightPurpleSecMedium.copyWith(
-                    color: AppColors.whiteColor,
+                    color: AppColors.lightPurple,
                   ),
                 ),
                 // Container(

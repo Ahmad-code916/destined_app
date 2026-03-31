@@ -19,11 +19,11 @@ class LocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
-        child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+        body: PrimaryGradient(
+          firstColor: AppColors.gradientSecondryFirst,
+          secondColor: AppColors.gradientSecondrySec,
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<LocationScreenController>(
@@ -50,6 +50,7 @@ class LocationScreen extends StatelessWidget {
                                 AppStrings.location.tr,
                                 style: AppTextStyle.whiteBold.copyWith(
                                   fontSize: 36,
+                                  color: AppColors.darkBlueColor,
                                 ),
                               ),
 
@@ -59,6 +60,7 @@ class LocationScreen extends StatelessWidget {
                                 AppStrings.locationSubString.tr,
                                 style: AppTextStyle.whiteMedium.copyWith(
                                   fontSize: 16,
+                                  color: AppColors.lightPurpleSec,
                                 ),
                               ),
                               AppFunctions.height(36),
@@ -74,37 +76,35 @@ class LocationScreen extends StatelessWidget {
                                 onTap: () {
                                   controller.getPosition();
                                 },
-                                child: GradientContainer(
-                                  height: 60,
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      left: 16,
-                                      right: 16,
+                                child: Container(
+                                  padding: EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    borderRadius: AppFunctions.borderRadius(50),
+                                    border: Border.all(
+                                      color: AppColors.blueColor,
                                     ),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.darkBlackColor,
-                                      borderRadius: AppFunctions.borderRadius(
-                                        50,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          controller.currentUserData == null
+                                              ? AppStrings.select.tr
+                                              : '${controller.currentUserData!.subLocality},${controller.currentUserData!.locality},${controller.currentUserData!.country}',
+                                          style: AppTextStyle.whiteMedium
+                                              .copyWith(
+                                                color: AppColors.darkBlueColor,
+                                              ),
+                                        ),
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            controller.currentUserData == null
-                                                ? AppStrings.select.tr
-                                                : '${controller.currentUserData!.subLocality},${controller.currentUserData!.locality},${controller.currentUserData!.country}',
-                                            style: AppTextStyle.whiteMedium,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.location_searching_outlined,
-                                          color: AppColors.whiteColor,
-                                        ),
-                                      ],
-                                    ),
+                                      Icon(
+                                        Icons.location_searching_outlined,
+                                        color: AppColors.darkBlueColor,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

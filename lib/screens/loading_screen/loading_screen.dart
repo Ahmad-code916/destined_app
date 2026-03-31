@@ -18,13 +18,14 @@ class LoadingScreen extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            Center(
-              child: Image.asset(
-                AppImages.logoIMage,
-                fit: BoxFit.cover,
-                height: 95,
-              ),
-            ),
+            Text('NexChat'),
+            // Center(
+            //   child: Image.asset(
+            //     A,
+            //     fit: BoxFit.cover,
+            //     height: 95,
+            //   ),
+            // ),
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16),

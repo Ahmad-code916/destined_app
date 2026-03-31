@@ -1,3 +1,4 @@
+import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryGradient extends StatelessWidget {
@@ -18,12 +19,19 @@ class PrimaryGradient extends StatelessWidget {
       height: double.infinity,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [firstColor, secondColor],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0, 1.0],
+          colors: [AppColors.lightBlue2, AppColors.lightYellow],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
       ),
+      // decoration: BoxDecoration(
+      //   gradient: LinearGradient(
+      //     colors: [firstColor, secondColor],
+      //     begin: Alignment.topCenter,
+      //     end: Alignment.bottomCenter,
+      //     stops: [0, 1.0],
+      //   ),
+      // ),
       child: child,
     );
   }

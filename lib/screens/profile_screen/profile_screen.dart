@@ -58,80 +58,47 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Color(0xff140034),
+                                  color: AppColors.whiteColor,
                                   border: Border.symmetric(
                                     horizontal: BorderSide(
-                                      color: AppColors.darkPurple,
+                                      color: AppColors.lightPurpleFour,
                                     ),
                                   ),
                                 ),
                                 width: Get.width * 0.25,
                                 child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        child: ProfilePageRow(
-                                          icon: Icons.favorite_border_outlined,
-                                          text1:
-                                              UserBaseController
-                                                  .userData
-                                                  .likedBy!
-                                                  .length
-                                                  .toString(),
-                                        ),
-                                      ),
+                                    ProfilePageRow(
+                                      icon: Icons.favorite_border_outlined,
+                                      text1:
+                                          UserBaseController
+                                              .userData
+                                              .likedBy!
+                                              .length
+                                              .toString(),
                                     ),
-                                    AppFunctions.height(20),
-                                    Divider(
-                                      color: AppColors.darkPurple,
-                                      height: 1,
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        child: ProfilePageRow(
-                                          icon: Icons.thumb_up,
-                                          text1: '2.7',
-                                        ),
-                                      ),
-                                    ),
-                                    AppFunctions.height(20),
-                                    Divider(
-                                      color: AppColors.darkPurple,
-                                      height: 1,
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        child: ProfilePageRow(
-                                          icon: Icons.message_outlined,
-                                          text1: '2.7',
-                                        ),
-                                      ),
-                                    ),
-                                    AppFunctions.height(20),
-                                    Divider(
-                                      color: AppColors.darkPurple,
-                                      height: 1,
-                                    ),
+
+                                    // AppFunctions.height(10),
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                        bottom: 10,
-                                        top: 10,
+                                      padding: const EdgeInsets.only(top: 12),
+                                      child: Divider(
+                                        color: AppColors.lightPurpleFour,
+                                        height: 1,
                                       ),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.to(() => EditScreen());
-                                        },
-                                        child: GradientSecondryContainer(
-                                          firstColor: AppColors.lightBlue,
-                                          thirdColor: AppColors.darkBlue,
-                                          child: Icon(
-                                            Icons.edit,
-                                            color: AppColors.whiteColor,
-                                          ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => EditScreen());
+                                      },
+                                      child: GradientSecondryContainer(
+                                        firstColor: AppColors.lightBlue,
+                                        thirdColor: AppColors.darkBlue,
+                                        child: Icon(
+                                          Icons.edit,
+                                          color: AppColors.whiteColor,
                                         ),
                                       ),
                                     ),
@@ -147,17 +114,22 @@ class ProfileScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  UserBaseController.userData.name ?? "",
-                                  style: AppTextStyle.whiteMedium.copyWith(
-                                    fontSize: 32,
-                                  ),
+                                GetBuilder<UserBaseController>(
+                                  builder: (context) {
+                                    return Text(
+                                      UserBaseController.userData.name ?? "",
+                                      style: AppTextStyle.whiteMedium.copyWith(
+                                        fontSize: 32,
+                                        color: AppColors.darkBlueColor,
+                                      ),
+                                    );
+                                  },
                                 ),
                                 Row(
                                   children: [
                                     Icon(
                                       Icons.favorite_sharp,
-                                      color: AppColors.whiteColor,
+                                      color: AppColors.purpleColorNew,
                                     ),
                                     AppFunctions.width(8),
                                     Text(
@@ -166,16 +138,18 @@ class ProfileScreen extends StatelessWidget {
                                           .likedBy!
                                           .length
                                           .toString(),
-                                      style: AppTextStyle.whiteRegular,
+                                      style: AppTextStyle.whiteRegular.copyWith(
+                                        color: AppColors.lightPurple,
+                                      ),
                                     ),
                                     AppFunctions.width(16),
                                   ],
                                 ),
                                 AppFunctions.height(25),
                                 Text(
-                                  'Pictures',
+                                  AppStrings.pictures.tr,
                                   style: AppTextStyle.whiteMedium.copyWith(
-                                    color: AppColors.whiteColor,
+                                    color: AppColors.darkBlueColor,
                                   ),
                                 ),
                                 AppFunctions.height(30),
@@ -203,7 +177,7 @@ class ProfileScreen extends StatelessWidget {
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             width: 2,
-                                            color: AppColors.whiteColor,
+                                            color: AppColors.lightPurpleSec,
                                           ),
                                           borderRadius:
                                               AppFunctions.borderRadius(12),
@@ -226,7 +200,9 @@ class ProfileScreen extends StatelessWidget {
                                 AppFunctions.height(30),
                                 Text(
                                   AppStrings.interest.tr,
-                                  style: AppTextStyle.whiteMedium,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    color: AppColors.darkBlueColor,
+                                  ),
                                 ),
                                 AppFunctions.height(16),
                                 SizedBox(
@@ -261,7 +237,9 @@ class ProfileScreen extends StatelessWidget {
                                 AppFunctions.height(30),
                                 Text(
                                   AppStrings.language.tr,
-                                  style: AppTextStyle.whiteMedium,
+                                  style: AppTextStyle.whiteMedium.copyWith(
+                                    color: AppColors.darkBlueColor,
+                                  ),
                                 ),
                                 AppFunctions.height(20),
                                 FilterScreenGradientContainer(
@@ -271,11 +249,13 @@ class ProfileScreen extends StatelessWidget {
                                             Locale('en', 'US')
                                         ? 'English'
                                         : 'Urdu',
-                                    style: AppTextStyle.whiteRegular,
+                                    style: AppTextStyle.whiteRegular.copyWith(
+                                      color: AppColors.darkBlueColor,
+                                    ),
                                   ),
                                   icon: Icon(
                                     Icons.change_circle,
-                                    color: AppColors.whiteColor,
+                                    color: AppColors.darkBlueColor,
                                   ),
                                   onTap: () {
                                     localeController.showDialoge();
@@ -288,7 +268,18 @@ class ProfileScreen extends StatelessWidget {
                                     isLoading: controller.isLoading,
                                     buttonText: AppStrings.logOut.tr,
                                     onTap: () {
-                                      controller.logOut();
+                                      controller.showDialogToLogout();
+                                    },
+                                  ),
+                                ),
+                                AppFunctions.height(20),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: ButtonWidget(
+                                    isLoading: controller.isDeletingAccount,
+                                    buttonText: AppStrings.deleteAccount.tr,
+                                    onTap: () {
+                                      controller.showDialogeToDeleteAccount();
                                     },
                                   ),
                                 ),

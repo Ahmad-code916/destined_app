@@ -17,28 +17,33 @@ class DropDownWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GradientContainer(
-      height: 60,
-      child: Container(
-        padding: EdgeInsets.only(left: 16, right: 16),
-        decoration: BoxDecoration(
-          color: AppColors.darkBlackColor,
-          borderRadius: BorderRadius.all(Radius.circular(50)),
+    return Container(
+      padding: EdgeInsets.only(left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: AppColors.whiteColor,
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        border: Border.all(color: AppColors.lightPurpleSec),
+      ),
+      child: DropdownButton(
+        hint: Text(
+          'Select',
+          style: AppTextStyle.whiteMedium.copyWith(
+            color: AppColors.lightPurpleSec,
+          ),
         ),
-        child: DropdownButton(
-          hint: Text('Select', style: AppTextStyle.whiteMedium),
-          iconEnabledColor: AppColors.whiteColor,
-          dropdownColor: AppColors.darkBlackColor,
-          style: AppTextStyle.whiteMedium,
-          underline: const SizedBox(),
-          isExpanded: true,
-          value: selectedValue,
-          items:
-              items.map((String? value) {
-                return DropdownMenuItem(value: value, child: Text(value ?? ""));
-              }).toList(),
-          onChanged: onChange,
+        iconEnabledColor: AppColors.lightPurpleSec,
+        dropdownColor: AppColors.whiteColor,
+        style: AppTextStyle.whiteMedium.copyWith(
+          color: AppColors.lightPurpleSec,
         ),
+        underline: const SizedBox(),
+        isExpanded: true,
+        value: selectedValue,
+        items:
+            items.map((String? value) {
+              return DropdownMenuItem(value: value, child: Text(value ?? ""));
+            }).toList(),
+        onChanged: onChange,
       ),
     );
   }

@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                 label: '',
               ),
             ],
-            backgroundColor: Color(0xff140133),
+            backgroundColor: AppColors.whiteColor,
             showUnselectedLabels: true,
             unselectedLabelStyle: TextStyle(color: AppColors.blackColor),
             type: BottomNavigationBarType.fixed,

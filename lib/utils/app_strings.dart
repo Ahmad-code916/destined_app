@@ -51,7 +51,7 @@ class AppStrings extends Translations {
   static const String congrats = 'Congrats!';
   static const String congratsSubStr =
       // 'It\'s a Match!\nBelle & You both liked each\nother';
-      'It\'s a Match! You are friends now.';
+      'You are friends now.';
   static const String startConversation = 'Start Conversation';
   static const String bePatient = 'Be Patient';
   static const String bePatientSubStr =
@@ -68,6 +68,13 @@ class AppStrings extends Translations {
   static const String selectDate = 'Select Date';
   static const String saveEdit = 'Save Edit';
   static const String startChatting = 'Start Chatting';
+  static const String deleteAccount = 'Delete Account';
+  static const String noMatchFound = 'No Match Found';
+  static const String noUserFound = 'NO User Found';
+  static const String viewProfile = 'View Profile';
+  static const String all = 'All';
+  static const String likedYou = 'Liked You';
+  static const String pictures = 'Pictures';
 
   @override
   Map<String, Map<String, String>> get keys => {
@@ -120,7 +127,7 @@ class AppStrings extends Translations {
       select: 'Select',
       interest: 'Interest',
       congrats: 'Congrats!',
-      congratsSubStr: 'It\'s a Match! You are friends now.',
+      congratsSubStr: 'You are friends now.',
       startConversation: 'Start Conversation',
       bePatient: 'Be Patient',
       bePatientSubStr:
@@ -137,6 +144,13 @@ class AppStrings extends Translations {
       selectDate: 'Select Date',
       saveEdit: 'Save Edit',
       startChatting: 'Start Chatting',
+      deleteAccount: 'Delete Account',
+      noMatchFound: 'No Match Found',
+      noUserFound: 'No User Found',
+      viewProfile: 'View Profile',
+      all: 'All',
+      likedYou: 'Liked You',
+      pictures: 'Pictures',
     },
     'ur_PK': {
       onlineDatingApp: 'آن لائن ڈیٹنگ ایپ',
@@ -187,7 +201,7 @@ class AppStrings extends Translations {
       select: 'منتخب کریں',
       interest: 'دلچسپی',
       congrats: 'مبارک ہو!',
-      congratsSubStr: 'مبارک ہو! آپ دونوں کی جوڑی بن گئی ہے، اب آپ دوست ہیں۔',
+      congratsSubStr: 'مبارک ہو!اب آپ دوست ہیں۔',
       startConversation: 'گفتگو شروع کریں',
       bePatient: 'صبر کریں',
       bePatientSubStr:
@@ -204,6 +218,13 @@ class AppStrings extends Translations {
       selectDate: 'تاریخ منتخب کریں',
       saveEdit: 'تبدیلی محفوظ کریں',
       startChatting: 'چیٹنگ شروع کریں',
+      deleteAccount: 'اکاؤنٹ ڈیلیٹ کریں',
+      noMatchFound: 'کوئی دوست موجود نہیں',
+      noUserFound: 'کوئی صارف موجود نہیں',
+      viewProfile: 'پروفائل دیکھیں',
+      all: 'تمام',
+      likedYou: 'آپ کو پسند کیا',
+      pictures: 'تصاویر',
     },
   };
 }

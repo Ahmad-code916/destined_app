@@ -22,12 +22,13 @@ class ButtonWidget extends StatelessWidget {
         height: 60,
         width: 212,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [AppColors.lightRedColor, AppColors.purpleColor],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            stops: [0, 1.0],
-          ),
+          color: AppColors.blueColor,
+          // gradient: LinearGradient(
+          //   colors: [AppColors.lightRedColor, AppColors.purpleColor],
+          //   begin: Alignment.centerLeft,
+          //   end: Alignment.centerRight,
+          //   stops: [0, 1.0],
+          // ),
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: Center(

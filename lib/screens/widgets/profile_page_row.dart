@@ -14,9 +14,14 @@ class ProfilePageRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: AppColors.whiteColor, size: 20),
+        Icon(icon, color: AppColors.redColor, size: 20),
         AppFunctions.width(8),
-        Text(text1, style: AppTextStyle.whiteRegular),
+        Text(
+          text1,
+          style: AppTextStyle.whiteRegular.copyWith(
+            color: AppColors.lightPurple,
+          ),
+        ),
         AppFunctions.width(16),
       ],
     );

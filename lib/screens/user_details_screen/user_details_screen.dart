@@ -34,7 +34,7 @@ class UserDetailsScreen extends StatelessWidget {
                     UsersDetailsHeadRow(
                       firstColor: AppColors.pinkColorSec,
                       secondColor: AppColors.lightPink,
-                      child: Image.asset(AppImages.backIcon, height: 20),
+                      child: Image.asset(AppImages.backIconWhite, height: 20),
                       onTapChild: () => Get.back(),
                     ),
                     Expanded(
@@ -70,7 +70,11 @@ class UserDetailsScreen extends StatelessWidget {
                                             Text(
                                               controller.userData?.name ?? "",
                                               style: AppTextStyle.whiteMedium
-                                                  .copyWith(fontSize: 32),
+                                                  .copyWith(
+                                                    fontSize: 32,
+                                                    color:
+                                                        AppColors.darkBlueColor,
+                                                  ),
                                             ),
                                             Row(
                                               children: [
@@ -79,7 +83,7 @@ class UserDetailsScreen extends StatelessWidget {
                                                     Icon(
                                                       Icons.location_on,
                                                       color:
-                                                          AppColors.whiteColor,
+                                                          AppColors.lightPurple,
                                                     ),
                                                     AppFunctions.width(8),
                                                     RichText(
@@ -108,6 +112,9 @@ class UserDetailsScreen extends StatelessWidget {
                                                             .whiteMedium
                                                             .copyWith(
                                                               fontSize: 14,
+                                                              color:
+                                                                  AppColors
+                                                                      .lightPurple,
                                                             ),
                                                       ),
                                                     ),
@@ -119,7 +126,7 @@ class UserDetailsScreen extends StatelessWidget {
                                                     Icon(
                                                       Icons.favorite_sharp,
                                                       color:
-                                                          AppColors.whiteColor,
+                                                          AppColors.lightPurple,
                                                     ),
                                                     AppFunctions.width(8),
                                                     Text(
@@ -132,6 +139,9 @@ class UserDetailsScreen extends StatelessWidget {
                                                           .whiteMedium
                                                           .copyWith(
                                                             fontSize: 14,
+                                                            color:
+                                                                AppColors
+                                                                    .lightPurple,
                                                           ),
                                                     ),
                                                     AppFunctions.width(16),
@@ -144,7 +154,7 @@ class UserDetailsScreen extends StatelessWidget {
                                       ],
                                     ),
                                     AppFunctions.height(25),
-                                    SizedBox(
+                                    /*SizedBox(
                                       height: 40,
                                       child: ListView.builder(
                                         scrollDirection: Axis.horizontal,
@@ -199,6 +209,12 @@ class UserDetailsScreen extends StatelessWidget {
                                           );
                                         },
                                       ),
+                                    ),*/
+                                    Text(
+                                      'Pictures',
+                                      style: AppTextStyle.whiteMedium.copyWith(
+                                        color: AppColors.pinkColor,
+                                      ),
                                     ),
                                     AppFunctions.height(30),
                                     SizedBox(
@@ -211,9 +227,13 @@ class UserDetailsScreen extends StatelessWidget {
                                         itemCount:
                                             controller
                                                 .userData!
-                                                .interestList!
+                                                .profileImages!
                                                 .length,
                                         itemBuilder: (context, index) {
+                                          final user =
+                                              controller
+                                                  .userData!
+                                                  .profileImages![index];
                                           return Container(
                                             height: 90,
                                             width: 90,
@@ -221,14 +241,21 @@ class UserDetailsScreen extends StatelessWidget {
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 width: 2,
-                                                color: AppColors.whiteColor,
+                                                color: AppColors.lightPurpleSec,
                                               ),
                                               borderRadius:
                                                   AppFunctions.borderRadius(12),
                                             ),
-                                            child: Image.asset(
-                                              AppImages.cameraImage,
-                                              fit: BoxFit.contain,
+                                            child: CachedNetworkImage(
+                                              imageUrl: user,
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Icon(Icons.image),
+                                              placeholder:
+                                                  (context, url) => Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  ),
                                             ),
                                           );
                                         },
@@ -237,7 +264,9 @@ class UserDetailsScreen extends StatelessWidget {
                                     AppFunctions.height(30),
                                     Text(
                                       AppStrings.interest,
-                                      style: AppTextStyle.whiteMedium,
+                                      style: AppTextStyle.whiteMedium.copyWith(
+                                        color: AppColors.pinkColor,
+                                      ),
                                     ),
                                     AppFunctions.height(16),
                                     SizedBox(

@@ -41,12 +41,18 @@ class InterestsScreen extends StatelessWidget {
                       AppFunctions.height(30),
                       Text(
                         AppStrings.likes.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 36,
+                          color: AppColors.darkBlueColor,
+                        ),
                       ),
                       AppFunctions.height(12),
                       Text(
                         AppStrings.shareYourLikes.tr,
-                        style: AppTextStyle.whiteMedium.copyWith(fontSize: 16),
+                        style: AppTextStyle.whiteMedium.copyWith(
+                          fontSize: 16,
+                          color: AppColors.lightPurpleSec,
+                        ),
                       ),
                       AppFunctions.height(36),
                       GridView.builder(
@@ -68,37 +74,45 @@ class InterestsScreen extends StatelessWidget {
                               controller.selectList(index);
                             },
                             child: Container(
-                              decoration: BoxDecoration(
-                                gradient:
-                                    controller.selectedItems.contains(data)
-                                        ? LinearGradient(
-                                          colors: [
-                                            AppColors.lightRedColor,
-                                            AppColors.purpleColor,
-                                          ],
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight,
-                                          stops: [0, 1.0],
-                                        )
-                                        : null,
-                                color:
-                                    controller.selectedItems.contains(data)
-                                        ? null
-                                        : AppColors.transparentColor,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
-                                ),
-                              ),
+                              // decoration: BoxDecoration(
+                              //   gradient:
+                              //       controller.selectedItems.contains(data)
+                              //           ? LinearGradient(
+                              //             colors: [
+                              //               AppColors.lightRedColor,
+                              //               AppColors.purpleColor,
+                              //             ],
+                              //             begin: Alignment.centerLeft,
+                              //             end: Alignment.centerRight,
+                              //             stops: [0, 1.0],
+                              //           )
+                              //           : null,
+                              //   color:
+                              //       controller.selectedItems.contains(data)
+                              //           ? null
+                              //           : AppColors.transparentColor,
+                              //   borderRadius: BorderRadius.all(
+                              //     Radius.circular(50),
+                              //   ),
+                              // ),
                               padding: EdgeInsets.all(3),
                               child: Container(
+                                padding: EdgeInsets.only(left: 12),
                                 decoration: BoxDecoration(
-                                  color: Color(0xff251759),
+                                  color: AppColors.whiteColor,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(50),
                                   ),
+                                  border: Border.all(
+                                    color:
+                                        controller.selectedItems.contains(data)
+                                            ? AppColors.blueColor
+                                            : AppColors.whiteColor,
+                                    width: 3,
+                                  ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  // mainAxisAlignment: MainAxisAlignment.center,
                                   spacing: 8,
                                   children: [
                                     Image.asset(
@@ -113,8 +127,8 @@ class InterestsScreen extends StatelessWidget {
                                             controller.selectedItems.contains(
                                                   data,
                                                 )
-                                                ? AppColors.whiteColor
-                                                : AppColors.purpleColor,
+                                                ? AppColors.darkBlueColor
+                                                : AppColors.lightPurpleThird,
                                         fontSize: 14,
                                       ),
                                     ),

@@ -19,18 +19,16 @@ class FilterScreenGradientContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: GradientContainer(
-        height: 60,
-        child: Container(
-          padding: EdgeInsets.only(left: 16, right: 16),
-          decoration: BoxDecoration(
-            color: AppColors.darkBlackColor,
-            borderRadius: AppFunctions.borderRadius(50),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [widget, icon],
-          ),
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AppColors.whiteColor,
+          borderRadius: AppFunctions.borderRadius(50),
+          border: Border.all(color: AppColors.blueColor),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [widget, icon],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:destined_app/screens/login_screen/login_screen_controller.dart';
 import 'package:destined_app/screens/personal_details_screen/personal_details_screen.dart';
+import 'package:destined_app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/app_functions.dart';
@@ -16,11 +17,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PrimaryGradient(
-        firstColor: Color(0xff641C3C),
-        secondColor: Color(0xff07011A),
-        child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+        body: PrimaryGradient(
+          firstColor: Color(0xff641C3C),
+          secondColor: Color(0xff07011A),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<LoginScreenController>(
@@ -38,6 +39,7 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             AppStrings.createAccount.tr,
                             style: AppTextStyle.whiteBold.copyWith(
+                              color: AppColors.lightPurpleSec,
                               fontSize: 16,
                             ),
                           ),
@@ -46,12 +48,18 @@ class LoginScreen extends StatelessWidget {
                       AppFunctions.height(30),
                       Text(
                         AppStrings.login.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 36,
+                          color: AppColors.darkBlueColor,
+                        ),
                       ),
                       AppFunctions.height(12),
                       Text(
                         AppStrings.filldetails.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 16),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 16,
+                          color: AppColors.lightPurple,
+                        ),
                       ),
                       AppFunctions.height(70),
 
@@ -77,6 +85,7 @@ class LoginScreen extends StatelessWidget {
                       AppFunctions.height(10),
                       TextFormFieldWidget(
                         controller: controller.passwordController,
+                        icon: Icon(Icons.remove_red_eye_outlined, size: 20),
                       ),
                       AppFunctions.height(40),
                       ButtonWidget(

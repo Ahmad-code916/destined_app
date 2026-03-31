@@ -31,4 +31,18 @@ class AppColors {
   static const darkPurple = Color(0xff42207A);
   static const lightBlue = Color(0xff2285FA);
   static const darkBlue = Color(0xff1B40C1);
+
+  //-------------------->>>>>>>>>>>> New Theme
+  static const blueColor = Color(0xff7D92FA);
+  static const darkBlueColor = Color(0xff33196B);
+  static const lightBlue2 = Color(0xffE9FBFF);
+  static const lightYellow = Color(0xffFFF7CA);
+  static const lightPurple = Color(0xff645290);
+  static const lightPurpleSec = Color(0xff83659D);
+  static const lightPurpleThird = Color(0xff745594);
+  static const lightPurpleFour = Color(0xffDFD2F3);
+  static const purpleColorNew = Color(0xff463079);
+  static const redColorSec = Color(0xffC9234F);
+  static const purpleColorThird = Color(0xff7E1D96);
+  static const skyBlueColor = Color(0xff97ECFF);
 }

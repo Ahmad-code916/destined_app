@@ -2,6 +2,7 @@ import 'package:destined_app/screens/splash_screen/splash_screen.dart';
 import 'package:destined_app/services/local_controller.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,12 +17,19 @@ void main() async {
   //       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSzIsInJlZiI6InZhcG11Z2Npa3p4bGV4dnVwY3ZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUzMjc4NTQsImV4cCI6MjA3MDkwMzg1NH0.DYC7K8cEOWKb9pRyX12o4TneJo8FpIdBAukY0P_0PgA',
   //   url: 'https://vapmugcikzxlexvupcvd.supabase.co',
   // );
+  // ------> Project_Nov
   Supabase.initialize(
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxtc29vdmxkdml2ZGxkcXhjYWl6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNzI3NzMsImV4cCI6MjA3ODc0ODc3M30.yecHqWeFn7BequF2rIk0yQKPK_i890Twlalx1SsIom0',
     url: 'https://lmsoovldvivdldqxcaiz.supabase.co',
   );
-
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
   runApp(const MyApp());
 }
 

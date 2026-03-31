@@ -34,7 +34,10 @@ class EditScreen extends StatelessWidget {
                       AppFunctions.height(30),
                       Text(
                         AppStrings.profileDetails.tr,
-                        style: AppTextStyle.whiteBold.copyWith(fontSize: 36),
+                        style: AppTextStyle.whiteBold.copyWith(
+                          fontSize: 36,
+                          color: AppColors.darkBlueColor,
+                        ),
                       ),
                       AppFunctions.height(12),
                       Align(
@@ -90,7 +93,7 @@ class EditScreen extends StatelessWidget {
                                 width: 50,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: AppColors.blackColor,
+                                    color: AppColors.whiteColor,
                                     width: 3,
                                   ),
                                   borderRadius: BorderRadius.all(
@@ -169,33 +172,33 @@ class EditScreen extends StatelessWidget {
                         onTap: () {
                           controller.selectDate();
                         },
-                        child: GradientContainer(
-                          child: Container(
-                            height: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: AppFunctions.borderRadius(50),
-                              color: AppColors.blackColor,
+                        child: Container(
+                          height: 55,
+                          decoration: BoxDecoration(
+                            borderRadius: AppFunctions.borderRadius(50),
+                            color: AppColors.whiteColor,
+                            border: Border.all(
+                              color: AppColors.lightPurpleColorSec,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    controller.selectedDate == null
-                                        ? AppStrings.selectDate.tr
-                                        : '${controller.selectedDate!.day.toString()}-${controller.selectedDate!.month.toString()}-${controller.selectedDate!.year.toString()}',
-                                    style: AppTextStyle.whiteRegular,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  controller.selectedDate == null
+                                      ? AppStrings.selectDate.tr
+                                      : '${controller.selectedDate!.day.toString()}-${controller.selectedDate!.month.toString()}-${controller.selectedDate!.year.toString()}',
+                                  style: AppTextStyle.whiteRegular.copyWith(
+                                    color: AppColors.darkBlueColor,
                                   ),
-                                  Icon(
-                                    Icons.calendar_month,
-                                    color: AppColors.whiteColor,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: AppColors.darkBlueColor,
+                                ),
+                              ],
                             ),
                           ),
                         ),

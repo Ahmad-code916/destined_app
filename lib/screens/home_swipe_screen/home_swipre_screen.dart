@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
+import 'package:destined_app/screens/loading_screen/loading_screen.dart';
+import 'package:destined_app/screens/user_details_screen/user_details_screen.dart';
 import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
+import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -21,6 +24,7 @@ class HomeSwipreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: AppColors.blackColor,
       body: PrimaryGradient(
         firstColor: AppColors.gradientSecondryFirst,
         secondColor: AppColors.gradientSecondrySec,
@@ -43,33 +47,34 @@ class HomeSwipreScreen extends StatelessWidget {
                                 image:
                                     UserBaseController.userData.imageUrl ?? "",
                                 name: UserBaseController.userData.name ?? "",
-                                // onTapFilter: () => Get.to(() => FilterScreen()),
-                                // onTapnotification: () {},
                               ),
                               AppFunctions.height(12),
                               GestureDetector(
                                 onTap: () {
                                   controller.createChatWithAi();
                                 },
-                                child: GradientContainer(
-                                  height: 50,
-                                  child: Center(
-                                    child:
-                                        controller.isCreatingChat == true
-                                            ? Center(
-                                              child: CircularProgressIndicator(
-                                                color: AppColors.whiteColor,
-                                              ),
-                                            )
-                                            : Text(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 4),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.blueColor,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child:
+                                      controller.isCreatingChat == true
+                                          ? Center(
+                                            child: CircularProgressIndicator(
+                                              color: AppColors.whiteColor,
+                                            ),
+                                          )
+                                          : Center(
+                                            child: Text(
                                               textAlign: TextAlign.start,
                                               'Chat With AI',
-                                              style: TextStyle(
-                                                color: AppColors.whiteColor,
-                                                fontSize: 20,
-                                              ),
+                                              style: AppTextStyle.whiteBold
+                                                  .copyWith(fontSize: 20),
                                             ),
-                                  ),
+                                          ),
                                 ),
                               ),
                               AppFunctions.height(30),
@@ -77,8 +82,12 @@ class HomeSwipreScreen extends StatelessWidget {
                                 SizedBox(
                                   height: Get.height * 0.6,
                                   child: Text(
-                                    'No User',
-                                    style: AppTextStyle.whiteBold,
+                                    textAlign: TextAlign.center,
+                                    AppStrings.noUserFound.tr,
+                                    style: AppTextStyle.whiteBold.copyWith(
+                                      fontSize: 25,
+                                      color: AppColors.purpleColorNew,
+                                    ),
                                   ),
                                 )
                               else if (controller.userList.isNotEmpty)
@@ -126,7 +135,20 @@ class HomeSwipreScreen extends StatelessWidget {
                                             user.lng!,
                                           );
                                       return GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          if (user.myLikes!.contains(
+                                            UserBaseController.userData.uid,
+                                          )) {
+                                            Get.to(
+                                              () => UserDetailsScreen(),
+                                              arguments: {'uid': user.uid},
+                                            );
+                                          } else {
+                                            print('You cannot see profile');
+                                            controller
+                                                .showDialogOnProfileView();
+                                          }
+                                        },
                                         child: Container(
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(
