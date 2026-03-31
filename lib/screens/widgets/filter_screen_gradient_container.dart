@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../services/app_functions.dart';
 import '../../utils/app_colors.dart';
-import 'gradient_container.dart';
 
 class FilterScreenGradientContainer extends StatelessWidget {
   const FilterScreenGradientContainer({

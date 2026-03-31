@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/screens/chat_screen/chat_screen_controller.dart';
-import 'package:destined_app/screens/profile_screen/profile_screen.dart';
 import 'package:destined_app/screens/user_details_screen/user_details_screen.dart';
 import 'package:destined_app/screens/widgets/chat_screen_menu.dart';
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/local_controller.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
@@ -23,6 +22,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localeController = Get.put(LocalController());
     return GetBuilder<ChatScreenController>(
       builder: (context) {
         return Scaffold(
@@ -31,7 +31,11 @@ class ChatScreen extends StatelessWidget {
             secondColor: AppColors.gradientSecondrySec,
             child: SafeArea(
               child: Stack(
-                alignment: Alignment.topRight,
+                alignment:
+                    localeController.currentLocale == Locale('en', 'US')
+                        ? Alignment.topRight
+                        : Alignment.topLeft,
+
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
@@ -85,9 +89,12 @@ class ChatScreen extends StatelessWidget {
                               onTap: () {
                                 controller.showMenuOnTapIcon();
                               },
-                              child: Image.asset(
-                                AppImages.menuIcon,
-                                height: 20,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  AppImages.menuIcon,
+                                  height: 20,
+                                ),
                               ),
                             ),
                           ],
@@ -289,61 +296,73 @@ class ChatScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        Row(
-                          spacing: 12,
-                          children: [
-                            Expanded(
-                              child: TextFormFieldWidget(
-                                secIcon:
-                                    controller.image != null
-                                        ? Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 12,
-                                          ),
-                                          child: Image.file(
-                                            controller.image!,
-                                            height: 25,
-                                          ),
-                                        )
-                                        : null,
-                                onChange: (p0) {
-                                  controller.updateValue(p0);
-                                },
-                                hintText: AppStrings.message,
-                                controller: controller.messageController,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                controller.pickImage();
-                              },
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: AppColors.purpleColorNew,
-                                size: 32,
-                              ),
-                            ),
-                            controller.isSendingMessage == true
-                                ? CircularProgressIndicator(
-                                  color: AppColors.whiteColor,
-                                )
-                                : GestureDetector(
-                                  onTap: () {
-                                    controller.createChat();
+                        if (controller.threadModel.isBlocked == true)
+                          Text(
+                            controller.threadModel.senderId ==
+                                    UserBaseController.userData.uid
+                                ? 'You blocked this user.'
+                                : '${controller.user.name} blocked you',
+                          )
+                        else
+                          Row(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                child: TextFormFieldWidget(
+                                  secIcon:
+                                      controller.image != null
+                                          ? Padding(
+                                            padding: const EdgeInsets.only(
+                                              left: 12,
+                                            ),
+                                            child: Image.file(
+                                              controller.image!,
+                                              height: 25,
+                                            ),
+                                          )
+                                          : null,
+                                  onChange: (p0) {
+                                    controller.updateValue(p0);
                                   },
-                                  child: Icon(
-                                    Icons.send,
-                                    color: AppColors.darkBlueColor,
-                                    size: 32,
-                                  ),
+                                  hintText: AppStrings.message,
+                                  controller: controller.messageController,
                                 ),
-                          ],
-                        ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.pickImage();
+                                },
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: AppColors.purpleColorNew,
+                                  size: 32,
+                                ),
+                              ),
+                              controller.isSendingMessage == true
+                                  ? CircularProgressIndicator(
+                                    color: AppColors.whiteColor,
+                                  )
+                                  : GestureDetector(
+                                    onTap: () {
+                                      controller.createChat();
+                                    },
+                                    child: Icon(
+                                      Icons.send,
+                                      color: AppColors.darkBlueColor,
+                                      size: 32,
+                                    ),
+                                  ),
+                            ],
+                          ),
                       ],
                     ),
                   ),
                   if (controller.showMenuCard == true)
                     ChatScreenMenu(
+                      blockOrUnclockText:
+                          controller.threadModel.isBlocked == true
+                              ? AppStrings.unblockUser.tr
+                              : AppStrings.blockUser,
                       onTapClearIcon: () {
                         controller.showMenuOnTapIcon();
                       },
@@ -353,6 +372,10 @@ class ChatScreen extends StatelessWidget {
                           arguments: {'uid': controller.user.uid},
                         );
                       },
+                      onTapBlock: () {
+                        controller.showDialogToBlockUser();
+                      },
+                      onTapDeleteChat: () {},
                     ),
                 ],
               ),

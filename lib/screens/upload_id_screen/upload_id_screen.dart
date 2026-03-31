@@ -1,6 +1,5 @@
 import 'package:destined_app/screens/upload_id_screen/upload_id_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_text_style.dart';
@@ -19,11 +18,11 @@ class UploadIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: PrimaryGradient(
-          firstColor: AppColors.gradientSecondryFirst,
-          secondColor: AppColors.gradientSecondrySec,
+    return Scaffold(
+      body: PrimaryGradient(
+        firstColor: AppColors.gradientSecondryFirst,
+        secondColor: AppColors.gradientSecondrySec,
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<UploadIdScreenController>(

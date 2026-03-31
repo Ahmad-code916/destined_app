@@ -73,7 +73,9 @@ class UsersScreen extends StatelessWidget {
                           Center(
                             child: Text(
                               'No user found!',
-                              style: AppTextStyle.whiteMedium,
+                              style: AppTextStyle.whiteMedium.copyWith(
+                                color: AppColors.purpleColorNew,
+                              ),
                             ),
                           )
                         else
@@ -98,11 +100,6 @@ class UsersScreen extends StatelessWidget {
                                   user.lng!,
                                 );
                                 return UserDataContainer(
-                                  onTapContainer:
-                                      () => Get.to(
-                                        () => UserDetailsScreen(),
-                                        arguments: {'uid': user.uid},
-                                      ),
                                   image: user.imageUrl ?? "",
                                   age:
                                       AppFunctions.calculateAge(
@@ -121,7 +118,9 @@ class UsersScreen extends StatelessWidget {
                     Center(
                       child: Text(
                         'No user found!',
-                        style: AppTextStyle.whiteMedium,
+                        style: AppTextStyle.whiteMedium.copyWith(
+                          color: AppColors.purpleColorNew,
+                        ),
                       ),
                     )
                   else
@@ -152,7 +151,10 @@ class UsersScreen extends StatelessWidget {
                                 );
                                 return UserDataContainer(
                                   onTapContainer:
-                                      () => Get.to(() => UserDetailsScreen()),
+                                      () => Get.to(
+                                        () => UserDetailsScreen(),
+                                        arguments: {'uid': user.uid},
+                                      ),
                                   image: user.imageUrl ?? "",
                                   age:
                                       AppFunctions.calculateAge(

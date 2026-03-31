@@ -1,4 +1,5 @@
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/local_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
@@ -10,13 +11,20 @@ class ChatScreenMenu extends StatelessWidget {
     super.key,
     required this.onTapClearIcon,
     required this.onTapClearViewProfile,
+    required this.onTapBlock,
+    required this.blockOrUnclockText,
+    required this.onTapDeleteChat,
   });
 
   final void Function() onTapClearIcon;
   final void Function() onTapClearViewProfile;
+  final void Function() onTapBlock;
+  final void Function() onTapDeleteChat;
+  final String blockOrUnclockText;
 
   @override
   Widget build(BuildContext context) {
+    final localeController = Get.put(LocalController());
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -24,7 +32,16 @@ class ChatScreenMenu extends StatelessWidget {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
         ),
-        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50)),
+        borderRadius: BorderRadius.only(
+          bottomLeft:
+              localeController.currentLocale == Locale('en', 'US')
+                  ? Radius.circular(50)
+                  : Radius.circular(0),
+          bottomRight:
+              localeController.currentLocale == Locale('ur', 'PK')
+                  ? Radius.circular(50)
+                  : Radius.circular(0),
+        ),
       ),
       height: Get.height * 0.5,
       width: Get.width * 0.7,
@@ -35,7 +52,10 @@ class ChatScreenMenu extends StatelessWidget {
             GestureDetector(
               onTap: onTapClearIcon,
               child: Align(
-                alignment: Alignment.centerRight,
+                alignment:
+                    localeController.currentLocale == Locale('en', 'US')
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                 child: Icon(Icons.clear, color: AppColors.whiteColor),
               ),
             ),
@@ -50,6 +70,31 @@ class ChatScreenMenu extends StatelessWidget {
                     AppStrings.viewProfile.tr,
                     style: AppTextStyle.whiteMedium,
                   ),
+                ],
+              ),
+            ),
+            AppFunctions.height(20),
+            GestureDetector(
+              onTap: onTapDeleteChat,
+              child: Row(
+                spacing: 12,
+                children: [
+                  Icon(Icons.delete, color: AppColors.whiteColor),
+                  Text(
+                    AppStrings.deleteChat.tr,
+                    style: AppTextStyle.whiteMedium,
+                  ),
+                ],
+              ),
+            ),
+            AppFunctions.height(20),
+            GestureDetector(
+              onTap: onTapBlock,
+              child: Row(
+                spacing: 12,
+                children: [
+                  Icon(Icons.block, color: AppColors.whiteColor),
+                  Text(blockOrUnclockText, style: AppTextStyle.whiteMedium),
                 ],
               ),
             ),

@@ -74,27 +74,6 @@ class InterestsScreen extends StatelessWidget {
                               controller.selectList(index);
                             },
                             child: Container(
-                              // decoration: BoxDecoration(
-                              //   gradient:
-                              //       controller.selectedItems.contains(data)
-                              //           ? LinearGradient(
-                              //             colors: [
-                              //               AppColors.lightRedColor,
-                              //               AppColors.purpleColor,
-                              //             ],
-                              //             begin: Alignment.centerLeft,
-                              //             end: Alignment.centerRight,
-                              //             stops: [0, 1.0],
-                              //           )
-                              //           : null,
-                              //   color:
-                              //       controller.selectedItems.contains(data)
-                              //           ? null
-                              //           : AppColors.transparentColor,
-                              //   borderRadius: BorderRadius.all(
-                              //     Radius.circular(50),
-                              //   ),
-                              // ),
                               padding: EdgeInsets.all(3),
                               child: Container(
                                 padding: EdgeInsets.only(left: 12),
@@ -106,9 +85,9 @@ class InterestsScreen extends StatelessWidget {
                                   border: Border.all(
                                     color:
                                         controller.selectedItems.contains(data)
-                                            ? AppColors.blueColor
+                                            ? AppColors.purpleColorNew
                                             : AppColors.whiteColor,
-                                    width: 3,
+                                    width: 2,
                                   ),
                                 ),
                                 child: Row(

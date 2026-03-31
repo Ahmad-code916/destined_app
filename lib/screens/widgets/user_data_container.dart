@@ -13,7 +13,7 @@ class UserDataContainer extends StatelessWidget {
     // required this.count,
     required this.image,
     // required this.isShownGreen,
-    required this.onTapContainer,
+    this.onTapContainer,
   });
 
   final String name;
@@ -22,7 +22,7 @@ class UserDataContainer extends StatelessWidget {
   final String age;
   // final int count;
   // final bool isShownGreen;
-  final void Function() onTapContainer;
+  final void Function()? onTapContainer;
 
   @override
   Widget build(BuildContext context) {

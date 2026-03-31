@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/chatbot_model.dart';
 import 'package:destined_app/models/thread_model.dart';
 import 'package:destined_app/models/user_model.dart';
-import 'package:destined_app/screens/edit_screen/edit_screen.dart';
 import 'package:destined_app/screens/login_screen/login_screen.dart';
+import 'package:destined_app/screens/widgets/confirm_dialog.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
@@ -28,42 +28,16 @@ class ProfileScreenController extends GetxController {
 
   void showDialogeToDeleteAccount() async {
     Get.dialog(
-      AlertDialog(
-        title: Text(
-          'Delete Account?',
-          style: AppTextStyle.whiteMedium.copyWith(color: AppColors.redColor),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Do you want to delete this account?'),
-            AppFunctions.height(20),
-            Row(
-              spacing: 20,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Text('Cancel'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                    showDialogeToReLogin();
-                  },
-                  child: Text(
-                    'Ok',
-                    style: AppTextStyle.whiteRegular.copyWith(
-                      color: AppColors.redColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+      ConfirmDialog(
+        title: 'Delete Account',
+        subTitle: 'Do you want to delete account?',
+        onTapCancel: () {
+          Get.back();
+        },
+        onTapConfirm: () {
+          Get.back();
+          showDialogeToReLogin();
+        },
       ),
     );
   }

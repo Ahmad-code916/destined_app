@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
-import 'package:destined_app/screens/loading_screen/loading_screen.dart';
 import 'package:destined_app/screens/user_details_screen/user_details_screen.dart';
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
@@ -144,7 +142,6 @@ class HomeSwipreScreen extends StatelessWidget {
                                               arguments: {'uid': user.uid},
                                             );
                                           } else {
-                                            print('You cannot see profile');
                                             controller
                                                 .showDialogOnProfileView();
                                           }

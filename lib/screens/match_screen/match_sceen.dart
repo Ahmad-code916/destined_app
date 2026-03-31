@@ -100,18 +100,21 @@ class MatchSceen extends StatelessWidget {
                               AppStrings.congrats.tr,
                               style: AppTextStyle.whiteBold.copyWith(
                                 fontWeight: FontWeight.w600,
+                                color: AppColors.darkBlueColor,
                               ),
                             ),
                             Text(
                               textAlign: TextAlign.center,
                               AppStrings.congratsSubStr.tr,
-                              style: AppTextStyle.whiteRegular,
+                              style: AppTextStyle.whiteRegular.copyWith(
+                                color: AppColors.lightPurpleSec,
+                              ),
                             ),
                             AppFunctions.height(20),
                             Icon(
                               Icons.message_outlined,
                               size: 25,
-                              color: AppColors.whiteColor,
+                              color: AppColors.lightPurpleSec,
                             ),
                             AppFunctions.height(6),
                             Text(

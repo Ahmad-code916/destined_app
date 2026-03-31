@@ -14,6 +14,7 @@ class ThreadModel {
   UserModel? userDetails;
   int? unseenMessageCount;
   UserModel? userModel;
+  bool? isBlocked; // 👈 ADDED
 
   ThreadModel({
     this.id,
@@ -24,6 +25,7 @@ class ThreadModel {
     this.userDetails,
     this.unseenMessageCount,
     this.userModel,
+    this.isBlocked, // 👈 ADDED
   });
 
   factory ThreadModel.fromMap(Map<String, dynamic> map) {
@@ -42,6 +44,7 @@ class ThreadModel {
       unseenMessageCount: map["unseenMessageCount"] ?? 0,
       userModel:
           map["userModel"] != null ? UserModel.fromMap(map["userModel"]) : null,
+      isBlocked: map["isBlocked"] ?? false, // 👈 ADDED
     );
   }
 
@@ -55,6 +58,7 @@ class ThreadModel {
       "senderId": senderId,
       "unseenMessageCount": unseenMessageCount,
       "userModel": userModel?.toMap(),
+      "isBlocked": isBlocked ?? false, // 👈 ADDED
     };
   }
 
@@ -66,6 +70,7 @@ class ThreadModel {
     String? senderId,
     int? unseenMessageCount,
     UserModel? userModel,
+    bool? isBlocked, // 👈 ADDED
   }) {
     return ThreadModel(
       id: id ?? this.id,
@@ -75,6 +80,7 @@ class ThreadModel {
       senderId: senderId ?? this.senderId,
       unseenMessageCount: unseenMessageCount ?? this.unseenMessageCount,
       userModel: userModel ?? this.userModel,
+      isBlocked: isBlocked ?? this.isBlocked, // 👈 ADDED
     );
   }
 }

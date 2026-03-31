@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/chat_model.dart';
 import 'package:destined_app/models/thread_model.dart';
 import 'package:destined_app/models/user_model.dart';
+import 'package:destined_app/screens/widgets/confirm_dialog.dart';
 import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
@@ -22,6 +23,8 @@ class ChatScreenController extends GetxController {
   String? message;
   TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
+  StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>?
+  threadSubscription;
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   final supabase = Supabase.instance.client;
   File? image;
@@ -32,6 +35,25 @@ class ChatScreenController extends GetxController {
   updateValue(String? value) {
     message = value;
     update();
+  }
+
+  Future getThread() async {
+    try {
+      threadSubscription = FirebaseFirestore.instance
+          .collection(ThreadModel.tableName)
+          .doc(threadId)
+          .snapshots()
+          .listen((event) {
+            threadModel = ThreadModel.fromMap(event.data()!);
+            update();
+          });
+    } catch (e) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: e.toString(),
+      );
+    }
   }
 
   Future createChat() async {
@@ -261,12 +283,101 @@ class ChatScreenController extends GetxController {
     }
   }
 
+  void showDialogToBlockUser() {
+    Get.dialog(
+      GetBuilder<ChatScreenController>(
+        builder: (context) {
+          return ConfirmDialog(
+            title:
+                threadModel.isBlocked == true ? 'Unblock User' : 'Block User',
+            subTitle:
+                threadModel.isBlocked == true
+                    ? 'Do you want to unblock this user?'
+                    : 'Do you want to block this user?',
+            onTapCancel: () {
+              Get.back();
+            },
+            onTapConfirm: () {
+              blockUser();
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  void blockUser() async {
+    try {
+      if (threadModel.isBlocked != true) {
+        final model = threadModel.copyWith(
+          isBlocked: threadModel.isBlocked == true ? false : true,
+          senderId: UserBaseController.userData.uid,
+          lastMessage: threadModel.isBlocked == false ? 'Blocked' : 'Unblock',
+          lastMessageTime: DateTime.now(),
+        );
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .set(model.toMap(), SetOptions(merge: true));
+        update();
+        Get.back();
+        Get.snackbar(
+          threadModel.isBlocked == true ? 'Blocked' : 'Unblock',
+          threadModel.isBlocked == true
+              ? 'User has been blocked.'
+              : 'User has been unblocked.',
+        );
+      } else if (threadModel.isBlocked == true &&
+          threadModel.senderId == UserBaseController.userData.uid) {
+        final model = threadModel.copyWith(
+          isBlocked: threadModel.isBlocked == true ? false : true,
+          senderId: UserBaseController.userData.uid,
+          lastMessage: threadModel.isBlocked == false ? 'Blocked' : 'Unblock',
+          lastMessageTime: DateTime.now(),
+        );
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .set(model.toMap(), SetOptions(merge: true));
+        update();
+        Get.back();
+        Get.snackbar(
+          threadModel.isBlocked == true ? 'Blocked' : 'Unblock',
+          threadModel.isBlocked == true
+              ? 'User has been blocked.'
+              : 'User has been unblocked.',
+        );
+      } else {
+        Get.back();
+        showOkAlertDialog(
+          context: Get.context!,
+          title: 'Error',
+          message: 'You cannot unblock this user.',
+        );
+      }
+    } catch (e) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  void onClose() async {
+    subscription?.cancel();
+    threadSubscription?.cancel();
+    super.onClose();
+  }
+
   @override
   void onInit() {
     threadId = Get.arguments['threadId'];
     user = Get.arguments['user'];
     threadModel = Get.arguments['threadModel'];
     getMessages();
+    getThread();
     super.onInit();
   }
 }

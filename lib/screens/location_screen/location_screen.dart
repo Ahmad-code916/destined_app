@@ -1,6 +1,5 @@
 import 'package:destined_app/screens/location_screen/location_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../services/app_functions.dart';
@@ -19,11 +18,11 @@ class LocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: PrimaryGradient(
-          firstColor: AppColors.gradientSecondryFirst,
-          secondColor: AppColors.gradientSecondrySec,
+    return Scaffold(
+      body: PrimaryGradient(
+        firstColor: AppColors.gradientSecondryFirst,
+        secondColor: AppColors.gradientSecondrySec,
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<LocationScreenController>(

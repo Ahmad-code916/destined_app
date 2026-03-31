@@ -1,9 +1,7 @@
-import 'package:destined_app/screens/interests_screen/interests_screen.dart';
 import 'package:destined_app/screens/login_screen/login_screen.dart';
 import 'package:destined_app/screens/personal_details_screen/personal_details_screen_controller.dart';
 import 'package:destined_app/screens/widgets/button_widget.dart';
 import 'package:destined_app/screens/widgets/drop_down_widget.dart';
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
@@ -23,11 +21,11 @@ class PersonalDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: PrimaryGradient(
-          firstColor: Color(0xff641C3C),
-          secondColor: Color(0xff07011A),
+    return Scaffold(
+      body: PrimaryGradient(
+        firstColor: Color(0xff641C3C),
+        secondColor: Color(0xff07011A),
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<PersonalDetailsScreenController>(

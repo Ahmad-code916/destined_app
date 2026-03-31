@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class ChatbotScreenController extends GetxController {
   TextEditingController messageText = TextEditingController();
+
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   List<ChatBotMessageModel> chatMessages = [];
   bool isLoading = false;

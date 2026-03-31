@@ -1,4 +1,3 @@
-import 'package:destined_app/screens/widgets/gradient_container.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
 

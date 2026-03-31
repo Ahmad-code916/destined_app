@@ -17,11 +17,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: PrimaryGradient(
-          firstColor: Color(0xff641C3C),
-          secondColor: Color(0xff07011A),
+    return Scaffold(
+      body: PrimaryGradient(
+        firstColor: Color(0xff641C3C),
+        secondColor: Color(0xff07011A),
+        child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: GetBuilder<LoginScreenController>(
