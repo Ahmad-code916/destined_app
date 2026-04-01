@@ -16,7 +16,6 @@ class SplashScreenController extends GetxController {
     Future.delayed(Duration(seconds: 3), () async {
       final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        AppFunctions.showSnakBar('Error', 'User not found!');
         Get.offAll(() => PersonalDetailsScreen());
       } else {
         final user =
@@ -25,7 +24,6 @@ class SplashScreenController extends GetxController {
                 .doc(currentUser.uid)
                 .get();
         if (user.exists) {
-          AppFunctions.showSnakBar('Yes', 'User Exists');
           UserBaseController.updateUserModel(UserModel.fromMap(user.data()!));
           if (UserBaseController.userData.page1 == false) {
             Get.offAll(() => PersonalDetailsScreen());

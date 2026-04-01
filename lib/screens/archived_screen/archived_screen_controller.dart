@@ -1,60 +1,17 @@
+import 'dart:async';
+
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/thread_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:destined_app/models/user_model.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:get/get.dart';
-import 'dart:async';
-import '../../models/user_model.dart';
-import '../../services/user_base_controller.dart';
 
-class MessageScreenController extends GetxController {
-  final TextEditingController searchController = TextEditingController();
-  List<UserModel> userList = [];
-  List<ThreadModel> threadList = [];
-  List<String> participientUsers = [];
-  UserModel? userData;
-  List<ThreadModel> filteredUserList = [];
-  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
-  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
+class ArchivedScreenController extends GetxController {
   bool isLoading = false;
-
-  Future getUsers() async {
-    try {
-      isLoading = true;
-      update();
-      subscription = FirebaseFirestore.instance
-          .collection(UserModel.tableName)
-          .snapshots()
-          .listen((event) {
-            if (event.docs.isNotEmpty) {
-              userList =
-                  event.docs
-                      .map((e) {
-                        return UserModel.fromMap(e.data());
-                      })
-                      .where((element) {
-                        return UserBaseController.userData.matches!.contains(
-                          element.uid ?? "",
-                        );
-                      })
-                      .toList();
-              isLoading = false;
-              update();
-            }
-            isLoading = false;
-            update();
-          });
-    } catch (e) {
-      isLoading = false;
-      update();
-      showOkAlertDialog(
-        context: Get.context!,
-        title: 'Error',
-        message: e.toString(),
-      );
-    }
-  }
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
+  List<ThreadModel> threadList = [];
+  UserModel? userData;
 
   Future getThreads() async {
     try {
@@ -77,9 +34,9 @@ class MessageScreenController extends GetxController {
                   model.participantsList ?? [],
                 );
                 model.userDetails = await getOtherUserData(otherUserid);
-                if (!(model.archivedUsersList!.contains(
+                if (model.archivedUsersList!.contains(
                   UserBaseController.userData.uid,
-                ))) {
+                )) {
                   threadList.add(model);
                 }
               }
@@ -88,7 +45,7 @@ class MessageScreenController extends GetxController {
                   a.lastMessageTime ?? DateTime.now(),
                 ),
               );
-              filteredUserList = threadList;
+              isLoading = false;
               update();
             } else {
               isLoading = false;
@@ -129,27 +86,15 @@ class MessageScreenController extends GetxController {
     return null;
   }
 
-  void onChange(String value) {
-    filteredUserList =
-        threadList.where((element) {
-          return element.userDetails!.name!.toLowerCase().contains(
-            value.toLowerCase(),
-          );
-        }).toList();
-    update();
+  @override
+  void onClose() async {
+    threadSubscription?.cancel();
+    super.onClose();
   }
 
   @override
   void onInit() {
-    getUsers();
     getThreads();
     super.onInit();
-  }
-
-  @override
-  void onClose() async {
-    await subscription?.cancel();
-    await threadSubscription?.cancel();
-    super.onClose();
   }
 }

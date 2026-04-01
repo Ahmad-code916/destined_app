@@ -30,6 +30,7 @@ class ChatScreenController extends GetxController {
   File? image;
   bool isSendingMessage = false;
   bool showMenuCard = false;
+  bool isDeletingChat = false;
 
   @override
   updateValue(String? value) {
@@ -273,7 +274,7 @@ class ChatScreenController extends GetxController {
     }
   }
 
-  void showMenuOnTapIcon() {
+  void showChatMenuOnTapIcon() {
     if (showMenuCard == false) {
       showMenuCard = true;
       update();
@@ -355,6 +356,69 @@ class ChatScreenController extends GetxController {
           message: 'You cannot unblock this user.',
         );
       }
+    } catch (e) {
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: e.toString(),
+      );
+    }
+  }
+
+  void clearChat() async {
+    try {
+      showMenuCard = false;
+      isDeletingChat = true;
+      update();
+      for (var message in messages) {
+        await FirebaseFirestore.instance
+            .collection(ThreadModel.tableName)
+            .doc(threadId)
+            .collection(ChatModel.tableName)
+            .doc(message.id)
+            .delete();
+      }
+      final model = threadModel.copyWith(
+        lastMessage: 'Start Chat',
+        lastMessageTime: DateTime.now(),
+      );
+      await FirebaseFirestore.instance
+          .collection(ThreadModel.tableName)
+          .doc(threadId)
+          .set(model.toMap(), SetOptions(merge: true));
+      messages.clear();
+      isDeletingChat = false;
+      update();
+    } catch (e) {
+      isDeletingChat = false;
+      update();
+      showOkAlertDialog(
+        context: Get.context!,
+        title: 'Error',
+        message: e.toString(),
+      );
+    }
+  }
+
+  void addChatToArchived() async {
+    try {
+      final currentUserId = UserBaseController.userData.uid ?? "";
+      if (threadModel.archivedUsersList!.contains(currentUserId)) {
+        threadModel.archivedUsersList!.remove(currentUserId);
+      } else {
+        threadModel.archivedUsersList!.add(currentUserId);
+      }
+      final model = threadModel.copyWith(
+        archivedUsersList: threadModel.archivedUsersList,
+        senderId: currentUserId,
+        lastMessageTime: DateTime.now(),
+      );
+      await FirebaseFirestore.instance
+          .collection(ThreadModel.tableName)
+          .doc(threadId)
+          .set(model.toMap(), SetOptions(merge: true));
+      Get.back();
+      update();
     } catch (e) {
       showOkAlertDialog(
         context: Get.context!,

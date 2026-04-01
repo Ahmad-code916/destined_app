@@ -14,13 +14,19 @@ class ChatScreenMenu extends StatelessWidget {
     required this.onTapBlock,
     required this.blockOrUnclockText,
     required this.onTapDeleteChat,
+    required this.onTapArchive,
+    required this.archiveText,
+    required this.archiveIcon,
   });
 
   final void Function() onTapClearIcon;
   final void Function() onTapClearViewProfile;
   final void Function() onTapBlock;
   final void Function() onTapDeleteChat;
+  final void Function() onTapArchive;
   final String blockOrUnclockText;
+  final String archiveText;
+  final Icon archiveIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,7 @@ class ChatScreenMenu extends StatelessWidget {
                   : Radius.circular(0),
         ),
       ),
-      height: Get.height * 0.5,
+      height: Get.height * 0.3,
       width: Get.width * 0.7,
       child: Padding(
         padding: const EdgeInsets.all(10),
@@ -95,6 +101,17 @@ class ChatScreenMenu extends StatelessWidget {
                 children: [
                   Icon(Icons.block, color: AppColors.whiteColor),
                   Text(blockOrUnclockText, style: AppTextStyle.whiteMedium),
+                ],
+              ),
+            ),
+            AppFunctions.height(20),
+            GestureDetector(
+              onTap: onTapArchive,
+              child: Row(
+                spacing: 12,
+                children: [
+                  archiveIcon,
+                  Text(archiveText, style: AppTextStyle.whiteMedium),
                 ],
               ),
             ),

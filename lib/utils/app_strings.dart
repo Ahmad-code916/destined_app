@@ -77,7 +77,8 @@ class AppStrings extends Translations {
   static const String pictures = 'Pictures';
   static const String blockUser = 'Block User';
   static const String unblockUser = 'Unblock User';
-  static const String deleteChat = 'Delete Chat';
+  static const String deleteChat = 'Clear Chat';
+  static const String noChatFound = 'No Chat Found';
 
   @override
   Map<String, Map<String, String>> get keys => {
@@ -156,7 +157,8 @@ class AppStrings extends Translations {
       pictures: 'Pictures',
       blockUser: 'Block User',
       unblockUser: 'Unblock User',
-      deleteChat: 'Delete Chat',
+      deleteChat: 'Clear Chat',
+      noChatFound: 'No Chat Found',
     },
     'ur_PK': {
       onlineDatingApp: 'آن لائن ڈیٹنگ ایپ',
@@ -233,7 +235,8 @@ class AppStrings extends Translations {
       pictures: 'تصاویر',
       blockUser: 'بلاک یوزر',
       unblockUser: 'ان بلاک یوزر',
-      deleteChat: 'چیٹ ڈیلیٹ کریں',
+      deleteChat: 'چیٹ کلئیر کریں',
+      noChatFound: 'کوئی چیٹ نہیں ملی',
     },
   };
 }

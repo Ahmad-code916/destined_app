@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:destined_app/models/user_model.dart';
+import 'package:destined_app/screens/archived_screen/archived_screen.dart';
 import 'package:destined_app/screens/home_swipe_screen/home_swipe_screen_controller.dart';
 import 'package:destined_app/screens/user_details_screen/user_details_screen.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
@@ -46,7 +47,34 @@ class HomeSwipreScreen extends StatelessWidget {
                                     UserBaseController.userData.imageUrl ?? "",
                                 name: UserBaseController.userData.name ?? "",
                               ),
-                              AppFunctions.height(12),
+                              // AppFunctions.height(12),
+                              GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  Get.to(() => ArchivedScreen());
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 20,
+                                  ),
+                                  child: Row(
+                                    spacing: 20,
+                                    children: [
+                                      Icon(
+                                        Icons.archive_rounded,
+                                        color: AppColors.purpleColorNew,
+                                      ),
+                                      Text(
+                                        'Archieved',
+                                        style: AppTextStyle.whiteMedium
+                                            .copyWith(
+                                              color: AppColors.darkBlueColor,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               GestureDetector(
                                 onTap: () {
                                   controller.createChatWithAi();
@@ -62,7 +90,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                       controller.isCreatingChat == true
                                           ? Center(
                                             child: CircularProgressIndicator(
-                                              color: AppColors.whiteColor,
+                                              color: AppColors.purpleColorNew,
                                             ),
                                           )
                                           : Center(
@@ -75,7 +103,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                           ),
                                 ),
                               ),
-                              AppFunctions.height(30),
+                              AppFunctions.height(20),
                               if (controller.userList.isEmpty)
                                 SizedBox(
                                   height: Get.height * 0.6,
