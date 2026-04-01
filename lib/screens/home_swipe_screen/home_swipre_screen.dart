@@ -90,7 +90,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                       controller.isCreatingChat == true
                                           ? Center(
                                             child: CircularProgressIndicator(
-                                              color: AppColors.purpleColorNew,
+                                              color: AppColors.whiteColor,
                                             ),
                                           )
                                           : Center(

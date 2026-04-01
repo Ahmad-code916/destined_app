@@ -231,25 +231,6 @@ class ChatScreenController extends GetxController {
     }
   }
 
-  /*  Future<File?> pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 50,
-    );
-    if (pickedImage != null) {
-      image = File(pickedImage.path);
-
-      return image;
-    } else {
-      Get.dialog(
-        AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
-      );
-    }
-    update();
-    return image;
-  }*/
-
   Future<String> uploadImage() async {
     if (image == null) {
       return "";
