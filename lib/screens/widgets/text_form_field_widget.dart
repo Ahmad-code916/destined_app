@@ -22,17 +22,7 @@ class TextFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-    // GradientContainer(
-    //   height: 60,
-    //   child: Container(
-    //     padding: EdgeInsets.only(left: 16, right: 16),
-    //     decoration: BoxDecoration(
-    //       color: AppColors.darkBlackColor,
-    //       borderRadius: BorderRadius.all(Radius.circular(50)),
-    //     ),
-    //     child:
-    TextFormField(
+    return TextFormField(
       onChanged: onChange,
       controller: controller,
       style: AppTextStyle.whiteMedium.copyWith(color: AppColors.darkBlueColor),
@@ -54,8 +44,6 @@ class TextFormFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
       ),
-      // ),
-      // ),
     );
   }
 }

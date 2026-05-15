@@ -14,8 +14,6 @@ class MatchSceen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(

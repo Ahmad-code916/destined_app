@@ -23,8 +23,6 @@ class PersonalDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: Color(0xff641C3C),
-        secondColor: Color(0xff07011A),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(20),

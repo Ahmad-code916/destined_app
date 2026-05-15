@@ -58,8 +58,6 @@ class UsersScreen extends StatelessWidget {
             ),
           ),
           body: PrimaryGradient(
-            firstColor: AppColors.gradientSecondryFirst,
-            secondColor: AppColors.gradientSecondrySec,
             child: SafeArea(
               child: TabBarView(
                 controller: controller.tabController,

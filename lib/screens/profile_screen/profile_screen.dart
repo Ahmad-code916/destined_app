@@ -27,8 +27,6 @@ class ProfileScreen extends StatelessWidget {
     final localeController = Get.put(LocalController());
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: GetBuilder<ProfileScreenController>(
           builder: (context) {
             return Column(
@@ -181,16 +179,21 @@ class ProfileScreen extends StatelessWidget {
                                           borderRadius:
                                               AppFunctions.borderRadius(12),
                                         ),
-                                        child: CachedNetworkImage(
-                                          imageUrl: image,
-                                          placeholder:
-                                              (context, url) => Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                      color:
-                                                          AppColors.whiteColor,
-                                                    ),
-                                              ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              AppFunctions.borderRadius(12),
+                                          child: CachedNetworkImage(
+                                            imageUrl: image,
+                                            placeholder:
+                                                (context, url) => Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                        color:
+                                                            AppColors
+                                                                .whiteColor,
+                                                      ),
+                                                ),
+                                          ),
                                         ),
                                       );
                                     },
@@ -259,6 +262,26 @@ class ProfileScreen extends StatelessWidget {
                                   onTap: () {
                                     localeController.showDialoge();
                                   },
+                                ),
+                                AppFunctions.height(30),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Private Mode',
+                                      style: AppTextStyle.whiteMedium.copyWith(
+                                        color: AppColors.darkBlueColor,
+                                      ),
+                                    ),
+                                    Switch(
+                                      focusColor: AppColors.darkBlueColor,
+                                      value: controller.isPrivateMood,
+                                      onChanged: (value) {
+                                        controller.updateSwitchValue(value);
+                                      },
+                                    ),
+                                  ],
                                 ),
                                 AppFunctions.height(20),
                                 Align(

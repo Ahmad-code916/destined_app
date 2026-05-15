@@ -13,6 +13,7 @@ class MessageWidget extends StatelessWidget {
     required this.image,
     required this.dateTime,
     required this.count,
+    required this.isShowCount,
   });
 
   final String name;
@@ -20,6 +21,7 @@ class MessageWidget extends StatelessWidget {
   final String image;
   final String dateTime;
   final String count;
+  final bool isShowCount;
 
   @override
   Widget build(BuildContext context) {
@@ -90,20 +92,22 @@ class MessageWidget extends StatelessWidget {
                     color: AppColors.lightPurple,
                   ),
                 ),
-                // Container(
-                //   height: 20,
-                //   width: 20,
-                //   decoration: BoxDecoration(
-                //     color: AppColors.darkRed,
-                //     shape: BoxShape.circle,
-                //   ),
-                //   child: Center(
-                //     child: Text(
-                //       count,
-                //       style: AppTextStyle.whiteRegular.copyWith(fontSize: 14),
-                //     ),
-                //   ),
-                // ),
+                AppFunctions.height(12),
+                if (isShowCount == true)
+                  Container(
+                    height: 20,
+                    width: 20,
+                    decoration: BoxDecoration(
+                      color: AppColors.darkRed,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        count,
+                        style: AppTextStyle.whiteRegular.copyWith(fontSize: 14),
+                      ),
+                    ),
+                  ),
               ],
             ),
           ],

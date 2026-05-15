@@ -13,8 +13,6 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientPrimaryFirst,
-        secondColor: AppColors.gradientPrimarySecond,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [

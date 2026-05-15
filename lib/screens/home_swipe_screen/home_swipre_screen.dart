@@ -23,10 +23,7 @@ class HomeSwipreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColors.blackColor,
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: GetBuilder<HomeSwipeScreenController>(
           builder: (context) {
             return SafeArea(
@@ -65,7 +62,7 @@ class HomeSwipreScreen extends StatelessWidget {
                                         color: AppColors.purpleColorNew,
                                       ),
                                       Text(
-                                        'Archieved',
+                                        'Archived',
                                         style: AppTextStyle.whiteMedium
                                             .copyWith(
                                               color: AppColors.darkBlueColor,
@@ -105,15 +102,12 @@ class HomeSwipreScreen extends StatelessWidget {
                               ),
                               AppFunctions.height(20),
                               if (controller.userList.isEmpty)
-                                SizedBox(
-                                  height: Get.height * 0.6,
-                                  child: Text(
-                                    textAlign: TextAlign.center,
-                                    AppStrings.noUserFound.tr,
-                                    style: AppTextStyle.whiteBold.copyWith(
-                                      fontSize: 25,
-                                      color: AppColors.purpleColorNew,
-                                    ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  AppStrings.noUserFound.tr,
+                                  style: AppTextStyle.whiteBold.copyWith(
+                                    fontSize: 25,
+                                    color: AppColors.purpleColorNew,
                                   ),
                                 )
                               else if (controller.userList.isNotEmpty)
@@ -162,9 +156,17 @@ class HomeSwipreScreen extends StatelessWidget {
                                           );
                                       return GestureDetector(
                                         onTap: () {
-                                          if (user.myLikes!.contains(
-                                            UserBaseController.userData.uid,
-                                          )) {
+                                          if (user.isPrivateMood == false ||
+                                              user.isPrivateMood == null) {
+                                            Get.to(
+                                              () => UserDetailsScreen(),
+                                              arguments: {'uid': user.uid},
+                                            );
+                                          } else if (user.isPrivateMood ==
+                                                  true &&
+                                              user.myLikes!.contains(
+                                                UserBaseController.userData.uid,
+                                              )) {
                                             Get.to(
                                               () => UserDetailsScreen(),
                                               arguments: {'uid': user.uid},

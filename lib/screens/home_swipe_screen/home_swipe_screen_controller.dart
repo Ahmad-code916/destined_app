@@ -231,7 +231,8 @@ class HomeSwipeScreenController extends GetxController {
             AppFunctions.height(20),
             GestureDetector(
               onTap: () {
-                Get.back();
+                // Get.back();
+                Navigator.of(Get.context!).pop();
               },
               child: Align(
                 alignment: Alignment.centerRight,

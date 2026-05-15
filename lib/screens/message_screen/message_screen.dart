@@ -7,6 +7,7 @@ import 'package:destined_app/screens/widgets/message_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
 import 'package:destined_app/screens/widgets/text_form_field_widget.dart';
 import 'package:destined_app/services/app_functions.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_strings.dart';
 import 'package:destined_app/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,6 @@ class MessageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: const Color.fromARGB(255, 20, 0, 52),
-        secondColor: AppColors.gradientSecondrySec,
         child: GetBuilder<MessageScreenController>(
           builder: (context) {
             return controller.isLoading == true
@@ -148,6 +147,9 @@ class MessageScreen extends StatelessWidget {
                               ),
                             ),
                             AppFunctions.height(30),
+                            // if (controller.selectedChat != null ||
+                            //     controller.selectedChat!.isNotEmpty)
+                            //   Text(controller.selectedChat ?? ""),
                             if (controller.filteredUserList.isEmpty)
                               Center(
                                 child: Text(
@@ -157,7 +159,7 @@ class MessageScreen extends StatelessWidget {
                                   ),
                                 ),
                               )
-                            else if (controller.userList.isNotEmpty)
+                            else
                               ListView.builder(
                                 physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
@@ -169,6 +171,9 @@ class MessageScreen extends StatelessWidget {
                                     padding: const EdgeInsets.only(bottom: 16),
                                     child: GestureDetector(
                                       behavior: HitTestBehavior.opaque,
+                                      onLongPress: () {
+                                        controller.selectChat(index);
+                                      },
                                       onTap: () {
                                         Get.to(
                                           () => ChatScreen(),
@@ -180,13 +185,24 @@ class MessageScreen extends StatelessWidget {
                                         );
                                       },
                                       child: MessageWidget(
+                                        isShowCount:
+                                            (thread.senderId ==
+                                                        UserBaseController
+                                                            .userData
+                                                            .uid ||
+                                                    thread.unseenMessageCount ==
+                                                        0)
+                                                ? false
+                                                : true,
                                         name: thread.userDetails?.name ?? "",
                                         lastMessage: thread.lastMessage ?? "",
                                         image:
                                             thread.userDetails?.imageUrl ?? "",
                                         dateTime:
                                             '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
-                                        count: '3',
+                                        count:
+                                            thread.unseenMessageCount
+                                                .toString(),
                                       ),
                                     ),
                                   );

@@ -27,8 +27,6 @@ class ChatScreen extends StatelessWidget {
       builder: (context) {
         return Scaffold(
           body: PrimaryGradient(
-            firstColor: AppColors.gradientSecondryFirst,
-            secondColor: AppColors.gradientSecondrySec,
             child:
                 controller.isDeletingChat == true
                     ? Center(child: CircularProgressIndicator())
@@ -56,8 +54,10 @@ class ChatScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         GestureDetector(
+                                          behavior: HitTestBehavior.opaque,
                                           onTap: () {
-                                            Get.back();
+                                            // Get.back();
+                                            Navigator.of(Get.context!).pop();
                                           },
                                           child: Image.asset(
                                             AppImages.backIcon,

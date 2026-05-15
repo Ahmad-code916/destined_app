@@ -18,6 +18,17 @@ class MessageScreenController extends GetxController {
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? subscription;
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? threadSubscription;
   bool isLoading = false;
+  bool isChatLoaded = false;
+  String? selectedChat;
+
+  void selectChat(int index) {
+    if (selectedChat == null || selectedChat!.isEmpty) {
+      selectedChat = filteredUserList[index].id;
+    } else {
+      selectedChat = '';
+    }
+    update();
+  }
 
   Future getUsers() async {
     try {
@@ -58,8 +69,7 @@ class MessageScreenController extends GetxController {
 
   Future getThreads() async {
     try {
-      isLoading = true;
-      update();
+      threadSubscription?.cancel();
       threadSubscription = FirebaseFirestore.instance
           .collection(ThreadModel.tableName)
           .where(
@@ -70,7 +80,6 @@ class MessageScreenController extends GetxController {
           .listen((event) async {
             if (event.docs.isNotEmpty) {
               threadList.clear();
-              update();
               for (final e in event.docs) {
                 final model = ThreadModel.fromMap(e.data());
                 String otherUserid = fetchOtherUserId(
@@ -90,14 +99,9 @@ class MessageScreenController extends GetxController {
               );
               filteredUserList = threadList;
               update();
-            } else {
-              isLoading = false;
-              update();
             }
           });
     } catch (e) {
-      isLoading = false;
-      update();
       showOkAlertDialog(
         context: Get.context!,
         title: 'Error',

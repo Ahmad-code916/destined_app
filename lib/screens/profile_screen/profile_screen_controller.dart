@@ -25,6 +25,30 @@ class ProfileScreenController extends GetxController {
   List<UserModel> users = [];
   bool isDeletingAccount = false;
   TextEditingController passwordController = TextEditingController();
+  bool isPrivateMood =
+      UserBaseController.userData.isPrivateMood == null
+          ? false
+          : UserBaseController.userData.isPrivateMood!;
+
+  void updateSwitchValue(bool value) {
+    isPrivateMood = !isPrivateMood;
+    updatePrivateMood();
+    update();
+  }
+
+  void updatePrivateMood() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection(UserModel.tableName)
+          .doc(UserBaseController.userData.uid)
+          .update({'isPrivateMood': isPrivateMood});
+      update();
+    } catch (e) {
+      Get.dialog(
+        AlertDialog(title: Text('Error!'), content: Text(e.toString())),
+      );
+    }
+  }
 
   void showDialogeToDeleteAccount() async {
     Get.dialog(

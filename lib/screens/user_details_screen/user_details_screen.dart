@@ -22,8 +22,6 @@ class UserDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: GetBuilder<UserDetailsScreenController>(
           builder: (context) {
             return controller.isLoading == true

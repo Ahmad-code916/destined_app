@@ -23,8 +23,6 @@ class EditScreen extends StatelessWidget {
       body: GetBuilder<EditScreenController>(
         builder: (context) {
           return PrimaryGradient(
-            firstColor: AppColors.gradientSecondryFirst,
-            secondColor: AppColors.gradientSecondrySec,
             child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(20),

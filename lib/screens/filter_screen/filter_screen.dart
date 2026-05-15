@@ -20,8 +20,6 @@ class FilterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20),

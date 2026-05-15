@@ -16,15 +16,13 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientPrimaryFirst,
-        secondColor: AppColors.gradientPrimarySecond,
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 AppFunctions.height(30),
-                Text(AppStrings.onlineDatingApp, style: AppTextStyle.redMedium),
+                // Text(AppStrings.onlineDatingApp, style: AppTextStyle.redMedium),
                 AppFunctions.height(12),
                 Text(
                   textAlign: TextAlign.center,

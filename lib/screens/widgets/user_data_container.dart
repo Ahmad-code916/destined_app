@@ -10,9 +10,7 @@ class UserDataContainer extends StatelessWidget {
     required this.name,
     required this.distance,
     required this.age,
-    // required this.count,
     required this.image,
-    // required this.isShownGreen,
     this.onTapContainer,
   });
 
@@ -20,8 +18,6 @@ class UserDataContainer extends StatelessWidget {
   final String image;
   final double distance;
   final String age;
-  // final int count;
-  // final bool isShownGreen;
   final void Function()? onTapContainer;
 
   @override
@@ -59,24 +55,18 @@ class UserDataContainer extends StatelessWidget {
                         height: 120,
                         fit: BoxFit.fitWidth,
                         width: double.infinity,
+                        placeholder:
+                            (context, url) => Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.purpleColorNew,
+                              ),
+                            ),
+                        errorWidget:
+                            (context, url, error) =>
+                                Center(child: Icon(Icons.image)),
                       ),
                     ),
                   ),
-                  // if (isShownGreen == true)
-                  //   Container(
-                  //     margin: EdgeInsets.only(right: 13, top: 12),
-                  //     height: 15,
-                  //     width: 15,
-                  //     decoration: BoxDecoration(
-                  //       shape: BoxShape.circle,
-                  //       gradient: LinearGradient(
-                  //         stops: [0.0, 1.0],
-                  //         begin: Alignment.topLeft,
-                  //         end: Alignment.bottomRight,
-                  //         colors: [Color(0xffBFFF6F), Color(0xff12D13C)],
-                  //       ),
-                  //     ),
-                  //   ),
                 ],
               ),
             ),
@@ -105,22 +95,6 @@ class UserDataContainer extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Row(
-                      //   spacing: 3,
-                      //   children: [
-                      //     Icon(
-                      //       Icons.camera_alt,
-                      //       color: AppColors.whiteColor,
-                      //       size: 11,
-                      //     ),
-                      //     Text(
-                      //       count.toString(),
-                      //       style: AppTextStyle.whiteMedium.copyWith(
-                      //         fontSize: 12,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                     ],
                   ),
                 ],

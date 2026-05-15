@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:destined_app/models/user_model.dart';
 import 'package:destined_app/screens/interests_screen/interests_screen.dart';
+import 'package:destined_app/services/app_functions.dart';
 import 'package:destined_app/services/user_base_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PersonalDetailsScreenController extends GetxController {
@@ -46,16 +48,22 @@ class PersonalDetailsScreenController extends GetxController {
   }
 
   void pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
-      image = File(pickedImage.path);
-      update();
+    image = await AppFunctions.pickImage();
+    update();
+    /* var status = await Permission.camera.request();
+    if (status.isGranted) {
+      print('status-------------->>>>>>>>>>>>.>$status');
+      final picker = ImagePicker();
+      final pickedImage = await picker.pickImage(source: ImageSource.camera);
+      if (pickedImage != null) {
+        image = File(pickedImage.path);
+        update();
+      }
     } else {
       Get.dialog(
         AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
-      );
-    }
+      )
+       }*/
   }
 
   Future<String> uploadImage() async {
@@ -83,12 +91,17 @@ class PersonalDetailsScreenController extends GetxController {
   }
 
   void pickImageAndAdddToList() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
+    /*  var status = await Permission.camera.request();
+    if (status.isGranted) {
+      print('Status --------->>>>>>>>>>>>>$status');
+      final picker = ImagePicker();
+      final pickedImage = await picker.pickImage(source: ImageSource.camera);*/
+    final pickedImage = await AppFunctions.pickImage();
     extraImages2.add(File(pickedImage!.path));
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Added');
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${extraImages2.length}');
     update();
+    // }
   }
 
   Future<List<String>> uploadExtraProfileImages() async {

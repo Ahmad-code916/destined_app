@@ -2,6 +2,7 @@ import 'package:destined_app/screens/archived_screen/archived_screen_controller.
 import 'package:destined_app/screens/chat_screen/chat_screen.dart';
 import 'package:destined_app/screens/widgets/message_widget.dart';
 import 'package:destined_app/screens/widgets/primary_gradient.dart';
+import 'package:destined_app/services/user_base_controller.dart';
 import 'package:destined_app/utils/app_colors.dart';
 import 'package:destined_app/utils/app_images.dart';
 import 'package:destined_app/utils/app_strings.dart';
@@ -18,8 +19,8 @@ class ArchivedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: Colors.black,
-        secondColor: Colors.black,
+        // firstColor: Colors.black,
+        // secondColor: Colors.black,
         child: GetBuilder<ArchivedScreenController>(
           builder: (context) {
             return SafeArea(
@@ -77,25 +78,33 @@ class ArchivedScreen extends StatelessWidget {
                           itemCount: controller.threadList.length,
                           itemBuilder: (context, index) {
                             final thread = controller.threadList[index];
-                            return GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                Get.to(
-                                  () => ChatScreen(),
-                                  arguments: {
-                                    'threadId': thread.id,
-                                    'user': thread.userDetails,
-                                    'threadModel': thread,
-                                  },
-                                );
-                              },
-                              child: MessageWidget(
-                                name: thread.userDetails?.name ?? "",
-                                lastMessage: thread.lastMessage ?? "",
-                                image: thread.userDetails?.imageUrl ?? "",
-                                dateTime:
-                                    '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
-                                count: '3',
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  Get.to(
+                                    () => ChatScreen(),
+                                    arguments: {
+                                      'threadId': thread.id,
+                                      'user': thread.userDetails,
+                                      'threadModel': thread,
+                                    },
+                                  );
+                                },
+                                child: MessageWidget(
+                                  isShowCount:
+                                      thread.senderId ==
+                                              UserBaseController.userData.uid
+                                          ? false
+                                          : true,
+                                  name: thread.userDetails?.name ?? "",
+                                  lastMessage: thread.lastMessage ?? "",
+                                  image: thread.userDetails?.imageUrl ?? "",
+                                  dateTime:
+                                      '${thread.lastMessageTime!.hour}:${thread.lastMessageTime!.minute}',
+                                  count: '3',
+                                ),
                               ),
                             );
                           },

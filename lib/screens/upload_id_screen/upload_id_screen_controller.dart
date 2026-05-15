@@ -8,6 +8,7 @@ import 'package:destined_app/services/user_base_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class UploadIdScreenController extends GetxController {
@@ -24,16 +25,22 @@ class UploadIdScreenController extends GetxController {
   }
 
   void pickImage() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
-      image = File(pickedImage.path);
-      update();
+    image = await AppFunctions.pickImage();
+    update();
+    /* var status = await Permission.camera.request();
+    if (status.isGranted) {
+      print('status ------------>>>>>>>>>>>>>>$status');
+      final picker = ImagePicker();
+      final pickedImage = await picker.pickImage(source: ImageSource.camera);
+      if (pickedImage != null) {
+        image = File(pickedImage.path);
+        update();
+      }
     } else {
       Get.dialog(
         AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
       );
-    }
+    }*/
   }
 
   Future<String> uploadImage() async {

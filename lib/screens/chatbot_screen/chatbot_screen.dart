@@ -18,8 +18,6 @@ class ChatbotScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PrimaryGradient(
-        firstColor: AppColors.gradientSecondryFirst,
-        secondColor: AppColors.gradientSecondrySec,
         child: SafeArea(
           child: GetBuilder<ChatbotScreenController>(
             builder: (context) {
@@ -31,7 +29,8 @@ class ChatbotScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Get.back();
+                            // Get.back();
+                            Navigator.of(Get.context!).pop();
                           },
                           child: Image.asset(AppImages.backIcon, height: 20),
                         ),

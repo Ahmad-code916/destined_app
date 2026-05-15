@@ -24,6 +24,7 @@ class UserModel {
   bool? page2;
   bool? page3;
   bool? page4;
+  bool? isPrivateMood;
 
   /// New fields
   double? lat;
@@ -53,7 +54,8 @@ class UserModel {
     this.page4,
     this.lat,
     this.lng,
-    this.profileImages, // <-- Added here
+    this.profileImages,
+    this.isPrivateMood, // <-- Added here
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -83,6 +85,7 @@ class UserModel {
       page2: map["page2"] ?? false,
       page3: map["page3"] ?? false,
       page4: map["page4"] ?? false,
+      isPrivateMood: map["isPrivateMood"] ?? false,
       lat: map["lat"] != null ? (map["lat"] as num).toDouble() : null,
       lng: map["lng"] != null ? (map["lng"] as num).toDouble() : null,
 
@@ -115,6 +118,7 @@ class UserModel {
       "page2": page2,
       "page3": page3,
       "page4": page4,
+      "isPrivateMood": isPrivateMood,
       "lat": lat,
       "lng": lng,
 
@@ -142,6 +146,7 @@ class UserModel {
     bool? page2,
     bool? page3,
     bool? page4,
+    bool? isPrivateMood,
     double? lat,
     double? lng,
 
@@ -167,6 +172,7 @@ class UserModel {
       page2: page2 ?? this.page2,
       page3: page3 ?? this.page3,
       page4: page4 ?? this.page4,
+      isPrivateMood: isPrivateMood ?? this.isPrivateMood,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
 

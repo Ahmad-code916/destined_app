@@ -96,6 +96,8 @@ class ChatScreenController extends GetxController {
                   .copyWith(
                     lastMessage: message,
                     lastMessageTime: DateTime.now(),
+                    unseenMessageCount: threadModel.unseenMessageCount! + 1,
+                    senderId: currentUserId,
                   )
                   .toMap(),
               SetOptions(merge: true),
@@ -136,6 +138,8 @@ class ChatScreenController extends GetxController {
                   .copyWith(
                     lastMessage: message!.isEmpty ? 'Image' : message,
                     lastMessageTime: DateTime.now(),
+                    unseenMessageCount: threadModel.unseenMessageCount! + 1,
+                    senderId: currentUserId,
                   )
                   .toMap(),
               SetOptions(merge: true),
@@ -154,22 +158,18 @@ class ChatScreenController extends GetxController {
           .collection(ChatModel.tableName)
           .orderBy('timestamp', descending: true)
           .snapshots()
-          .listen((event) {
+          .listen((event) async {
             if (event.docs.isNotEmpty) {
               messages =
                   event.docs.map((e) {
                     return ChatModel.fromMap(e.data());
                   }).toList();
-              print('^^^^^^^^^^^^^^^^^^^^^${messages.length}');
-              Future.delayed(const Duration(milliseconds: 100), () {
-                if (scrollController.hasClients) {
-                  scrollController.animateTo(
-                    scrollController.position.maxScrollExtent,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeOut,
-                  );
-                }
-              });
+              if (messages.first.senderId != UserBaseController.userData.uid) {
+                await FirebaseFirestore.instance
+                    .collection(ThreadModel.tableName)
+                    .doc(threadId)
+                    .update({'unseenMessageCount': 0});
+              }
               update();
             }
           });

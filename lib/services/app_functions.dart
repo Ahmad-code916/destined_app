@@ -1,8 +1,12 @@
+import 'dart:io';
 import 'dart:math' as math;
 import 'dart:math';
 import 'package:destined_app/utils/app_colors.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AppFunctions {
   static Widget height(double height) {
@@ -75,5 +79,25 @@ class AppFunctions {
 
   static double _degreesToRadians(double degree) {
     return degree * pi / 180;
+  }
+
+  static Future<File?> pickImage() async {
+    var status = await Permission.camera.request();
+    if (status.isGranted) {
+      print('status-------------->>>>>>>>>>>>.>$status');
+      final picker = ImagePicker();
+      final pickedImage = await picker.pickImage(source: ImageSource.camera);
+      if (pickedImage != null) {
+        return File(pickedImage.path);
+        // image = File(pickedImage.path);
+        // update();
+      }
+    } else {
+      Get.dialog(
+        AlertDialog(title: Text('Error!'), content: Text('No Image Selected.')),
+      );
+      return null;
+    }
+    return null;
   }
 }
