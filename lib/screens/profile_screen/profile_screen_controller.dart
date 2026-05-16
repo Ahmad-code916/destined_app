@@ -56,10 +56,11 @@ class ProfileScreenController extends GetxController {
         title: 'Delete Account',
         subTitle: 'Do you want to delete account?',
         onTapCancel: () {
-          Get.back();
+          Navigator.of(Get.context!).pop();
         },
         onTapConfirm: () {
-          Get.back();
+          Navigator.of(Get.context!).pop();
+
           showDialogeToReLogin();
         },
       ),

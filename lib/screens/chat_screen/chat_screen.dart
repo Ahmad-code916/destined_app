@@ -334,6 +334,8 @@ class ChatScreen extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: TextFormFieldWidget(
+                                          maxLine: 5,
+                                          minLines: 1,
                                           secIcon:
                                               controller.image != null
                                                   ? Padding(
@@ -347,6 +349,7 @@ class ChatScreen extends StatelessWidget {
                                                     ),
                                                   )
                                                   : null,
+
                                           onChange: (p0) {
                                             controller.updateValue(p0);
                                           },

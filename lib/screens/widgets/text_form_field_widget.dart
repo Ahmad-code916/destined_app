@@ -11,10 +11,14 @@ class TextFormFieldWidget extends StatelessWidget {
     this.hintStyle,
     this.onChange,
     this.secIcon,
+    this.minLines,
+    this.maxLine,
   });
 
   final TextEditingController controller;
   final Widget? icon;
+  final int? minLines;
+  final int? maxLine;
   final String? hintText;
   final TextStyle? hintStyle;
   final Function(String)? onChange;
@@ -24,6 +28,8 @@ class TextFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: onChange,
+      maxLines: maxLine,
+      minLines: minLines,
       controller: controller,
       style: AppTextStyle.whiteMedium.copyWith(color: AppColors.darkBlueColor),
       decoration: InputDecoration(
