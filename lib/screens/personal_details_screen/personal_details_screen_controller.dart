@@ -97,10 +97,12 @@ class PersonalDetailsScreenController extends GetxController {
       final picker = ImagePicker();
       final pickedImage = await picker.pickImage(source: ImageSource.camera);*/
     final pickedImage = await AppFunctions.pickImage();
-    extraImages2.add(File(pickedImage!.path));
+    if (pickedImage != null) {
+      extraImages2.add(File(pickedImage.path));
+      update();
+    }
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Added');
     print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^${extraImages2.length}');
-    update();
     // }
   }
 

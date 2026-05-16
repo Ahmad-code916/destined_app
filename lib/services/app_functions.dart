@@ -86,7 +86,7 @@ class AppFunctions {
     if (status.isGranted) {
       print('status-------------->>>>>>>>>>>>.>$status');
       final picker = ImagePicker();
-      final pickedImage = await picker.pickImage(source: ImageSource.camera);
+      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
         return File(pickedImage.path);
         // image = File(pickedImage.path);
