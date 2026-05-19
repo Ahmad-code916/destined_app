@@ -126,7 +126,8 @@ class MatchSceen extends StatelessWidget {
                             AppFunctions.height(45),
                             GestureDetector(
                               onTap: () {
-                                Get.back();
+                                // Get.back();
+                                Navigator.of(Get.context!).pop();
                               },
                               child: Text(
                                 AppStrings.startChatting.tr,

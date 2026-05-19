@@ -33,7 +33,7 @@ class UserDetailsScreen extends StatelessWidget {
                       firstColor: AppColors.pinkColorSec,
                       secondColor: AppColors.lightPink,
                       child: Image.asset(AppImages.backIconWhite, height: 20),
-                      onTapChild: () => Get.back(),
+                      onTapChild: () => Navigator.of(Get.context!).pop(),
                     ),
                     Expanded(
                       child: SingleChildScrollView(

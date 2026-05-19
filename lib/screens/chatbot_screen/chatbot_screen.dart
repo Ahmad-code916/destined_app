@@ -29,7 +29,6 @@ class ChatbotScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // Get.back();
                             Navigator.of(Get.context!).pop();
                           },
                           child: Image.asset(AppImages.backIcon, height: 20),

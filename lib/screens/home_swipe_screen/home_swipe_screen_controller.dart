@@ -86,12 +86,13 @@ class HomeSwipeScreenController extends GetxController {
                   return UserModel.fromMap(e.data());
                 })
                 .where((ele) {
-                  return !((UserBaseController.userData.myLikes!.contains(
-                        ele.uid,
-                      )) ||
-                      (UserBaseController.userData.myDislikes!.contains(
-                        ele.uid,
-                      )));
+                  return (ele.page4 == true &&
+                      !((UserBaseController.userData.myLikes!.contains(
+                            ele.uid,
+                          )) ||
+                          (UserBaseController.userData.myDislikes!.contains(
+                            ele.uid,
+                          ))));
                 })
                 .toList();
         isLoading = false;

@@ -43,7 +43,7 @@ class LocationScreenController extends GetxController {
       Get.dialog(
         AlertDialog(
           title: Text('Error!'),
-          content: Text('Location permissions are denied.'),
+          content: Text('Location permissions were denied.'),
         ),
       );
       isLoading = false;

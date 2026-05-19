@@ -56,7 +56,6 @@ class ChatScreen extends StatelessWidget {
                                         GestureDetector(
                                           behavior: HitTestBehavior.opaque,
                                           onTap: () {
-                                            // Get.back();
                                             Navigator.of(Get.context!).pop();
                                           },
                                           child: Image.asset(
